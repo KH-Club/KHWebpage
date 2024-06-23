@@ -1,4 +1,4 @@
-import { Icons } from "@/components/icons"
+import { Icons } from "@/components/Header/icons"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { NavItem } from "@/types/nav"

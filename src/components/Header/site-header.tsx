@@ -1,7 +1,7 @@
-import { Icons } from "@/components/icons"
-import { MainNav } from "@/components/main-nav"
-import { ModeToggle } from "@/components/mode-toggle"
-import { buttonVariants } from "@/components/ui/button"
+import { Icons } from "@/components/Header/icons"
+import { MainNav } from "@/components/Header/main-nav"
+import { ModeToggle } from "@/components/Header/mode-toggle"
+import { buttonVariants } from "@/components/Header/ui/button"
 import { siteConfig } from "@/config/site"
 import { Link } from "react-router-dom"
 

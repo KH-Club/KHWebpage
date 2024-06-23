@@ -11,13 +11,11 @@ export const siteConfig = {
     },
     {
       title: "About Us",
-      href: "/about",
+      href: "/aboutus",
     },
   ],
   links: {
-    youtube: "https://youtube.com/@m6io",
     facebook : "https://www.facebook.com/profile.php?id=61558699434541",
     instagram : "https://www.instagram.com/kaihor.official/",
-    docs: "https://ui.shadcn.com",
   },
 }
