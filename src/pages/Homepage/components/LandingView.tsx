@@ -3,7 +3,7 @@ import RightContainerImage from "@/assets/KH52.jpg";
 
 const LandingView = () =>{
     return(
-        <section 
+    <section 
       id="home" 
       className="relative bg-cover bg-center bg-no-repeat shadow-lg h-[85vh]"
       style={{ backgroundImage: `url(${HomepageBackgroundImage})` }}

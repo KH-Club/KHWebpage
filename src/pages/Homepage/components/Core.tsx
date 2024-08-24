@@ -1,4 +1,4 @@
-const About = () => {
+const Core = () => {
     return (
         <section className="py-12 bg-gray-100">
             <div className="container mx-auto px-6">
@@ -45,4 +45,4 @@ const About = () => {
     );
 }
 
-export default About;
+export default Core;
