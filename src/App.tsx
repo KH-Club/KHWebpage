@@ -1,11 +1,13 @@
 import { SiteHeader } from "@/components/Header/site-header"
 import { useRoutes } from "react-router-dom"
-import ErrorBoundary from "./layouts/ErrorBoundary"
+import ErrorBoundary from "@/layouts/ErrorBoundary"
 import Home from "@/pages/Homepage/page";
-import SiteFooter from "./components/Footer/Footer";
+import SiteFooter from "@/components/Footer/Footer";
+import ActivityPage from "@/pages/Activitypage/page";
+
 const routes = [
   { path: "/", element: <Home /> },
-  { path: "/about" , element : <></>},
+  { path: "/activity" , element : <ActivityPage/>},
   { path: "/camp" , element : <></>}
 ]
 
