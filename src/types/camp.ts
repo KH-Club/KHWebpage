@@ -5,7 +5,7 @@ export type CampLocation = {
     schoolName : string;
 }
 
-export type CampLeader = {
+export type CampDirector = {
     name : string;
     surname : string;
     nickname : string;
@@ -15,8 +15,9 @@ export type CampLeader = {
 
 export type CampData = {
     campID : number;
-    campName : string;
+    name : string;
+    date : Date;
+    location : CampLocation;
+    director : CampDirector;
     isMainCamp : boolean;
-    campLocation : CampLocation;
-    campLeader : CampLeader;
 }
