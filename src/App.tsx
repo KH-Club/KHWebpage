@@ -2,7 +2,10 @@ import { SiteHeader } from "@/components/Header/site-header"
 import { useRoutes } from "react-router-dom"
 import ErrorBoundary from "./layouts/ErrorBoundary"
 import Home from "@/pages/Homepage/page";
-const routes = [{ path: "/", element: <Home /> }]
+const routes = [
+  { path: "/", element: <Home /> },
+  { path: "/about" , element : <Home/>}
+]
 
 function App() {
   const children = useRoutes(routes)

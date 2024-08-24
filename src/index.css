@@ -4,6 +4,8 @@
  
 @layer base {
   :root {
+    --font-sans: 'Godwit,MuseoSans','-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -68,9 +70,14 @@
  
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border font-sans;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
+}
+.app {
+  height: 100%;
+  width: 100%;
+  font-family: "DM Sans", sans-serif;
 }
