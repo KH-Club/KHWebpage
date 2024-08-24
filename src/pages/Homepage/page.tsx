@@ -1,3 +1,4 @@
+import About from "./components/About";
 import Core from "./components/Core";
 import LandingView from "./components/LandingView";
 
@@ -6,6 +7,7 @@ const Home = () => {
     <>
       <LandingView/>
       <Core/>
+      <About/>
     </>
   );
 };

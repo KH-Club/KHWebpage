@@ -13,6 +13,10 @@ export const siteConfig = {
       title: "About",
       href: "/about",
     },
+    {
+      title: "Camp",
+      href: "/camp",
+    },
   ],
   links: {
     facebook : "https://www.facebook.com/profile.php?id=61558699434541",
