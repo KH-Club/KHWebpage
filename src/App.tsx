@@ -4,11 +4,12 @@ import ErrorBoundary from "@/layouts/ErrorBoundary"
 import Home from "@/pages/Homepage/page";
 import SiteFooter from "@/components/Footer/Footer";
 import ActivityPage from "@/pages/Activitypage/page";
+import CampPage from "./pages/Camppage/page";
 
 const routes = [
   { path: "/", element: <Home /> },
   { path: "/activity" , element : <ActivityPage/>},
-  { path: "/camp" , element : <></>}
+  { path: "/camp" , element : <CampPage/>}
 ]
 
 function App() {
