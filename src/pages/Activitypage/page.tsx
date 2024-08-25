@@ -1,8 +1,8 @@
-import KrongArsaImage from "@/assets/krongarsa.jpg"
-import KrongFoodImage from "@/assets/krongfood.jpg"
-import KrongKidImage from "@/assets/krongkid.jpg"
-import KrongSampanImage from "@/assets/krongsampan.jpg"
-import KrongNganImage from "@/assets/krongngan.jpg"
+import KrongArsaImage from "@/assets/images/activitys/krongarsa.jpg"
+import KrongFoodImage from "@/assets/images/activitys/krongfood.jpg"
+import KrongKidImage from "@/assets/images/activitys/krongkid.jpg"
+import KrongSampanImage from "@/assets/images/activitys/krongsampan.jpg"
+import KrongNganImage from "@/assets/images/activitys/krongngan.jpg"
 import ActivityCard from "@/pages/Activitypage/components/ActivityCard"
 import ActivityPopup from "@/pages/Activitypage/components/ActivityPopup"
 

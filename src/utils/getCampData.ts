@@ -12,11 +12,11 @@ const getCampsData = async (): Promise<Camp[]> => {
 	const data = await response.json()
 	const campsData: Camp[] = data.map(
 		(camp: {
-			campID: any
-			name: any
-			location: any
-			director: any
-			imgSrc: any
+			campID: number
+			name: string
+			location: string
+			director: string
+			imgSrc: string
 		}) => ({
 			id: camp.campID,
 			name: camp.name,
