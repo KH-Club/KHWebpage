@@ -6,7 +6,7 @@ import {
   Facebook,
   type LucideIcon,
 } from "lucide-react"
-import BackgroundImage from "@/assets/kaihorlogo.png";
+import BackgroundImage from "@/assets/logos/kaihorlogo.png";
 
 export type Icon = LucideIcon
 

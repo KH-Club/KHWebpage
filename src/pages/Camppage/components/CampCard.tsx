@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 interface CampCardProp{
     id : number;
     name : string;
@@ -7,12 +9,22 @@ interface CampCardProp{
 }
 
 const CampCard = (prop : CampCardProp) =>{
+    const navigate = useNavigate();
+
+    const handleCardClick = () => {
+        navigate(`/camp/${prop.id}`);
+    };
+    
     return(
-        <div key={prop.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div 
+            onClick={handleCardClick}
+            key={prop.id} 
+            className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-lg"
+        >
         <img
             src={prop.imgSrc}
             alt={prop.name}
-            className="w-full h-40 object-cover"
+            className="w-full h-60 object-cover"
         />
         <div className="p-4">
             <h2 className="text-lg font-bold mb-2">ค่ายหอ ครั้งที่ {prop.id} "{prop.name}"</h2>
