@@ -1,3 +1,4 @@
+// Note : this components is not use right now
 import React from 'react';
 
 import { FaInstagram } from 'react-icons/fa';

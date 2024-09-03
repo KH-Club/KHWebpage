@@ -1,6 +1,4 @@
 import InstagramEmbed from "./components/InstagramEmbled"
-import FacebookEmbed from "./components/facebookEmbled"
-// import ContactItem from "./components/contactItems"
 
 export interface Contact {
     name: string
@@ -19,14 +17,6 @@ export enum contactType {
 
 const ContactPage = () => {
     const embedIGSubUrl = "C_Numb1yoch"
-    // const embedFacebookUrl = "https://www.facebook.com/photo?fbid=122095101884289981"
-    // const ContactList: Contact[] = [
-    //     {
-    //         name: "IG",
-    //         link: "https://www.instagram.com/kaihor.official/",
-    //         type: contactType.Instagram,
-    //     }
-    // ]
 
     return (
         <section className="bg-gray-100 py-12">
