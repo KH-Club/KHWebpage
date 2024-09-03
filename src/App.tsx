@@ -5,11 +5,13 @@ import Home from "@/pages/Homepage/page";
 import SiteFooter from "@/components/Footer/Footer";
 import ActivityPage from "@/pages/Activitypage/page";
 import CampPage from "./pages/Camppage/page";
+import ContactPage from "./pages/Contactpage/page";
 
 const routes = [
   { path: "/", element: <Home /> },
-  { path: "/activity" , element : <ActivityPage/>},
-  { path: "/camp" , element : <CampPage/>}
+  { path: "/activity", element: <ActivityPage /> },
+  { path: "/camp", element: <CampPage /> },
+  { path: "/contact", element: <ContactPage /> }
 ]
 
 function App() {
@@ -20,7 +22,7 @@ function App() {
       <div className="relative flex min-h-screen flex-col">
         <SiteHeader />
         <div className="flex-1">{children}</div>
-        <SiteFooter/>
+        <SiteFooter />
       </div>
     </ErrorBoundary>
   )
