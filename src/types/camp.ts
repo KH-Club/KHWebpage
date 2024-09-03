@@ -21,3 +21,12 @@ export type CampData = {
     director : CampDirector;
     isMainCamp : boolean;
 }
+
+// Note: use only before we have the real data
+export type CampRawData = {
+    campID: number
+    name: string
+    location: string
+    director: string
+    imgSrc: string
+}
