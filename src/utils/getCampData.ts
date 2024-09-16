@@ -1,32 +1,37 @@
-interface Camp {
-	id: number
-	name: string
-	location: string
-	imgSrc: string
-	director: string
-}
+import { CampData } from "@/types/camp"
 
-const getCampsData = async (): Promise<Camp[]> => {
+const getMainCampsData = async (): Promise<CampData[]> => {
 	const filePath = "/src/assets/data/KHdata.json"
 	const response = await fetch(filePath)
 	const data = await response.json()
-	const campsData: Camp[] = data.map(
+	const campsData: CampData[] = data.map(
 		(camp: {
 			campID: number
 			name: string
 			location: string
 			director: string
-			imgSrc: string
+			imgSrc: string[]
+			date : string
 		}) => ({
-			id: camp.campID,
+			campID: camp.campID,
 			name: camp.name,
+			date : camp.date,
 			location: camp.location,
-			imgSrc: camp.imgSrc ?? "/src/assets/images/camps/KH52.jpg",
+			imgSrc: camp.imgSrc ?? ["/src/assets/images/camps/main/52/KH52.jpg"],
 			director: camp.director,
 		}),
 	)
-
 	return campsData.reverse()
 }
 
-export { getCampsData }
+const getMainCampsDataByCampID = async (campID: number): Promise<CampData> => {
+	const campsData = await getMainCampsData();
+	const camp = campsData.find(camp => camp.campID === campID)
+	if(!camp) throw Error(`Camp with ${campID} is not found`)
+	return camp;
+};
+
+export { 
+	getMainCampsData ,
+	getMainCampsDataByCampID
+}

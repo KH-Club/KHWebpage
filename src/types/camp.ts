@@ -16,8 +16,9 @@ export type CampDirector = {
 export type CampData = {
     campID : number;
     name : string;
-    date : Date;
-    location : CampLocation;
-    director : CampDirector;
+    date : string;
+    location : string;
+    director : string;
     isMainCamp : boolean;
+    imgSrc : string[];
 }

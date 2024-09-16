@@ -1,5 +1,5 @@
 import HomepageBackgroundImage from "@/assets/images/layout/homepagebackground.jpg";
-import RightContainerImage from "@/assets/images/camps/KH52.jpg";
+import RightContainerImage from "@/assets/images/camps/main/52/KH52.jpg";
 
 const LandingView = () =>{
     return(

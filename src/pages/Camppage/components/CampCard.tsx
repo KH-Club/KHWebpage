@@ -6,6 +6,7 @@ interface CampCardProp{
     imgSrc : string;
     location : string;
     director: string;
+    date : string;
 }
 
 const CampCard = (prop : CampCardProp) =>{
@@ -29,6 +30,7 @@ const CampCard = (prop : CampCardProp) =>{
         <div className="p-4">
             <h2 className="text-lg font-bold mb-2">ค่ายหอ ครั้งที่ {prop.id} "{prop.name}"</h2>
             <p className="text-gray-700 mb-2">จัดที่ {prop.location}</p>
+            <p className="text-gray-700 mb-2">จัดช่วง {prop.date}</p>
             <p className="text-gray-700">ผู้อำนวยการค่าย : {prop.director}</p>
         </div>
     </div>

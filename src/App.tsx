@@ -5,11 +5,13 @@ import Home from "@/pages/Homepage/page";
 import SiteFooter from "@/components/Footer/Footer";
 import ActivityPage from "@/pages/Activitypage/page";
 import CampPage from "./pages/Camppage/page";
+import CampDetailPage from "./pages/CampDetailpage/page";
 
 const routes = [
   { path: "/", element: <Home /> },
   { path: "/activity" , element : <ActivityPage/>},
-  { path: "/camp" , element : <CampPage/>}
+  { path: "/camp" , element : <CampPage/>},
+  { path: "/camp/:campID" , element : <CampDetailPage/>}
 ]
 
 function App() {

@@ -319,7 +319,8 @@
     "date": "ธ.ค. 2561",
     "location": "ร.ร.บ้านวังพง ต.ซับใหญ่ อ.ซับใหญ่ จ.ชัยภูมิ",
     "name": "ซับใหญ่...สงสัยน้ำหก",
-    "director": "ตั้น วิชญ์ภาส เอี่ยมกมล"
+    "director": "ตั้น วิชญ์ภาส เอี่ยมกมล",
+    "imgSrc" : ["/src/assets/images/camps/main/45/KH45.jpg"]
   },
   {
     "campID": 46,
@@ -327,7 +328,7 @@
     "location": "ร.ร.บ้านกล้วย ต.คลองเขื่อน อ.คลองเขื่อน จ.ฉะเชิงเทรา",
     "name": "กล้วยส้ม มะละกอ บ้านกล้วย",
     "director": "บอล วิชญ์พล มีบุญ",
-    "imgSrc" : "/src/assets/images/camps/KH46.jpg"
+    "imgSrc" : ["/src/assets/images/camps/main/46/KH46.jpg"]
   },
   {
     "campID": 47,
@@ -335,7 +336,14 @@
     "location": "ร.ร.บ้านน้ำเลา ต.นาทะนุง อ.นาหมื่น จ.น่าน",
     "name": "ค่ายหอจัดที่น่านไง ที่ไหนนะ จะรู้ไหม ก็ที่น่านไง แล้วมันที่ไหนล่ะ เอ๊ะ ก็บอกที่น่าน ที่น่าน เออ แล้วมันที่ไหน ก็ที่น่านไง สรุป จัดที่ไหน ที่น่านไง จะเอายังไง ก็ที่น่านนะสิ ชกกันไหม น่านนะสิ น่านนะสิ",
     "director": "ฟิว นันทภัทร์ จั่นสนิท",
-    "imgSrc" : "/src/assets/images/camps/KH47.jpg"
+    "imgSrc" : [
+      "/src/assets/images/camps/main/47/KH47.jpg",
+      "/src/assets/images/camps/main/47/9.jpg",
+      "/src/assets/images/camps/main/47/2.jpg",
+      "/src/assets/images/camps/main/47/7.jpg",
+      "/src/assets/images/camps/main/47/4.jpg",
+      "/src/assets/images/camps/main/47/5.jpg"
+    ]
   },
   {
     "campID": 48,
@@ -343,7 +351,14 @@
     "location": "อบต.ไฮตาก ต.ไฮตาก อ.ภูเรือ จ.เลย",
     "name": "ไปเลย ไปเล้ย ไปเลย",
     "director": "ลมหนาว กิติศักดิ์ เผ่าดิษฐ",
-    "imgSrc" : "/src/assets/images/camps/KH48.jpg"
+    "imgSrc" : [
+      "/src/assets/images/camps/main/48/KH48.jpg",
+      "/src/assets/images/camps/main/48/1.jpg",
+      "/src/assets/images/camps/main/48/2.jpg",
+      "/src/assets/images/camps/main/48/3.jpg",
+      "/src/assets/images/camps/main/48/4.jpg",
+      "/src/assets/images/camps/main/48/5.jpg"
+    ]
   },
   {
     "campID": 49,
@@ -351,7 +366,7 @@
     "location": "ร.ร.บ้านน้ำกุ่ม ต.น้ำกุ่ม อ.นครไทย จ.พิษณุโลก",
     "name": "เจ็บเพราะพิษรัก เลยไปพักที่พิดโลก",
     "director": "มาก พันธุ์ธัช ศิริวัน",
-    "imgSrc" : "/src/assets/images/camps/KH49.jpg"
+    "imgSrc" : ["/src/assets/images/camps/main/49/KH49.jpg"]
   },
   {
     "campID": 50,
@@ -359,7 +374,7 @@
     "location": "ร.ร.บ้านหนองหัวคู และ ร.ร.บ้านกุดเม็ก ต.หนองหัวคู อ.บ้านผือ จ.อุดรธานี",
     "name": "ปิดเทอมเเต่ไม่ปิดใจไปหารักครั้งใหม่ที่หนองหัวคู",
     "director": "นาย ตรัณ อนุสรณ์",
-    "imgSrc" : "/src/assets/images/camps/KH50.jpg"
+    "imgSrc" : ["/src/assets/images/camps/main/50/KH50.jpg"]
   },
   {
     "campID": 51,
@@ -367,7 +382,7 @@
     "location": "ร.ร.สนวนโคกเม็ก ต.ศรีณรงค์ อ.ชุมพลบุรี จ.สุรินทร์",
     "name": "สุรินทร์ถิ่นช้างใหญ่ ไผมีใจกะไปนำกันเด้อ",
     "director": "บูม เทพบัญชา ชมภูพื้น",
-    "imgSrc" : "/src/assets/images/camps/KH51.jpg"
+    "imgSrc" : ["/src/assets/images/camps/main/51/KH51.jpg"]
   },
   {
     "campID": 52,
@@ -375,6 +390,13 @@
     "location": "ร.ร.บ้านโหมงราษฎร์พัฒนา ต.พะรักษ์ ต.พะโต๊ะ จ.ชุมพร",
     "name": "ปิดเทอมใหญ่พาน้องล่องใต้พักใจที่ชุมพร",
     "director": "ต้าร์ ณภัทร เฉลิมวัย",
-    "imgSrc" : "/src/assets/images/camps/KH52.jpg"
+    "imgSrc" : [
+      "/src/assets/images/camps/main/52/KH52.jpg",
+      "/src/assets/images/camps/main/52/1.jpg",
+      "/src/assets/images/camps/main/52/2.jpg",
+      "/src/assets/images/camps/main/52/3.jpg",
+      "/src/assets/images/camps/main/52/4.jpg",
+      "/src/assets/images/camps/main/52/5.jpg"
+    ]
   }
 ]

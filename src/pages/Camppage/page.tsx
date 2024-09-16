@@ -1,22 +1,15 @@
 import { useEffect, useState } from "react";
 import CampCard from "./components/CampCard";
 import CampSearchComponent from "./components/CampSearch";
-import { getCampsData } from "@/utils/getCampData";
-
-interface Camp {
-    id: number;
-    name: string;
-    location: string;
-    imgSrc: string;
-    director: string;
-}
+import { getMainCampsData } from "@/utils/getCampData";
+import { CampData } from "@/types/camp";
 
 const CampPage = () => {
-    const [campsData, setCampsData] = useState<Camp[]>([]);
-    const [filteredCamps, setFilteredCamps] = useState<Camp[]>([]);
+    const [campsData, setCampsData] = useState<CampData[]>([]);
+    const [filteredCamps, setFilteredCamps] = useState<CampData[]>([]);
 
     const fetchCampsData = async () => {
-        const campsData = await getCampsData();
+        const campsData = await getMainCampsData();
         setCampsData(campsData);
         setFilteredCamps(campsData);
         return campsData;
@@ -28,7 +21,7 @@ const CampPage = () => {
 
     const handleSearch = (query: string, filterBy: string) => {
         const filtered = campsData.filter((camp) =>
-            camp[filterBy as keyof Camp]
+            camp[filterBy as keyof CampData]
                 .toString()
                 .toLowerCase()
                 .includes(query.toLowerCase())
@@ -43,12 +36,13 @@ const CampPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {filteredCamps.map((camp) => (
                     <CampCard
-                        key={camp.id}
-                        id={camp.id}
+                        key={camp.campID}
+                        id={camp.campID}
                         name={camp.name}
-                        imgSrc={camp.imgSrc}
+                        imgSrc={camp.imgSrc[0]}
                         location={camp.location}
                         director={camp.director}
+                        date={camp.date}
                     />
                 ))}
             </div>
