@@ -742,6 +742,11 @@
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.14.1.tgz#6d2dd03d52e604279c38911afc1079d58c50a755"
   integrity sha512-Qg4DMQsfPNAs88rb2xkdk03N3bjK4jgX5fR24eHCTR9q6PrhZQZ4UJBPzCHJkIpTRN1UKxx2DzjZmnC+7Lj0Ow==
 
+"@svg-maps/thailand@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@svg-maps/thailand/-/thailand-1.0.1.tgz#33ddb468214ab61974fe05e61493703d9c02e330"
+  integrity sha512-R4cbbY0EElEk6k9ULP467pGAepoOHRAwBi/XYgEpt3VsXmpoXljCuvx+kpPkHiHCfA8Baq1WFh9VqiVWEHuSQg==
+
 "@types/babel__core@^7.20.5":
   version "7.20.5"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.20.5.tgz#3df15f27ba85319caa07ba08d0721889bb39c017"

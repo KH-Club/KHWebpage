@@ -21,6 +21,7 @@ export type CampData = {
     director : string;
     isMainCamp : boolean;
     imgSrc : string[];
+    province : string;
 }
 
 // Note: use only before we have the real data

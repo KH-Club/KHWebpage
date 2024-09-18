@@ -12,13 +12,15 @@ const getMainCampsData = async (): Promise<CampData[]> => {
 			director: string
 			imgSrc: string[]
 			date : string
+			province : string
 		}) => ({
 			campID: camp.campID,
 			name: camp.name,
 			date : camp.date,
 			location: camp.location,
-			imgSrc: camp.imgSrc ?? ["/src/assets/images/camps/main/52/KH52.jpg"],
+			imgSrc: camp.imgSrc ?? ["/src/assets/images/layout/homepagebackground.jpg"],
 			director: camp.director,
+			province : camp.province
 		}),
 	)
 	return campsData.reverse()

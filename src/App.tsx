@@ -6,7 +6,7 @@ import SiteFooter from "@/components/Footer/Footer";
 import ActivityPage from "@/pages/Activitypage/page";
 import CampPage from "./pages/Camppage/page";
 import ContactPage from "./pages/Contactpage/page";
-import CampDetailPage from "./pages/CampDetailspage/page";
+import CampDetailPage from "./pages/CampDetailpage/page";
 
 
 const routes = [
@@ -15,7 +15,6 @@ const routes = [
   { path: "/camp", element: <CampPage /> },
   { path: "/contact", element: <ContactPage /> },
   { path: "/camp/:campID", element: <CampDetailPage /> }
-
 ]
 
 function App() {
