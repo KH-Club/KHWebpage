@@ -20,7 +20,7 @@ const CampCard = (prop : CampCardProp) =>{
         <div 
             onClick={handleCardClick}
             key={prop.id} 
-            className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-lg"
+            className="bg-white m-4 rounded-lg shadow-md overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-lg"
         >
         <img
             src={prop.imgSrc}

@@ -2,11 +2,12 @@ import React, { useState, useRef } from 'react';
 import mapData from '@svg-maps/thailand';
 
 interface MapProps {
-  onProvinceHover: (name: string | null) => void;
+  onProvinceSelect: (name: string | null) => void; // Add a callback for selecting a province
 }
 
-const ThailandMap = ({ onProvinceHover }: MapProps) => {
+const ThailandMap = ({ onProvinceSelect }: MapProps) => {
   const [hoveredProvince, setHoveredProvince] = useState<string | null>(null);
+  const [selectedProvince, setSelectedProvince] = useState<string | null>(null); // State for selected province
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const timeOutDelay: number = 100;
 
@@ -15,19 +16,23 @@ const ThailandMap = ({ onProvinceHover }: MapProps) => {
       clearTimeout(timeoutRef.current);
     }
     setHoveredProvince(name);
-    onProvinceHover(name);
   };
 
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
-      onProvinceHover(null);
+      setHoveredProvince(null);
     }, timeOutDelay);
+  };
+
+  const handleClick = (name: string) => {
+    setSelectedProvince(name);
+    onProvinceSelect(name);
   };
 
   return (
     <div style={{ position: 'relative' }}>
-      <svg 
-        viewBox={mapData.viewBox} 
+      <svg
+        viewBox={mapData.viewBox}
         xmlns="http://www.w3.org/2000/svg"
         width="50%"
         height="50%"
@@ -36,11 +41,12 @@ const ThailandMap = ({ onProvinceHover }: MapProps) => {
           <path
             key={location.id}
             d={location.path}
-            fill={hoveredProvince === location.name ? 'black' : 'none'}
+            fill={selectedProvince === location.name ? 'black' : (hoveredProvince === location.name ? 'gray' : 'none')}
             stroke="black"
             strokeWidth="1"
             onMouseEnter={() => handleMouseEnter(location.name)}
             onMouseLeave={handleMouseLeave}
+            onClick={() => handleClick(location.name)}
           >
             <title>{location.name}</title>
           </path>
