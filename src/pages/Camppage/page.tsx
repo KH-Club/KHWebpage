@@ -41,13 +41,13 @@ const CampPage = () => {
                 <h1 className="text-3xl font-bold">ประวัติค่ายหอ</h1>
                 <div className="flex space-x-4">
                     <button
-                        className={`px-4 py-2 ${viewMode === 'list' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                        className={`rounded-lg px-4 py-2 ${viewMode === 'list' ? 'bg-blue-500 font-semibold text-white shadow-md transition duration-300 hover:bg-blue-600 md:mt-0' : 'bg-gray-200'}`}
                         onClick={() => toggleViewMode('list')}
                     >
                         List View
                     </button>
                     <button
-                        className={`px-4 py-2 ${viewMode === 'map' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                        className={`rounded-lg px-4 py-2 ${viewMode === 'map' ? ' bg-blue-500 font-semibold text-white shadow-md transition duration-300 hover:bg-blue-600 md:mt-0' : 'bg-gray-200'}`}
                         onClick={() => toggleViewMode('map')}
                     >
                         Map View

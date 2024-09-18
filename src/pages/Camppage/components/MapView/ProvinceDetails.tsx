@@ -8,31 +8,34 @@ interface ProvinceDetailsProps {
 
 const ProvinceDetails = ({ provinceName, campsList }: ProvinceDetailsProps) => {
   return (
-    <div>
+    <div className="p-6 bg-gray-50 rounded-lg shadow-md">
       <div>
         {provinceName ? (
           <div>
-            <h3 className="text-lg font-semibold">{provinceName}</h3>
+            <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+              จังหวัด : {provinceName}
+            </h3>
             {campsList.length > 0 ? (
-              <ul>
+              <ul className="space-y-4">
                 {campsList.map((camp) => (
-                  <CampCard
-                    key={camp.campID}
-                    id={camp.campID}
-                    name={camp.name}
-                    imgSrc={camp.imgSrc[0]}
-                    location={camp.location}
-                    director={camp.director}
-                    date={camp.date}
-                  />
+                  <li key={camp.campID}>
+                    <CampCard
+                      id={camp.campID}
+                      name={camp.name}
+                      imgSrc={camp.imgSrc[0]}
+                      location={camp.location}
+                      director={camp.director}
+                      date={camp.date}
+                    />
+                  </li>
                 ))}
               </ul>
             ) : (
-              <p>No camps available for this province.</p>
+              <p className="text-gray-600">No camps available for this province.</p>
             )}
           </div>
         ) : (
-          <p>Hover over a province to see details.</p>
+          <p className="text-gray-600">Hover over a province to see details.</p>
         )}
       </div>
     </div>

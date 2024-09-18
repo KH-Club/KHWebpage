@@ -41,7 +41,7 @@ const ThailandMap = ({ onProvinceSelect }: MapProps) => {
           <path
             key={location.id}
             d={location.path}
-            fill={selectedProvince === location.name ? 'black' : (hoveredProvince === location.name ? 'gray' : 'none')}
+            fill={selectedProvince === location.name ? 'blue' : (hoveredProvince === location.name ? '#3b82f6' : 'none')}
             stroke="black"
             strokeWidth="1"
             onMouseEnter={() => handleMouseEnter(location.name)}

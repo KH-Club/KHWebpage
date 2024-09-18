@@ -13,11 +13,11 @@ const MapView = (props : MapViewProps) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
+    <div className="flex h-screen flex-col md:flex-row">
       <div className="flex-1 overflow-auto p-4">
         <ThailandMap  onProvinceSelect={handleProvinceSelect} />
       </div>
-      <div className="w-full md:w-1/3 p-4">
+      <div className="w-full p-4 md:w-1/3">
         <ProvinceDetails provinceName={selectedProvince} campsList={filterCamps} />
       </div>
     </div>
