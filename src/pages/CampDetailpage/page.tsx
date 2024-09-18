@@ -20,7 +20,7 @@ const CampDetailPage = () => {
 		campDetail ?
 		<div className="container mx-auto p-6">
 			<h1 className="mb-6 text-center text-4xl font-extrabold">
-                ค่ายหอ ครั้งที่ {campID} "{campDetail.name}"
+				ค่ายหอ ครั้งที่ {campID} {campDetail.name !== '' ? `"${campDetail.name}"` : campDetail.name}
 			</h1>
 			<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
 				{campDetail.imgSrc.map((src, index) => (

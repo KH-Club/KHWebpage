@@ -1,6 +1,5 @@
 import { Icons } from "@/components/Header/icons"
 import { MainNav } from "@/components/Header/main-nav"
-import { ModeToggle } from "@/components/Header/mode-toggle"
 import { buttonVariants } from "@/components/Header/ui/button"
 import { siteConfig } from "@/config/site"
 import { Link } from "react-router-dom"
@@ -38,7 +37,6 @@ export function SiteHeader() {
                 <span className="sr-only">Instagram</span>
               </div>
             </Link>
-            <ModeToggle />
           </nav>
         </div>
       </div>
