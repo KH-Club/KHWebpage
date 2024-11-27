@@ -12,7 +12,6 @@ const CampPage = () => {
         const campsData = await getMainCampsData();
         setCampsData(campsData);
         setFilteredCamps(campsData);
-        return campsData;
     };
 
     useEffect(() => {
@@ -20,20 +19,18 @@ const CampPage = () => {
     }, []);
 
     const handleSearch = (query: string, filterBy: string) => {
-        const filtered = campsData.filter((camp) =>
-            camp[filterBy as keyof CampData]
-                .toString()
-                .toLowerCase()
-                .includes(query.toLowerCase())
-        );
+        const lowerCaseQuery = query.toLowerCase();
+        const filtered = campsData.filter((camp) => {
+            const fieldValue = camp[filterBy as keyof CampData]?.toString()?.toLowerCase() || '';
+            return fieldValue.includes(lowerCaseQuery);
+        });
         setFilteredCamps(filtered);
     };
 
-   
     return (
         <div className="container mx-auto p-6">
             <CampSearchComponent onSearch={handleSearch} />
-            <ListView campsList={filteredCamps}/>
+            <ListView campsList={filteredCamps} />
         </div>
     );
 };

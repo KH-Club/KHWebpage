@@ -26,7 +26,6 @@ const CampSearchComponent = ({ onSearch }: CampSearchComponentProps) => {
                 onChange={(e) => setFilterBy(e.target.value)}
                 className="w-full md:w-1/5 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-                <option value="id">Filter by Camp ID</option>
                 <option value="name">Filter by Camp Name</option>
                 <option value="location">Filter by Camp Location</option>
             </select>

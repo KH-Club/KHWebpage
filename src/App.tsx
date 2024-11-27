@@ -22,13 +22,13 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <div className="relative flex min-h-screen flex-col">
+      <div className="relative flex min-h-screen w-full flex-col overflow-hidden">
         <SiteHeader />
-        <div className="flex-1">{children}</div>
+        <main className="flex-1 w-full max-w-full">{children}</main>
         <SiteFooter />
       </div>
     </ErrorBoundary>
-  )
+  );
 }
 
 export default App
