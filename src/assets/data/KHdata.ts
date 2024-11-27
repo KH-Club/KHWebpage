@@ -1,0 +1,552 @@
+import { CampData } from "@/types/camp";
+
+export const KHCamps : CampData[] = [
+    {
+        campID: 1,
+        date: "",
+        location: "",
+        name: "",
+        director: "",
+        province: "",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 2,
+        date: "",
+        location: "",
+        name: "",
+        director: "",
+        province: "",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 3,
+        date: "",
+        location: "",
+        name: "",
+        director: "",
+        province: "",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 4,
+        date: "",
+        location: "",
+        name: "",
+        director: "",
+        province: "",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 5,
+        date: "",
+        location: "",
+        name: "",
+        director: "",
+        province: "",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 6,
+        date: "",
+        location: "",
+        name: "",
+        director: "",
+        province: "",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 7,
+        date: "ต.ค. 2541",
+        location: "หมูบ้านห้วยมะขามป้อม ต.ท่าก๊อ อ.แม่สรวย จ.เชียงใหม่",
+        name: "",
+        director: "นิธิพนธ์ น้อยเผ่า",
+        province: "Chiang Mai",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 8,
+        date: "",
+        location: "",
+        name: "",
+        director: "",
+        province: "",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    // {
+    //   campID: "9.1",
+    //   date: "มี.ค. 2543",
+    //   location: "หมู่บ้านห้วยโสก ต.ป่าเต็ง อ.แก่งกระจาน จ.เพชรบุรี",
+    //   name: "",
+    //   director: "นิรันดร์ วงศ์ชัย",
+    //   province: "Phetchaburi"
+    // },
+    // {
+    //   campID: "9.2",
+    //   date: "",
+    //   location: "หมู่บ้านแม่หลุ ต.กองแขก อ.แม่แจ่ม จ.เชียงใหม่",
+    //   name: "",
+    //   director: "ณัฐศาสตร์ ม่วงสวนขวัญ",
+    //   province: "Chiang Mai"
+    // },
+    {
+        campID: 10,
+        date: "",
+        location: "",
+        name: "",
+        director: "",
+        province: "",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 11,
+        date: "",
+        location: "",
+        name: "",
+        director: "",
+        province: "",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 12,
+        date: "",
+        location: "",
+        name: "",
+        director: "",
+        province: "",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 13,
+        date: "มี.ค. 2545",
+        location: "หมู่บ้านแม่จองไฟ ต.ห้วยอ้อ อ.ลอง จ.แพร่",
+        name: "",
+        director: "สุรเวท แสงมณี",
+        province: "Phrae",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 14,
+        date: "ต.ค. 2545",
+        location: "หมู่บ้านดอยติ้ว ต.ศรีภูมิ อ.ท่าวังผา จ.น่าน",
+        name: "",
+        director: "วัชรพล พุฒทอง",
+        province: "Nan",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 15,
+        date: "",
+        location: "",
+        name: "",
+        director: "",
+        province: "",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 16,
+        date: "ต.ค. 2546",
+        location: "บ้านทุ่งสว่าง ต.ละเอาะ อ.น้ำเกลี้ยง จ.ศรีษะเกษ",
+        name: "",
+        director: "ภูมินันท์ วศินะจินดาแก้ว",
+        province: "Si Sa Ket",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 17,
+        date: "มี.ค. 2547",
+        location: "บ้านทัพม่าน ต.บัวใหญ๋ อ.นาน้อย จ.น่าน",
+        name: "",
+        director: "ปฐมพงษ์ ทะแสง",
+        province: "Nan",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 18,
+        date: "ต.ค. 2547",
+        location: "บ้านโนนสว่าง ต.โนนเมือง อ.โนนสัง จ.หนองบัวลำภู",
+        name: "",
+        director: "",
+        province: "Nong Bua Lamphu",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 19,
+        date: "",
+        location: "",
+        name: "",
+        director: "",
+        province: "",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 20,
+        date: "ต.ค. 2548",
+        location: "บ้านขุนก๋อง ต.แม่ทาลอบ อ.แม่ทา จ.ลำพูน",
+        name: "",
+        director: "เซิน ธนชัย ทัศนาวิวัฒน์",
+        province: "Lamphun",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 21,
+        date: "มี.ค. 2549",
+        location: "ร.ร.บ้านย่านมะปราง ต.ย่านยาว อ.คีรีรัฐนิคม จ.สุราษฎร์ธานี",
+        name: "",
+        director: "ปอนด์ ปรัชญ์ กิตติพงษ์พัฒนา",
+        province: "Surat Thani",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 22,
+        date: "ต.ค. 2549",
+        location: "โรงเรียนบ้านเทพประทาน อ.น้ำโสม จ. อุดรธานี",
+        name: "",
+        director: "",
+        province: "Udon Thani",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 23,
+        date: "มี.ค. 2550",
+        location: "ร.ร.บ้านโป่งสามขา ต.ศิลา อ.หล่มเก่า จ.เพชรบูรณ์",
+        name: "",
+        director: "บอย โกเมศ นาแจ้ง",
+        province: "Phetchabun",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 24,
+        date: "ต.ค. 2550",
+        location: "ร.ร.บ้านฟ้าประทาน ต.สังคม อ.สังคม จ. หนองคาย",
+        name: "",
+        director: "ออม",
+        province: "Nong Khai",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 25,
+        date: "มี.ค. 2551",
+        location: "จ. ลำปาง",
+        name: "",
+        director: "นิก ธนวัฒน์ จินจารักษ์",
+        province: "Lampang",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 26,
+        date: "ต.ค. 2551",
+        location: "ร.ร.บ้านโนนสวาง ต.ยางใหญ่ อ.น้ำยืน จ.อุบลราชธานี",
+        name: "",
+        director: "ดำรงค์ ทิวาวงษ์",
+        province: "Ubon Ratchathani",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 27,
+        date: "มี.ค. 2552",
+        location: "ร.ร.บ้านแม่แฮด ต.แม่พุง อ.วังชิ้น จ.แพร่",
+        name: "",
+        director: "บอย สมบุญ ขอถาวรทรัพย์",
+        province: "Phrae",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 28,
+        date: "ต.ค. 2552",
+        location: "ร.ร. บ้านห้วยตาดำ ต.ห้วยพุก อ.ดงเจริญ จ.พิจิตร",
+        name: "",
+        director: "ตั้ม ธนพัชร บัวสด",
+        province: "Phetchaburi",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 29,
+        date: "มี.ค. 2553",
+        location: "จ.กาฬสินธ์",
+        name: "",
+        director: "กาญจน์ กรองกาญจน์ การเนตร",
+        province: "Kalasin",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 30,
+        date: "ต.ค. 2553",
+        location: "ร.ร.บ้านสุมข้าม ต.นาขุม อ.บ้านโคก จ.อุตรดิตถ์",
+        name: "",
+        director: "นิก ปณิภัทร วัฒนศิริ",
+        province: "Uttaradit",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 31,
+        date: "มี.ค. 2554",
+        location: "ร.ร.บ้านโนนสมบูรณ์ ต.หนองสามสี อ.เสนางคนิคม จ.อำนาจเจริญ",
+        name: "",
+        director: "แบงค์ ธนัฐ ยี่หร่า",
+        province: "Amnat Charoen",
+        isMainCamp: false,
+        imgSrc: []
+    },
+    {
+        campID: 32,
+        date: "ต.ค. 2554",
+        location: "ร.ร.บ้านปางสา ต.แม่สิน อ.ศรีสัชนาลัย จ.สุโขทัย",
+        director: "โฮม สุรักษ์ สุทธิพิบูลย์",
+        province: "Sukhothai",
+        name: "",
+        isMainCamp: false,
+        imgSrc: []
+    },
+      {
+          campID: 33,
+          date: "ต.ค. 2555",
+          location: "จ.หนองบัวลำพูน",
+          director: "มุ่ย คนึงจิตร ทิศกูล",
+          province: "Nong Bua Lamphu",
+          name: "",
+          isMainCamp: false,
+          imgSrc: []
+      },
+      {
+          campID: 34,
+          date: "มี.ค. 2556",
+          location: "ร.ร.แม่งาวใต้ ต.บ้านร้อง อ.งาว จ.ลำปาง",
+          name: "ร้อนนี้ที่ลำปาง กับค่ายอาสาฯตะลุยดอย",
+          director: "ต่อ ธนวิทย์ โคตรโสภา",
+          province: "Lampang",
+          isMainCamp: false,
+          imgSrc: []
+      },
+      {
+          campID: 35,
+          date: "ต.ค. 2556",
+          location: "ศูนย์อบรมเด็กก่อนเกณฑ์ในวัด วัดต้นมะพร้าว ต.แม่กระบุง อ.ศรีสวัสดิ์ จ.กาญจนบุรี",
+          name: "ค่ายหอ@กาญจนบุรี",
+          director: "สิทธิพงษ์ ฉลวยศรี",
+          province: "Kanchanaburi",
+          isMainCamp: false,
+          imgSrc: []
+      },
+      {
+          campID: 36,
+          date: "มี.ค. 2557",
+          location: "ร.ร.บ้านคำน้อย ต.ห้วย อ.ปทุมราชวงศา จ.อำนาจเจริญ",
+          name: "ค่าย(มหา)อำนาจ",
+          director: "พิ้งค์ สุธาสินี ยมจินดา",
+          province: "Amnat Charoen",
+          isMainCamp: false,
+          imgSrc: []
+      },
+      {
+          campID: 37,
+          date: "ธ.ค. 2557",
+          location: "ร.ร.บ้านห้วยอีจีนสาขาห้วยโป่งน้ำ ต.ตาดกลอย อ.หล่มเก่า จ.เพชรบูรณ์",
+          name: "ค่ายหน้าหนาว นอนนับดาว",
+          director: "พี พิณณพรรษ ปิ่นศร",
+          province: "Phetchabun",
+          isMainCamp: false,
+          imgSrc: []
+      },
+      {
+          campID: 38,
+          date: "พ.ค. 2558",
+          location: "ร.ร.บ้านกุดเรือ ต.นาซอ อ.วานรนิวาส จ.สกลนคร",
+          name: "ค่ายหอสกลนคร เปลี่ยนฤดูร้อนเป็นฤดูรัก",
+          director: "สโตน วิชุกร คันธินทระ",
+          province: "Sakon Nakhon",
+          isMainCamp: false,
+          imgSrc: []
+      },
+      {
+          campID: 39,
+          date: "ธ.ค. 2558",
+          location: "ร.ร.บ้านทาป่าเปา อ.แม่ทา จังหวัดลำพูน",
+          name: "นอนผิงดาว กอดลมหนาว ที่ลำพูน",
+          director: "ฟิต ฟาอิซ ดาราแม",
+          province: "Lamphun",
+          isMainCamp: false,
+          imgSrc: []
+      },
+      {
+          campID: 40,
+          date: "พ.ค. 2559",
+          location: "ร.ร.บ้านโนนสูง อ.นาดี จ.ปราจีนบุรี",
+          name: "ฟ้าสดใส ไอแดดอุ่น ค่ายละมุน ที่ปราจีนฯ",
+          director: "ตุลย์ กราวิทัต ไชยกุล",
+          province: "Prachinburi",
+          isMainCamp: false,
+          imgSrc: []
+      },
+      {
+          campID: 41,
+          date: "ธ.ค. 2559",
+          location: "ร.ร.ตชด.เทคนิคอาสา1 ต.แม่อุสุ อ.ท่าสองยาง จ.ตาก",
+          name: "ค่ายหนาวใต้หมอกจาง ท่าสองยาง ทางสองเรา",
+          director: "ไทน์ ธีระวัฒน์ สุวรรณหงษ์",
+          province: "Tak",
+          isMainCamp: false,
+          imgSrc: []
+      },
+      {
+          campID: 42,
+          date: "พ.ค. 2560",
+          location: "ร.ร.คลองลอย ต.ร่อนทอง อ.บางสะพาน จ.ประจวบคีรีขันธ์",
+          director: "เจมส์ อติเทพ แก้วกอง",
+          province: "Prachuap Khiri Khan",
+          name: "",
+          isMainCamp: false,
+          imgSrc: []
+      },
+      {
+          campID: 43,
+          date: "ธ.ค. 2560",
+          location: "ร.ร.บ้านขนุนคลี่ อ.ทองผาภูมิ จ.กาญจนบุรี",
+          name: "กาญ(ละ)ครั้งหนึ่ง Once upon a KAN",
+          director: "ภุชงค์ สาริบุตร",
+          province: "Kanchanaburi",
+          isMainCamp: false,
+          imgSrc: []
+      },
+      {
+          campID: 44,
+          date: "พ.ค. 2561",
+          location: "ร.ร.บ้านวังขุม ต.เขาวง อ.บ้านตาขุน จ.สุราษฎร์ธานี",
+          name: "คงเป็นเพราะ \"บุพเพสุราษฯ\" ที่ทำให้เราได้พบกัน",
+          director: "กร ฐาปกรณ์ คงทน",
+          province: "Surat Thani",
+          isMainCamp: false,
+          imgSrc: []
+      },
+      {
+          campID: 45,
+          date: "ธ.ค. 2561",
+          location: "ร.ร.บ้านวังพง ต.ซับใหญ่ อ.ซับใหญ่ จ.ชัยภูมิ",
+          name: "ซับใหญ่...สงสัยน้ำหก",
+          director: "ตั้น วิชญ์ภาส เอี่ยมกมล",
+          province: "Chaiyaphum",
+          imgSrc: ["/src/assets/images/camps/main/45/KH45.jpg"],
+          isMainCamp: false
+      },
+      {
+          campID: 46,
+          date: "พ.ค. 2562",
+          location: "ร.ร.บ้านกล้วย ต.คลองเขื่อน อ.คลองเขื่อน จ.ฉะเชิงเทรา",
+          name: "กล้วยส้ม มะละกอ บ้านกล้วย",
+          director: "บอล วิชญ์พล มีบุญ",
+          province: "Chachoengsao",
+          imgSrc: ["/src/assets/images/camps/main/46/KH46.jpg"],
+          isMainCamp: false
+      },
+      {
+          campID: 47,
+          date: "ธ.ค. 2562",
+          location: "ร.ร.บ้านน้ำเลา ต.นาทะนุง อ.นาหมื่น จ.น่าน",
+          name: "ค่ายหอจัดที่น่านไง ที่ไหนนะ จะรู้ไหม ก็ที่น่านไง แล้วมันที่ไหนล่ะ เอ๊ะ ก็บอกที่น่าน ที่น่าน เออ แล้วมันที่ไหน ก็ที่น่านนะสิ ชกกันไหม น่านนะสิ น่านนะสิ",
+          director: "ฟิว นันทภัทร์ จั่นสนิท",
+          province: "Nan",
+          imgSrc: [
+              "/src/assets/images/camps/main/47/KH47.jpg",
+              "/src/assets/images/camps/main/47/9.jpg",
+              "/src/assets/images/camps/main/47/2.jpg",
+              "/src/assets/images/camps/main/47/7.jpg",
+              "/src/assets/images/camps/main/47/4.jpg",
+              "/src/assets/images/camps/main/47/5.jpg"
+          ],
+          isMainCamp: false
+      },
+      {
+          campID: 48,
+          date: "พ.ค. 2565",
+          location: "อบต.ไฮตาก ต.ไฮตาก อ.ภูเรือ จ.เลย",
+          name: "ไปเลย ไปเล้ย ไปเลย",
+          director: "ลมหนาว กิติศักดิ์ เผ่าดิษฐ",
+          province: "Loei",
+          imgSrc: [
+              "/src/assets/images/camps/main/48/KH48.jpg",
+              "/src/assets/images/camps/main/48/1.jpg",
+              "/src/assets/images/camps/main/48/2.jpg",
+              "/src/assets/images/camps/main/48/3.jpg",
+              "/src/assets/images/camps/main/48/4.jpg",
+              "/src/assets/images/camps/main/48/5.jpg"
+          ],
+          isMainCamp: false
+      },
+      {
+          campID: 49,
+          date: "ธ.ค. 2565",
+          location: "ร.ร.บ้านน้ำกุ่ม ต.น้ำกุ่ม อ.นครไทย จ.พิษณุโลก",
+          name: "เจ็บเพราะพิษรัก เลยไปพักที่พิดโลก",
+          director: "มาก พันธุ์ธัช ศิริวัน",
+          province: "Phitsanulok",
+          imgSrc: ["/src/assets/images/camps/main/49/KH49.jpg"],
+          isMainCamp: false
+      },
+      {
+          campID: 50,
+          date: "พ.ค. 2566",
+          location: "ร.ร.บ้านหนองหัวคู และ ร.ร.บ้านกุดเม็ก ต.หนองหัวคู อ.บ้านผือ จ.อุดรธานี",
+          name: "ปิดเทอมเเต่ไม่ปิดใจไปหารักครั้งใหม่ที่หนองหัวคู",
+          director: "นาย ตรัณ อนุสรณ์",
+          province: "Udon Thani",
+          imgSrc: ["/src/assets/images/camps/main/50/KH50.jpg"],
+          isMainCamp: false
+      },
+      {
+          campID: 51,
+          date: "ธ.ค. 2566",
+          location: "ร.ร.สนวนโคกเม็ก ต.ศรีณรงค์ อ.ชุมพลบุรี จ.สุรินทร์",
+          name: "สุรินทร์ถิ่นช้างใหญ่ ไผมีใจกะไปนำกันเด้อ",
+          director: "บูม เทพบัญชา ชมภูพื้น",
+          province: "Surin",
+          imgSrc: ["/src/assets/images/camps/main/51/KH51.jpg"],
+          isMainCamp: false
+      },
+      {
+          campID: 52,
+          date: "พ.ค. 2567",
+          location: "ร.ร.บ้านโหมงราษฎร์พัฒนา ต.พะรักษ์ ต.พะโต๊ะ จ.ชุมพร",
+          name: "ปิดเทอมใหญ่พาน้องล่องใต้พักใจที่ชุมพร",
+          director: "ต้าร์ ณภัทร เฉลิมวัย",
+          province: "Chumphon",
+          imgSrc: [
+              "/src/assets/images/camps/main/52/KH52.jpg",
+              "/src/assets/images/camps/main/52/1.jpg",
+              "/src/assets/images/camps/main/52/2.jpg",
+              "/src/assets/images/camps/main/52/3.jpg",
+              "/src/assets/images/camps/main/52/4.jpg",
+              "/src/assets/images/camps/main/52/5.jpg"
+          ],
+          isMainCamp: false
+      }
+]
+  

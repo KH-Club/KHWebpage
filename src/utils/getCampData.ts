@@ -1,26 +1,18 @@
+import { KHCamps } from "@/assets/data/KHdata"
 import { CampData } from "@/types/camp"
 
 const getMainCampsData = async (): Promise<CampData[]> => {
-	const filePath = "/src/assets/data/KHdata.json"
-	const response = await fetch(filePath)
-	const data = await response.json()
-	const campsData: CampData[] = data.map(
-		(camp: {
-			campID: number
-			name: string
-			location: string
-			director: string
-			imgSrc: string[]
-			date : string
-			province : string
-		}) => ({
+	
+	const campsData: CampData[] = KHCamps.map(
+		(camp: CampData) => ({
 			campID: camp.campID,
             name: camp.name, 
             location: camp.location || "-", 
             director: camp.director || "-", 
             date: camp.date || "-",
             imgSrc: camp.imgSrc?.length ? camp.imgSrc : ["/src/assets/images/layout/homepagebackground.jpg"], 
-            province: camp.province || "-" 
+            province: camp.province || "-", 
+			isMainCamp : true
 		}),
 	)
 	return campsData.reverse()
