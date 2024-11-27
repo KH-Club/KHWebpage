@@ -66,9 +66,9 @@ const About = () => {
               เช่น กิจกรรมสันทนาการ
             </p>
             {/* Text Icons */}
-            <div className="mt-6 flex flex-col gap-6 sm:flex-row sm:h-1/6 pb-3">
+            <div className="mt-6 flex flex-col gap-6 pb-3 sm:h-1/6 sm:flex-row">
               {/* First Section */}
-              <div className="flex w-full sm:w-1/2 items-center">
+              <div className="flex w-full items-center sm:w-1/2">
                 <div className="mr-4 h-full w-2 bg-blue-500"></div> {/* Blue bar */}
                 <div className="mb-2 flex items-center text-blue-500">
                   <span className="flex h-full items-center justify-center text-5xl font-semibold">52+</span>
@@ -80,7 +80,7 @@ const About = () => {
               </div>
 
               {/* Second Section */}
-              <div className="flex w-full sm:w-1/2 items-center">
+              <div className="flex w-full items-center sm:w-1/2">
                 <div className="mr-4 h-full w-2 bg-blue-500"></div> {/* Blue bar */}
                 <div className="mb-2 flex items-center text-blue-500">
                   <span className="flex h-full items-center justify-center text-5xl font-semibold">25+</span>
@@ -92,9 +92,9 @@ const About = () => {
               </div>
             </div>
             {/* Centered Button */}
-            <div className="flex justify-center mt-6">
+            <div className="mt-6 flex justify-center">
               <button
-                className="transform rounded-lg bg-blue-500 px-6 py-3 font-semibold text-white shadow-md transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-blue-700"
+                className="rounded-lg bg-blue-500 px-6 py-3 font-semibold text-white shadow-md transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-blue-700"
                 onClick={LearnMoreButtonOnClickHandler}
               >
                 Learn More
