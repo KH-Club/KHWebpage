@@ -10,7 +10,7 @@ const getMainCampsData = async (): Promise<CampData[]> => {
             location: camp.location || "-", 
             director: camp.director || "-", 
             date: camp.date || "-",
-            imgSrc: camp.imgSrc?.length ? camp.imgSrc : ["/src/assets/images/layout/homepagebackground.jpg"], 
+            imgSrc: camp.imgSrc?.length ? camp.imgSrc : ["/camps/homepagebackground.jpg"], 
             province: camp.province || "-", 
 			isMainCamp : true
 		}),

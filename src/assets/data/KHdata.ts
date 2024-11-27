@@ -454,7 +454,7 @@ export const KHCamps : CampData[] = [
           name: "ซับใหญ่...สงสัยน้ำหก",
           director: "ตั้น วิชญ์ภาส เอี่ยมกมล",
           province: "Chaiyaphum",
-          imgSrc: ["/assets/images/camps/main/45/KH45.jpg"],
+          imgSrc: ["/camps/main/45/KH45.jpg"],
           isMainCamp: false
       },
       {
@@ -464,7 +464,7 @@ export const KHCamps : CampData[] = [
           name: "กล้วยส้ม มะละกอ บ้านกล้วย",
           director: "บอล วิชญ์พล มีบุญ",
           province: "Chachoengsao",
-          imgSrc: ["/assets/images/camps/main/46/KH46.jpg"],
+          imgSrc: ["/camps/main/46/KH46.jpg"],
           isMainCamp: false
       },
       {
