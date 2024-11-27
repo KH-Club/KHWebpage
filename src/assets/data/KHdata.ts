@@ -475,12 +475,12 @@ export const KHCamps : CampData[] = [
           director: "ฟิว นันทภัทร์ จั่นสนิท",
           province: "Nan",
           imgSrc: [
-              "/assets/images/camps/main/47/KH47.jpg",
-              "/assets/images/camps/main/47/9.jpg",
-              "/assets/images/camps/main/47/2.jpg",
-              "/assets/images/camps/main/47/7.jpg",
-              "/assets/images/camps/main/47/4.jpg",
-              "/assets/images/camps/main/47/5.jpg"
+              "/camps/main/47/KH47.jpg",
+              "/camps/main/47/9.jpg",
+              "/camps/main/47/2.jpg",
+              "/camps/main/47/7.jpg",
+              "/camps/main/47/4.jpg",
+              "/camps/main/47/5.jpg"
           ],
           isMainCamp: false
       },
@@ -492,12 +492,12 @@ export const KHCamps : CampData[] = [
           director: "ลมหนาว กิติศักดิ์ เผ่าดิษฐ",
           province: "Loei",
           imgSrc: [
-              "/assets/images/camps/main/48/KH48.jpg",
-              "/assets/images/camps/main/48/1.jpg",
-              "/assets/images/camps/main/48/2.jpg",
-              "/assets/images/camps/main/48/3.jpg",
-              "/assets/images/camps/main/48/4.jpg",
-              "/assets/images/camps/main/48/5.jpg"
+              "/camps/main/48/KH48.jpg",
+              "/camps/main/48/1.jpg",
+              "/camps/main/48/2.jpg",
+              "/camps/main/48/3.jpg",
+              "/camps/main/48/4.jpg",
+              "/camps/main/48/5.jpg"
           ],
           isMainCamp: false
       },
@@ -508,7 +508,7 @@ export const KHCamps : CampData[] = [
           name: "เจ็บเพราะพิษรัก เลยไปพักที่พิดโลก",
           director: "มาก พันธุ์ธัช ศิริวัน",
           province: "Phitsanulok",
-          imgSrc: ["/assets/images/camps/main/49/KH49.jpg"],
+          imgSrc: ["/camps/main/49/KH49.jpg"],
           isMainCamp: false
       },
       {
@@ -518,7 +518,7 @@ export const KHCamps : CampData[] = [
           name: "ปิดเทอมเเต่ไม่ปิดใจไปหารักครั้งใหม่ที่หนองหัวคู",
           director: "นาย ตรัณ อนุสรณ์",
           province: "Udon Thani",
-          imgSrc: ["/assets/images/camps/main/50/KH50.jpg"],
+          imgSrc: ["/camps/main/50/KH50.jpg"],
           isMainCamp: false
       },
       {
@@ -528,7 +528,7 @@ export const KHCamps : CampData[] = [
           name: "สุรินทร์ถิ่นช้างใหญ่ ไผมีใจกะไปนำกันเด้อ",
           director: "บูม เทพบัญชา ชมภูพื้น",
           province: "Surin",
-          imgSrc: ["/assets/images/camps/main/51/KH51.jpg"],
+          imgSrc: ["/camps/main/51/KH51.jpg"],
           isMainCamp: false
       },
       {
@@ -539,12 +539,12 @@ export const KHCamps : CampData[] = [
           director: "ต้าร์ ณภัทร เฉลิมวัย",
           province: "Chumphon",
           imgSrc: [
-              "/assets/images/camps/main/52/KH52.jpg",
-              "/assets/images/camps/main/52/1.jpg",
-              "/assets/images/camps/main/52/2.jpg",
-              "/assets/images/camps/main/52/3.jpg",
-              "/assets/images/camps/main/52/4.jpg",
-              "/assets/images/camps/main/52/5.jpg"
+              "/camps/main/52/KH52.jpg",
+              "/camps/main/52/1.jpg",
+              "/camps/main/52/2.jpg",
+              "/camps/main/52/3.jpg",
+              "/camps/main/52/4.jpg",
+              "/camps/main/52/5.jpg"
           ],
           isMainCamp: false
       }
