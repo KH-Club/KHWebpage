@@ -454,7 +454,7 @@ export const KHCamps : CampData[] = [
           name: "ซับใหญ่...สงสัยน้ำหก",
           director: "ตั้น วิชญ์ภาส เอี่ยมกมล",
           province: "Chaiyaphum",
-          imgSrc: ["/src/assets/images/camps/main/45/KH45.jpg"],
+          imgSrc: ["/assets/images/camps/main/45/KH45.jpg"],
           isMainCamp: false
       },
       {
@@ -464,7 +464,7 @@ export const KHCamps : CampData[] = [
           name: "กล้วยส้ม มะละกอ บ้านกล้วย",
           director: "บอล วิชญ์พล มีบุญ",
           province: "Chachoengsao",
-          imgSrc: ["/src/assets/images/camps/main/46/KH46.jpg"],
+          imgSrc: ["/assets/images/camps/main/46/KH46.jpg"],
           isMainCamp: false
       },
       {
@@ -475,12 +475,12 @@ export const KHCamps : CampData[] = [
           director: "ฟิว นันทภัทร์ จั่นสนิท",
           province: "Nan",
           imgSrc: [
-              "/src/assets/images/camps/main/47/KH47.jpg",
-              "/src/assets/images/camps/main/47/9.jpg",
-              "/src/assets/images/camps/main/47/2.jpg",
-              "/src/assets/images/camps/main/47/7.jpg",
-              "/src/assets/images/camps/main/47/4.jpg",
-              "/src/assets/images/camps/main/47/5.jpg"
+              "/assets/images/camps/main/47/KH47.jpg",
+              "/assets/images/camps/main/47/9.jpg",
+              "/assets/images/camps/main/47/2.jpg",
+              "/assets/images/camps/main/47/7.jpg",
+              "/assets/images/camps/main/47/4.jpg",
+              "/assets/images/camps/main/47/5.jpg"
           ],
           isMainCamp: false
       },
@@ -492,12 +492,12 @@ export const KHCamps : CampData[] = [
           director: "ลมหนาว กิติศักดิ์ เผ่าดิษฐ",
           province: "Loei",
           imgSrc: [
-              "/src/assets/images/camps/main/48/KH48.jpg",
-              "/src/assets/images/camps/main/48/1.jpg",
-              "/src/assets/images/camps/main/48/2.jpg",
-              "/src/assets/images/camps/main/48/3.jpg",
-              "/src/assets/images/camps/main/48/4.jpg",
-              "/src/assets/images/camps/main/48/5.jpg"
+              "/assets/images/camps/main/48/KH48.jpg",
+              "/assets/images/camps/main/48/1.jpg",
+              "/assets/images/camps/main/48/2.jpg",
+              "/assets/images/camps/main/48/3.jpg",
+              "/assets/images/camps/main/48/4.jpg",
+              "/assets/images/camps/main/48/5.jpg"
           ],
           isMainCamp: false
       },
@@ -508,7 +508,7 @@ export const KHCamps : CampData[] = [
           name: "เจ็บเพราะพิษรัก เลยไปพักที่พิดโลก",
           director: "มาก พันธุ์ธัช ศิริวัน",
           province: "Phitsanulok",
-          imgSrc: ["/src/assets/images/camps/main/49/KH49.jpg"],
+          imgSrc: ["/assets/images/camps/main/49/KH49.jpg"],
           isMainCamp: false
       },
       {
@@ -518,7 +518,7 @@ export const KHCamps : CampData[] = [
           name: "ปิดเทอมเเต่ไม่ปิดใจไปหารักครั้งใหม่ที่หนองหัวคู",
           director: "นาย ตรัณ อนุสรณ์",
           province: "Udon Thani",
-          imgSrc: ["/src/assets/images/camps/main/50/KH50.jpg"],
+          imgSrc: ["/assets/images/camps/main/50/KH50.jpg"],
           isMainCamp: false
       },
       {
@@ -528,7 +528,7 @@ export const KHCamps : CampData[] = [
           name: "สุรินทร์ถิ่นช้างใหญ่ ไผมีใจกะไปนำกันเด้อ",
           director: "บูม เทพบัญชา ชมภูพื้น",
           province: "Surin",
-          imgSrc: ["/src/assets/images/camps/main/51/KH51.jpg"],
+          imgSrc: ["/assets/images/camps/main/51/KH51.jpg"],
           isMainCamp: false
       },
       {
@@ -539,12 +539,12 @@ export const KHCamps : CampData[] = [
           director: "ต้าร์ ณภัทร เฉลิมวัย",
           province: "Chumphon",
           imgSrc: [
-              "/src/assets/images/camps/main/52/KH52.jpg",
-              "/src/assets/images/camps/main/52/1.jpg",
-              "/src/assets/images/camps/main/52/2.jpg",
-              "/src/assets/images/camps/main/52/3.jpg",
-              "/src/assets/images/camps/main/52/4.jpg",
-              "/src/assets/images/camps/main/52/5.jpg"
+              "/assets/images/camps/main/52/KH52.jpg",
+              "/assets/images/camps/main/52/1.jpg",
+              "/assets/images/camps/main/52/2.jpg",
+              "/assets/images/camps/main/52/3.jpg",
+              "/assets/images/camps/main/52/4.jpg",
+              "/assets/images/camps/main/52/5.jpg"
           ],
           isMainCamp: false
       }
