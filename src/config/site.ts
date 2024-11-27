@@ -16,10 +16,6 @@ export const siteConfig = {
     {
       title: "Camp",
       href: "/camp",
-    },
-    {
-      title: "Contact",
-      href: "/contact",
     }
   ],
   links: {

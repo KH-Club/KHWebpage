@@ -38,7 +38,6 @@ const SiteFooter = () => {
           <h3 className="text-xl font-bold mb-4">Quick Links</h3>
           <ul className="space-y-2">
             <li><a href="#home" className="hover:underline">Home</a></li>
-            <li><a href="#donate" className="hover:underline">Donate</a></li>
           </ul>
         </div>
       </div>
