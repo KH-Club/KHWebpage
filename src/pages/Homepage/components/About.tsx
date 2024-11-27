@@ -8,7 +8,7 @@ const About = () => {
   const navigate = useNavigate();
 
   const LearnMoreButtonOnClickHandler = () => {
-    navigate("/about");
+    navigate("/camp");
   };
 
   return (
