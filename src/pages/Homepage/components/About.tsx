@@ -71,7 +71,7 @@ const About = () => {
               <div className="flex w-full items-center sm:w-1/2">
                 <div className="mr-4 h-full w-2 bg-blue-500"></div> {/* Blue bar */}
                 <div className="mb-2 flex items-center text-blue-500">
-                  <span className="flex h-full items-center justify-center text-5xl font-semibold">53</span>
+                  <span className="flex h-full items-center justify-center text-5xl font-semibold">53+</span>
                   <div className="ml-4 flex flex-col">
                     <span className="text-lg font-semibold">ค่าย</span>
                     <span className="text-md font-semibold">ที่เราได้จัด</span>
