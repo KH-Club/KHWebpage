@@ -1,8 +1,28 @@
 import HomepageBackgroundImage from "@/assets/images/layout/homepagebackground.jpg";
-import RightContainerImage from "@/assets/images/camps/main/52/KH52.jpg";
+import RightContainerImage1 from "@/assets/images/camps/main/52/KH52.jpg";
+import RightContainerImage2 from "@/assets/images/camps/main/53/KH53.jpg";
+import RightContainerImage3 from "@/assets/images/camps/main/51/KH51.jpg";
+import RightContainerImage4 from "@/assets/images/camps/main/50/KH50.jpg";
 import { Link } from "react-scroll"; 
+import { useEffect, useState } from "react";
 
 const LandingView = () => {
+  const rightContainerImages = [
+    RightContainerImage1,
+    RightContainerImage2,
+    RightContainerImage3,
+    RightContainerImage4
+  ];
+
+  const [currentBackgroundIndex, setCurrentBackgroundIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBackgroundIndex((prevIndex) => (prevIndex + 1) % rightContainerImages.length);
+    }, 5000); 
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section
       id="home"
@@ -39,7 +59,7 @@ const LandingView = () => {
         {/* Right Container */}
         <div className="mt-6 flex w-full items-center justify-center lg:mt-0 lg:w-1/3">
           <img
-            src={RightContainerImage}
+            src={rightContainerImages[currentBackgroundIndex]}
             alt="RightContainerImage"
             className="h-auto max-w-[80%] rounded-lg shadow-lg sm:max-w-[90%] md:max-w-full"
           />
