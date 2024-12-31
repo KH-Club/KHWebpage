@@ -534,7 +534,7 @@ export const KHCamps : CampData[] = [
       {
           campID: 52,
           date: "พ.ค. 2567",
-          location: "ร.ร.บ้านโหมงราษฎร์พัฒนา ต.พะรักษ์ ต.พะโต๊ะ จ.ชุมพร",
+          location: "ร.ร.บ้านโหมงราษฎร์พัฒนา ต.พะรักษ์ อ.พะโต๊ะ จ.ชุมพร",
           name: "ปิดเทอมใหญ่พาน้องล่องใต้พักใจที่ชุมพร",
           director: "ต้าร์ ณภัทร เฉลิมวัย",
           province: "Chumphon",
@@ -547,6 +547,18 @@ export const KHCamps : CampData[] = [
               "/camps/main/52/5.jpg"
           ],
           isMainCamp: false
-      }
+      },
+      {
+        campID: 53,
+        date: "ธ.ค. 2567",
+        location: "ร.ร.บ้านย่านดู่ ต.ผาเลือด อ.ปากปาด จ.อุตรดิตถ์",
+        name: "โอบกอดจากไออุ่นทอแสงอรุณที่อุตรดิตถ์",
+        director: "เต๋า พุฒิเมธ ศรีชลไพศาล",
+        province: "Uttardit",
+        imgSrc: [
+            "/camps/main/53/KH53.JPG",
+        ],
+        isMainCamp: false
+    }
 ]
   
