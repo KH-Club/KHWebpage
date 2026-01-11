@@ -559,6 +559,30 @@ export const KHCamps : CampData[] = [
             "/camps/main/53/KH53.JPG",
         ],
         isMainCamp: false
-    }
+      },
+      {
+        campID: 53.5,
+        date: "เม.ษ. 2568",
+        location: "ร.ร.บ้านหนองสำโรง จ.ลพบุรี",
+        name: "รอเจอน้องที่ลพ หวังจะพบที่(ที่)รัก",
+        director: "ขวัญ ขวัญมนัส อุดมเดช",
+        province: "Lopburi",
+        imgSrc: [
+            "/camps/main/53-5/KH53-5.jpg",
+        ],
+        isMainCamp: false
+      },
+      {
+        campID: 54,
+        date: "ธ.ค. 2568",
+        location: "ร.ร.หนองผือนาในวิทยาคาร จ.สกลนคร",
+        name: "โฮมฮักโฮมแพงฮ่วมแฮงฮ่วมใจ หนองผือนาในพาใจเฮาใกล้กัน",
+        director: "เอส กนกชน ดารารัตน์",
+        province: "Sakon Nakhon",
+        imgSrc: [
+            "/camps/main/54/KH54.jpg",
+        ],
+        isMainCamp: false
+      }
 ]
   

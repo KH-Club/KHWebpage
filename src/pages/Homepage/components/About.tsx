@@ -1,7 +1,7 @@
 import Image1 from "@/assets/images/activitys/krongarsa.jpg";
 import Image2 from "@/assets/images/activitys/krongfood.jpg";
 import Image3 from "@/assets/images/activitys/krongngan.jpg";
-import Image4 from "@/assets/images/activitys/krongkid.jpg";
+import Image4 from "@/assets/images/activitys/krongkid2.jpg";
 import { useNavigate } from "react-router-dom";
 
 const About = () => {
