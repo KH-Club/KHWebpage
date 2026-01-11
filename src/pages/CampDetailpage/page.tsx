@@ -8,7 +8,7 @@ const CampDetailPage = () => {
 	const { campID } = useParams<{ campID: string }>()
 	const fetchCampDetail = async() =>{
 		if(!campID) throw Error("CampID is not valid")
-		const campDetail : CampData = await getMainCampsDataByCampID(parseInt(campID));
+		const campDetail : CampData = await getMainCampsDataByCampID(parseFloat(campID));
 		setCampDetail(campDetail)
 		return campDetail;
 	}
