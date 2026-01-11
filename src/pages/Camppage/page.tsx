@@ -18,11 +18,13 @@ const CampPage = () => {
         fetchCampsData();
     }, []);
 
-    const handleSearch = (query: string, filterBy: string) => {
+    const handleSearch = (query: string) => {
         const lowerCaseQuery = query.toLowerCase();
         const filtered = campsData.filter((camp) => {
-            const fieldValue = camp[filterBy as keyof CampData]?.toString()?.toLowerCase() || '';
-            return fieldValue.includes(lowerCaseQuery);
+            const campName = camp.name?.toString()?.toLowerCase() || '';
+            const location = camp.location?.toString()?.toLowerCase() || '';
+            const campID = camp.campID?.toString()?.toLowerCase() || '';
+            return campName.includes(lowerCaseQuery) || location.includes(lowerCaseQuery) || campID.includes(lowerCaseQuery);
         });
         setFilteredCamps(filtered);
     };
