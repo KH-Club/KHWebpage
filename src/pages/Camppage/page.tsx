@@ -1,40 +1,53 @@
-import { useEffect, useState } from "react";
-import CampSearchComponent from "./components/ListView/CampSearch";
-import { getMainCampsData } from "@/utils/getCampData";
-import { CampData } from "@/types/camp";
-import ListView from "./components/ListView/ListView";
+import { useMemo } from "react"
+import { CampSearch, ListView } from "./components"
+import { useCamps, useSearch } from "@/hooks"
+import { CampData } from "@/types/camp"
 
 const CampPage = () => {
-    const [campsData, setCampsData] = useState<CampData[]>([]);
-    const [filteredCamps, setFilteredCamps] = useState<CampData[]>([]);
+  const { camps, isLoading, error } = useCamps()
 
-    const fetchCampsData = async () => {
-        const campsData = await getMainCampsData();
-        setCampsData(campsData);
-        setFilteredCamps(campsData);
-    };
+  const searchFields: (keyof CampData)[] = useMemo(
+    () => ["name", "location", "campID", "province"],
+    []
+  )
 
-    useEffect(() => {
-        fetchCampsData();
-    }, []);
+  const {
+    query,
+    setQuery,
+    filteredItems: filteredCamps,
+    isSearching
+  } = useSearch({
+    items: camps,
+    searchFields,
+    debounceMs: 300
+  })
 
-    const handleSearch = (query: string) => {
-        const lowerCaseQuery = query.toLowerCase();
-        const filtered = campsData.filter((camp) => {
-            const campName = camp.name?.toString()?.toLowerCase() || '';
-            const location = camp.location?.toString()?.toLowerCase() || '';
-            const campID = camp.campID?.toString()?.toLowerCase() || '';
-            return campName.includes(lowerCaseQuery) || location.includes(lowerCaseQuery) || campID.includes(lowerCaseQuery);
-        });
-        setFilteredCamps(filtered);
-    };
-
+  if (error) {
     return (
-        <div className="container mx-auto p-6">
-            <CampSearchComponent onSearch={handleSearch} />
-            <ListView campsList={filteredCamps} />
+      <div className="container mx-auto p-6">
+        <div className="rounded-lg bg-red-50 p-4 text-red-600">
+          Error loading camps: {error.message}
         </div>
-    );
-};
+      </div>
+    )
+  }
 
-export default CampPage;
+  return (
+    <div className="container mx-auto p-6">
+      <CampSearch
+        value={query}
+        onChange={setQuery}
+        isSearching={isSearching}
+      />
+      {isLoading ? (
+        <div className="flex h-64 items-center justify-center">
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
+        </div>
+      ) : (
+        <ListView campsList={filteredCamps} />
+      )}
+    </div>
+  )
+}
+
+export default CampPage

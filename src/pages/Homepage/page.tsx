@@ -1,15 +1,13 @@
-import About from "./components/About";
-import Core from "./components/Core";
-import LandingView from "./components/LandingView";
+import { About, Core, LandingView } from "./components"
 
 const Home = () => {
   return (
     <>
-      <LandingView/>
-      <Core/>
-      <About/>
+      <LandingView />
+      <Core />
+      <About />
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

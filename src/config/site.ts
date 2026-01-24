@@ -2,8 +2,8 @@ export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
   name: "KH",
-  description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
+  description: "ชมรมค่ายอาสาสมัครนิสิตหอพักจุฬาลงกรณ์มหาวิทยาลัย",
+  foundingYear: 1998,
   mainNav: [
     {
       title: "Home",
@@ -19,7 +19,7 @@ export const siteConfig = {
     }
   ],
   links: {
-    facebook : "https://www.facebook.com/profile.php?id=61558699434541",
-    instagram : "https://www.instagram.com/kaihor.official/",
+    facebook: "https://www.facebook.com/profile.php?id=61558699434541",
+    instagram: "https://www.instagram.com/kaihor.official/",
   },
 }
