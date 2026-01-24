@@ -54,7 +54,11 @@ describe("CampSearch component", () => {
 	it("should show loading indicator when searching with text", () => {
 		const handleChange = vi.fn()
 		const { container } = render(
-			<CampSearch value="search text" onChange={handleChange} isSearching={true} />,
+			<CampSearch
+				value="search text"
+				onChange={handleChange}
+				isSearching={true}
+			/>,
 		)
 
 		expect(container.querySelector(".animate-spin")).toBeInTheDocument()

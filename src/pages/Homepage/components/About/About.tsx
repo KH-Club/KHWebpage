@@ -21,7 +21,10 @@ const About = memo(function About() {
 	}, [navigate])
 
 	return (
-		<section id="about-section" className="mx-auto bg-gray-50 pb-16 pt-10 md:pb-24 md:pt-12">
+		<section
+			id="about-section"
+			className="mx-auto bg-gray-50 pb-16 pt-10 md:pb-24 md:pt-12"
+		>
 			<div className="container mx-auto px-6">
 				{/* Section Header */}
 				<div className="mb-12 text-center">
@@ -81,7 +84,7 @@ const About = memo(function About() {
 									"โครงอาสาพัฒนา",
 									"โครงเด็ก",
 									"โครงสัมพันธ์ชุมชน",
-									"โครงสร้างสรรค์ผลิตภัณฑ์ชุมชน"
+									"โครงสร้างสรรค์ผลิตภัณฑ์ชุมชน",
 								].map((tag) => (
 									<span
 										key={tag}
