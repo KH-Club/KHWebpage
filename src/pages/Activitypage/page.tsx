@@ -16,7 +16,9 @@ export interface Activity {
 }
 
 const ActivityPage = () => {
-	const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null)
+	const [selectedActivity, setSelectedActivity] = useState<Activity | null>(
+		null,
+	)
 
 	const activityList = [
 		{
@@ -40,12 +42,12 @@ const ActivityPage = () => {
 			description: "โครงอาสา",
 		},
 		{
-			name: "โครงงานก่อสร้าง", 
+			name: "โครงงานก่อสร้าง",
 			imgSrc: KrongNganImage,
 			description: "โครงอาสา",
 		},
 		{
-			name: "กิจกรรมสานสัมพันธ์", 
+			name: "กิจกรรมสานสัมพันธ์",
 			imgSrc: FunImage,
 			description: "กิจกรรมสานสัมพันธ์",
 		},
