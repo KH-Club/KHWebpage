@@ -15,7 +15,7 @@ describe("CampSearch component", () => {
 		render(<CampSearch value="" onChange={handleChange} />)
 
 		expect(
-			screen.getByPlaceholderText("Search camps by name or location..."),
+			screen.getByPlaceholderText("ค้นหาค่ายด้วยชื่อ, สถานที่, หรือจังหวัด..."),
 		).toBeInTheDocument()
 	})
 
@@ -51,10 +51,14 @@ describe("CampSearch component", () => {
 		expect(handleChange).toHaveBeenCalledWith("new value")
 	})
 
-	it("should show loading indicator when searching", () => {
+	it("should show loading indicator when searching with text", () => {
 		const handleChange = vi.fn()
 		const { container } = render(
-			<CampSearch value="" onChange={handleChange} isSearching={true} />,
+			<CampSearch
+				value="search text"
+				onChange={handleChange}
+				isSearching={true}
+			/>,
 		)
 
 		expect(container.querySelector(".animate-spin")).toBeInTheDocument()

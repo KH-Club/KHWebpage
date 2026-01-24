@@ -1,6 +1,7 @@
 import { memo } from "react"
 import { CampData } from "@/types/camp"
-import CampCard from "../CampCard"
+import CampCard from "../CampCard/CampCard"
+import { FiSearch } from "react-icons/fi"
 
 export interface ListViewProps {
 	campsList: CampData[]
@@ -9,19 +10,21 @@ export interface ListViewProps {
 const ListView = memo(function ListView({ campsList }: ListViewProps) {
 	if (campsList.length === 0) {
 		return (
-			<div className="flex h-64 items-center justify-center rounded-lg bg-gray-50 p-4 shadow-lg">
-				<p className="text-gray-500">No camps found matching your search.</p>
+			<div className="flex flex-col items-center justify-center rounded-2xl bg-gray-50 py-16">
+				<div className="mb-4 rounded-full bg-gray-100 p-4">
+					<FiSearch className="h-8 w-8 text-gray-400" />
+				</div>
+				<h3 className="mb-2 text-lg font-semibold text-gray-700">
+					ไม่พบค่ายที่ค้นหา
+				</h3>
+				<p className="text-gray-500">ลองค้นหาด้วยคำอื่น หรือล้างการค้นหา</p>
 			</div>
 		)
 	}
 
 	return (
-		<div
-			className="h-[768px] overflow-y-auto rounded-lg bg-gray-50 p-4 shadow-lg"
-			role="list"
-			aria-label="Camp list"
-		>
-			<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+		<div role="list" aria-label="Camp list">
+			<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 				{campsList.map((camp) => (
 					<CampCard
 						key={camp.campID}
@@ -31,6 +34,7 @@ const ListView = memo(function ListView({ campsList }: ListViewProps) {
 						location={camp.location}
 						director={camp.director}
 						date={camp.date}
+						province={camp.province}
 					/>
 				))}
 			</div>

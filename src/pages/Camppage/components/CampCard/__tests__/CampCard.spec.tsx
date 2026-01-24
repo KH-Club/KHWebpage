@@ -29,11 +29,16 @@ describe("CampCard component", () => {
 	it("should render camp information", () => {
 		render(<CampCard {...defaultProps} />)
 
-		expect(screen.getByText(/ค่ายหอ ครั้งที่ 47/)).toBeInTheDocument()
+		// Camp number badge
+		expect(screen.getByText(/ครั้งที่ 47/)).toBeInTheDocument()
+		// Camp name in title
 		expect(screen.getByText(/"Test Camp"/)).toBeInTheDocument()
-		expect(screen.getByText(/จัดที่ Bangkok/)).toBeInTheDocument()
-		expect(screen.getByText(/ผู้อำนวยการค่าย : John Doe/)).toBeInTheDocument()
-		expect(screen.getByText(/จัดช่วง ธ.ค. 2562/)).toBeInTheDocument()
+		// Location
+		expect(screen.getByText("Bangkok")).toBeInTheDocument()
+		// Director with new prefix
+		expect(screen.getByText(/ผอ\.ค่าย: John Doe/)).toBeInTheDocument()
+		// Date in badge
+		expect(screen.getByText("ธ.ค. 2562")).toBeInTheDocument()
 	})
 
 	it("should render image", () => {
@@ -70,11 +75,11 @@ describe("CampCard component", () => {
 		expect(mockNavigate).toHaveBeenCalledWith("/camp/47")
 	})
 
-	it("should not show quotes when name is empty", () => {
+	it("should show fallback title when name is empty", () => {
 		render(<CampCard {...defaultProps} name="" />)
 
+		// Should show fallback title
 		expect(screen.getByText(/ค่ายหอ ครั้งที่ 47/)).toBeInTheDocument()
-		expect(screen.queryByText(/""/)).not.toBeInTheDocument()
 	})
 
 	it("should have proper accessibility attributes", () => {

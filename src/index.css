@@ -78,6 +78,17 @@
 		@apply bg-background font-sans text-foreground;
 	}
 }
+
+/* Custom animations */
+@keyframes shimmer {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(100%);
+	}
+}
+
 .app {
 	height: 100%;
 	width: 100%;
