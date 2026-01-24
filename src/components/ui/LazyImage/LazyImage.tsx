@@ -1,4 +1,11 @@
-import { memo, useState, useEffect, ImgHTMLAttributes } from "react"
+import {
+	memo,
+	useState,
+	useEffect,
+	useRef,
+	useCallback,
+	ImgHTMLAttributes,
+} from "react"
 import { cn } from "@/lib/utils"
 
 export interface LazyImageProps extends ImgHTMLAttributes<HTMLImageElement> {
@@ -24,16 +31,36 @@ export const LazyImage = memo(function LazyImage({
 	showLoadingSpinner = true,
 	...props
 }: LazyImageProps) {
+	const imgRef = useRef<HTMLImageElement>(null)
 	const [imgSrc, setImgSrc] = useState(src)
 	const [isLoading, setIsLoading] = useState(true)
 	const [hasError, setHasError] = useState(false)
+
+	// Check if image is already cached/loaded
+	const checkIfLoaded = useCallback(() => {
+		const img = imgRef.current
+		if (img && img.complete && img.naturalWidth > 0) {
+			setIsLoading(false)
+		}
+	}, [])
 
 	// Reset loading state when src changes
 	useEffect(() => {
 		setImgSrc(src)
 		setIsLoading(true)
 		setHasError(false)
-	}, [src])
+
+		// Check immediately if the image is already cached
+		// Use requestAnimationFrame to ensure the img element has updated its src
+		requestAnimationFrame(() => {
+			checkIfLoaded()
+		})
+	}, [src, checkIfLoaded])
+
+	// Also check on mount in case the image loads very quickly
+	useEffect(() => {
+		checkIfLoaded()
+	}, [checkIfLoaded])
 
 	const handleError = () => {
 		if (!hasError && fallbackSrc) {
@@ -86,6 +113,7 @@ export const LazyImage = memo(function LazyImage({
 
 			{/* Actual Image */}
 			<img
+				ref={imgRef}
 				src={imgSrc}
 				alt={alt}
 				loading="lazy"
