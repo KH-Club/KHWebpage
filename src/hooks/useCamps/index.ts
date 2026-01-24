@@ -1,1 +1,7 @@
-export { useCamps, useCampDetail, getCampsData, getCampById, default } from "./useCamps"
+export {
+	useCamps,
+	useCampDetail,
+	getCampsData,
+	getCampById,
+	default,
+} from "./useCamps"

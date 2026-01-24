@@ -1,25 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react"
 
 export interface InstagramEmbedProps {
-    subUrl: string;
+	subUrl: string
 }
 
 const InstagramEmbed: React.FC<InstagramEmbedProps> = ({ subUrl }) => {
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://www.instagram.com/embed.js';
-        document.body.appendChild(script);
+	useEffect(() => {
+		const script = document.createElement("script")
+		script.async = true
+		script.src = "https://www.instagram.com/embed.js"
+		document.body.appendChild(script)
 
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, [subUrl]);
+		return () => {
+			document.body.removeChild(script)
+		}
+	}, [subUrl])
 
-    return (
-        <div className='flex justify-center'
-            dangerouslySetInnerHTML={{
-                __html: `<blockquote class="instagram-media" data - instgrm - captioned data - instgrm - permalink="https://www.instagram.com/p/${subUrl}/?utm_source=ig_embed&amp;utm_campaign=loading" data - instgrm - version="14" style = " background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);" >
+	return (
+		<div
+			className="flex justify-center"
+			dangerouslySetInnerHTML={{
+				__html: `<blockquote class="instagram-media" data - instgrm - captioned data - instgrm - permalink="https://www.instagram.com/p/${subUrl}/?utm_source=ig_embed&amp;utm_campaign=loading" data - instgrm - version="14" style = " background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);" >
         <div style="padding:16px;">
             <a href="https://www.instagram.com/p/${subUrl}/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank">
                 <div style=" display: flex; flex-direction: row; align-items: center;">
@@ -71,9 +72,9 @@ const InstagramEmbed: React.FC<InstagramEmbedProps> = ({ subUrl }) => {
             </p>
         </div>
       </blockquote > `,
-            }}
-        />
-    );
-};
+			}}
+		/>
+	)
+}
 
-export default InstagramEmbed;
+export default InstagramEmbed

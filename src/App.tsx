@@ -13,35 +13,33 @@ const CampDetailPage = lazy(() => import("@/pages/CampDetailpage/page"))
 
 // Loading fallback component
 const PageLoader = () => (
-  <div className="flex min-h-[50vh] items-center justify-center">
-    <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
-  </div>
+	<div className="flex min-h-[50vh] items-center justify-center">
+		<div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
+	</div>
 )
 
 const routes = [
-  { path: "/", element: <Home /> },
-  { path: "/activity", element: <ActivityPage /> },
-  { path: "/camp", element: <CampPage /> },
-  { path: "/contact", element: <ContactPage /> },
-  { path: "/camp/:campID", element: <CampDetailPage /> }
+	{ path: "/", element: <Home /> },
+	{ path: "/activity", element: <ActivityPage /> },
+	{ path: "/camp", element: <CampPage /> },
+	{ path: "/contact", element: <ContactPage /> },
+	{ path: "/camp/:campID", element: <CampDetailPage /> },
 ]
 
 function App() {
-  const children = useRoutes(routes)
+	const children = useRoutes(routes)
 
-  return (
-    <ErrorBoundary>
-      <div className="relative flex min-h-screen w-full flex-col overflow-hidden">
-        <SiteHeader />
-        <main className="w-full max-w-full flex-1">
-          <Suspense fallback={<PageLoader />}>
-            {children}
-          </Suspense>
-        </main>
-        <SiteFooter />
-      </div>
-    </ErrorBoundary>
-  )
+	return (
+		<ErrorBoundary>
+			<div className="relative flex min-h-screen w-full flex-col overflow-hidden">
+				<SiteHeader />
+				<main className="w-full max-w-full flex-1">
+					<Suspense fallback={<PageLoader />}>{children}</Suspense>
+				</main>
+				<SiteFooter />
+			</div>
+		</ErrorBoundary>
+	)
 }
 
 export default App

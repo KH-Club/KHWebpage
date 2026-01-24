@@ -3,21 +3,21 @@ import { render, RenderOptions } from "@testing-library/react"
 import { BrowserRouter } from "react-router-dom"
 
 interface WrapperProps {
-  children: ReactNode
+	children: ReactNode
 }
 
 /**
  * Custom render function that wraps components with necessary providers
  */
 function AllProviders({ children }: WrapperProps) {
-  return <BrowserRouter>{children}</BrowserRouter>
+	return <BrowserRouter>{children}</BrowserRouter>
 }
 
 function customRender(
-  ui: ReactElement,
-  options?: Omit<RenderOptions, "wrapper">
+	ui: ReactElement,
+	options?: Omit<RenderOptions, "wrapper">,
 ) {
-  return render(ui, { wrapper: AllProviders, ...options })
+	return render(ui, { wrapper: AllProviders, ...options })
 }
 
 // Re-export everything from testing library
