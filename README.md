@@ -35,15 +35,15 @@ src/
 │   ├── Footer/
 │   ├── Header/
 │   └── ui/              # Reusable UI components
+│       ├── AnimatedCounter/
 │       ├── Button/
 │       ├── InfoCard/
 │       ├── LazyImage/
-│       ├── SocialLinks/
-│       └── StatCard/
+│       ├── ScrollIndicator/
+│       └── SocialLinks/
 ├── config/              # App configuration
 ├── hooks/               # Custom React hooks
 │   ├── useCamps/        # Camp data fetching & caching
-│   ├── useImageCarousel/# Image carousel logic
 │   └── useSearch/       # Search with debouncing
 ├── layouts/             # Layout components
 ├── lib/                 # Utility functions
@@ -71,8 +71,8 @@ src/
 
 - Each component/hook has its own folder with:
   - `ComponentName.tsx` - Main component file
-  - `index.ts` - Barrel export
   - `__tests__/` - Test files (`.spec.tsx`)
+- Barrel exports (`index.ts`) are used at folder group level (e.g., `hooks/index.ts`, `ui/index.ts`)
 
 ## 🚀 Getting Started
 
@@ -205,20 +205,23 @@ Camp data is stored in `src/assets/data/KHdata.ts`. Each camp entry includes:
 ## 📱 Features
 
 - **Responsive Design** - Works on mobile, tablet, and desktop
-- **Lazy Loading** - Images load on demand for better performance
+- **Lazy Loading** - Images load on demand with loading UI
 - **Code Splitting** - Routes are lazy-loaded for faster initial load
 - **Search** - Debounced search for camps by name or location
-- **Image Carousel** - Auto-playing image carousel on homepage
+- **Animated Counters** - Dynamic statistics with animation
 - **Accessible** - Built with Radix UI for accessibility
 
 ## 🤝 Contributing
 
+Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
+
+**Quick Overview:**
 1. Create a feature branch from `develop`
-2. Make your changes
-3. Ensure all tests pass: `yarn test:run`
-4. Ensure code is formatted: `yarn format:check`
-5. Ensure no lint errors: `yarn lint`
-6. Create a pull request
+2. Make your changes and verify locally (`yarn format && yarn lint && yarn test:run`)
+3. Open a Pull Request
+4. **Make CI pass** before requesting review
+5. Wait for approval from reviewer
+6. Let the owner merge the PR
 
 ## 📄 License
 
