@@ -2,7 +2,7 @@ import { memo, forwardRef, ButtonHTMLAttributes, ReactNode } from "react"
 import { cn } from "@/lib/utils"
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	variant?: "primary" | "secondary" | "ghost" | "link"
+	variant?: "primary" | "secondary" | "outline" | "ghost" | "link"
 	size?: "sm" | "md" | "lg"
 	children: ReactNode
 	isLoading?: boolean
@@ -11,6 +11,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const buttonVariants = {
 	primary: "bg-blue-500 text-white hover:bg-blue-700 shadow-md",
 	secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300",
+	outline:
+		"border-2 border-blue-500 text-blue-500 bg-transparent hover:bg-blue-50",
 	ghost: "bg-transparent hover:bg-gray-100",
 	link: "bg-transparent underline-offset-4 hover:underline text-blue-500",
 }
