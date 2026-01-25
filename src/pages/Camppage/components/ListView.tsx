@@ -1,6 +1,6 @@
 import { memo } from "react"
 import { CampData } from "@/types/camp"
-import CampCard from "../CampCard/CampCard"
+import CampCard from "./CampCard"
 import { FiSearch } from "react-icons/fi"
 
 export interface ListViewProps {
