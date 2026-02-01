@@ -24,6 +24,7 @@ This website showcases our camps, activities, and provides information for prosp
 | [shadcn/ui](https://ui.shadcn.com) | Pre-built components |
 | [Vitest](https://vitest.dev) | Unit testing |
 | [React Testing Library](https://testing-library.com/react) | Component testing |
+| [Supabase](https://supabase.com) | Database & API |
 
 ## 📁 Project Structure
 
@@ -43,8 +44,10 @@ src/
 │       └── SocialLinks/
 ├── config/              # App configuration
 ├── hooks/               # Custom React hooks
-│   ├── useCamps/        # Camp data fetching & caching
+│   ├── useCamps/        # Camp data fetching from Supabase
 │   └── useSearch/       # Search with debouncing
+├── services/            # API services
+│   └── campService.ts   # Supabase camp data fetching
 ├── layouts/             # Layout components
 ├── lib/                 # Utility functions
 ├── pages/               # Page components (route-based)
@@ -191,9 +194,22 @@ export const siteConfig = {
 }
 ```
 
-### Camp Data
+### Supabase (Database)
 
-Camp data is stored in `src/assets/data/KHdata.ts`. Each camp entry includes:
+Camp data is fetched from Supabase. Configure in `.env.local`:
+
+```bash
+# Copy the example file
+cp .env.local.example .env.local
+
+# Add your Supabase credentials (same as kaihor-backoffice)
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+```
+
+### Camp Data Structure
+
+Each camp entry in the database includes:
 - `campID` - Unique identifier
 - `name` - Camp name
 - `location` - Camp location
