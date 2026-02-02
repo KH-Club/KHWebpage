@@ -283,7 +283,7 @@ export const KHCamps: CampData[] = [
 		location: "ร.ร. บ้านห้วยตาดำ ต.ห้วยพุก อ.ดงเจริญ จ.พิจิตร",
 		name: "",
 		director: "ตั้ม ธนพัชร บัวสด",
-		province: "Phetchaburi",
+		province: "Phichit",
 		isMainCamp: false,
 		imgSrc: [],
 	},
