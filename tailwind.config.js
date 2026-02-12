@@ -20,6 +20,23 @@ export default {
 			},
 		},
 		extend: {
+			fontFamily: {
+				sans: [
+					"Bai Jamjuree",
+					"Godwit",
+					"MuseoSans",
+					"-apple-system",
+					"BlinkMacSystemFont",
+					"Segoe UI",
+					"Roboto",
+					"Helvetica",
+					"Arial",
+					"sans-serif",
+					"Apple Color Emoji",
+					"Segoe UI Emoji",
+					"Segoe UI Symbol",
+				],
+			},
 			colors: {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
