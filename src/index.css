@@ -2,11 +2,107 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom font: Bai Jamjuree */
+@font-face {
+	font-family: "Bai Jamjuree";
+	src: url("./assets/fonts/BaiJamjuree-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Bai Jamjuree";
+	src: url("./assets/fonts/BaiJamjuree-Italic.ttf") format("truetype");
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Bai Jamjuree";
+	src: url("./assets/fonts/BaiJamjuree-Light.ttf") format("truetype");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Bai Jamjuree";
+	src: url("./assets/fonts/BaiJamjuree-LightItalic.ttf") format("truetype");
+	font-weight: 300;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Bai Jamjuree";
+	src: url("./assets/fonts/BaiJamjuree-Medium.ttf") format("truetype");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Bai Jamjuree";
+	src: url("./assets/fonts/BaiJamjuree-MediumItalic.ttf") format("truetype");
+	font-weight: 500;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Bai Jamjuree";
+	src: url("./assets/fonts/BaiJamjuree-SemiBold.ttf") format("truetype");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Bai Jamjuree";
+	src: url("./assets/fonts/BaiJamjuree-SemiBoldItalic.ttf") format("truetype");
+	font-weight: 600;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Bai Jamjuree";
+	src: url("./assets/fonts/BaiJamjuree-BoldItalic.ttf") format("truetype");
+	font-weight: bold;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Bai Jamjuree";
+	src: url("./assets/fonts/BaiJamjuree-ExtraLight.ttf") format("truetype");
+	font-weight: 200;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Bai Jamjuree";
+	src: url("./assets/fonts/BaiJamjuree-ExtraLightItalic.ttf") format("truetype");
+	font-weight: 200;
+	font-style: italic;
+	font-display: swap;
+}
+
 @layer base {
+	html,
+	body {
+		font-family:
+			"Bai Jamjuree",
+			"Godwit",
+			"MuseoSans",
+			-apple-system,
+			BlinkMacSystemFont,
+			"Segoe UI",
+			Roboto,
+			Helvetica,
+			Arial,
+			sans-serif,
+			"Apple Color Emoji",
+			"Segoe UI Emoji",
+			"Segoe UI Symbol";
+	}
 	:root {
-		--font-sans: "Godwit,MuseoSans", "-apple-system", "BlinkMacSystemFont",
-			"Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif",
-			"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+		--font-sans: "Bai Jamjuree", "Godwit,MuseoSans", "-apple-system",
+			"BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial",
+			"sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
 		--background: 0 0% 100%;
 		--foreground: 222.2 84% 4.9%;
