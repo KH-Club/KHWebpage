@@ -1,76 +1,53 @@
 import { useState, useEffect, useCallback } from "react"
 import { CampData } from "@/types/camp"
-import { KHCamps } from "@/assets/data/KHdata"
+import {
+	fetchCampsFromSupabase,
+	fetchCampByIdFromSupabase,
+} from "@/services/campService"
 
-// Cache for camp data to avoid recomputing
+// Cache for camp data to avoid refetching
 let cachedCamps: CampData[] | null = null
 
 /**
- * Transform raw camp data with default values
- */
-const transformCampData = (camp: CampData): CampData => ({
-	campID: camp.campID,
-	name: camp.name,
-	location: camp.location || "-",
-	director: camp.director || "-",
-	date: camp.date || "-",
-	imgSrc: camp.imgSrc?.length ? camp.imgSrc : ["/camps/homepagebackground.jpg"],
-	province: camp.province || "-",
-	isMainCamp: true,
-})
-
-/**
- * Get all camps data (with caching)
- */
-export const getCampsData = (): CampData[] => {
-	if (cachedCamps) {
-		return cachedCamps
-	}
-	cachedCamps = KHCamps.map(transformCampData).reverse()
-	return cachedCamps
-}
-
-/**
- * Get a single camp by ID
- */
-export const getCampById = (campID: number): CampData | undefined => {
-	const camps = getCampsData()
-	return camps.find((camp) => camp.campID === campID)
-}
-
-/**
- * Hook for fetching and managing camps data
+ * Hook for fetching and managing camps data from Supabase
  */
 export function useCamps() {
 	const [camps, setCamps] = useState<CampData[]>([])
 	const [isLoading, setIsLoading] = useState(true)
 	const [error, setError] = useState<Error | null>(null)
 
-	useEffect(() => {
+	const fetchCamps = useCallback(async () => {
 		try {
-			const data = getCampsData()
-			setCamps(data)
-			setIsLoading(false)
-		} catch (err) {
-			setError(err instanceof Error ? err : new Error("Failed to load camps"))
-			setIsLoading(false)
-		}
-	}, [])
+			// Return cached data if available
+			if (cachedCamps) {
+				setCamps(cachedCamps)
+				setIsLoading(false)
+				return
+			}
 
-	const refetch = useCallback(() => {
-		setIsLoading(true)
-		setError(null)
-		try {
-			// Clear cache and refetch
-			cachedCamps = null
-			const data = getCampsData()
+			const data = await fetchCampsFromSupabase()
+			cachedCamps = data
 			setCamps(data)
+			setError(null)
 		} catch (err) {
+			console.error("Failed to fetch camps:", err)
 			setError(err instanceof Error ? err : new Error("Failed to load camps"))
 		} finally {
 			setIsLoading(false)
 		}
 	}, [])
+
+	useEffect(() => {
+		fetchCamps()
+	}, [fetchCamps])
+
+	const refetch = useCallback(async () => {
+		setIsLoading(true)
+		setError(null)
+		// Clear cache and refetch
+		cachedCamps = null
+		await fetchCamps()
+	}, [fetchCamps])
 
 	return {
 		camps,
@@ -82,7 +59,7 @@ export function useCamps() {
 }
 
 /**
- * Hook for fetching a single camp by ID
+ * Hook for fetching a single camp by ID from Supabase
  */
 export function useCampDetail(campID: number | undefined) {
 	const [camp, setCamp] = useState<CampData | null>(null)
@@ -96,18 +73,24 @@ export function useCampDetail(campID: number | undefined) {
 			return
 		}
 
-		try {
-			const data = getCampById(campID)
-			if (!data) {
-				setError(new Error(`Camp with ID ${campID} not found`))
-			} else {
-				setCamp(data)
+		const fetchCamp = async () => {
+			try {
+				const data = await fetchCampByIdFromSupabase(campID)
+				if (!data) {
+					setError(new Error(`Camp with ID ${campID} not found`))
+				} else {
+					setCamp(data)
+					setError(null)
+				}
+			} catch (err) {
+				console.error("Failed to fetch camp:", err)
+				setError(err instanceof Error ? err : new Error("Failed to load camp"))
+			} finally {
+				setIsLoading(false)
 			}
-			setIsLoading(false)
-		} catch (err) {
-			setError(err instanceof Error ? err : new Error("Failed to load camp"))
-			setIsLoading(false)
 		}
+
+		fetchCamp()
 	}, [campID])
 
 	return {
@@ -115,6 +98,23 @@ export function useCampDetail(campID: number | undefined) {
 		isLoading,
 		error,
 	}
+}
+
+/**
+ * Get all camps data (for static/sync usage - fetches from cache)
+ * @deprecated Use useCamps hook instead for async data fetching
+ */
+export const getCampsData = (): CampData[] => {
+	return cachedCamps || []
+}
+
+/**
+ * Get a single camp by ID from cache
+ * @deprecated Use useCampDetail hook instead for async data fetching
+ */
+export const getCampById = (campID: number): CampData | undefined => {
+	const camps = getCampsData()
+	return camps.find((camp) => camp.campID === campID)
 }
 
 export default useCamps
