@@ -2,7 +2,6 @@ import { memo } from "react"
 import { Link } from "react-router-dom"
 import { FiCalendar, FiExternalLink, FiMapPin, FiUsers } from "react-icons/fi"
 import { LazyImage } from "@/components/ui"
-import { mapRegions } from "../data/campMapData"
 import { ProvinceSummary } from "../types"
 
 interface ProvinceDetailPanelProps {
@@ -32,8 +31,6 @@ export const ProvinceDetailPanel = memo(function ProvinceDetailPanel({
 		)
 	}
 
-	const region = mapRegions[summary.region]
-
 	return (
 		<aside className="overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-gray-100">
 			{summary.imageSrc ? (
@@ -46,11 +43,8 @@ export const ProvinceDetailPanel = memo(function ProvinceDetailPanel({
 					/>
 					<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 					<div className="absolute inset-x-4 bottom-4">
-						<span
-							className="inline-flex rounded-full px-3 py-1 text-xs font-semibold text-white shadow"
-							style={{ backgroundColor: region.selectedColor }}
-						>
-							{region.label}
+						<span className="inline-flex rounded-full bg-emerald-600 px-3 py-1 text-xs font-semibold text-white shadow">
+							Visited province
 						</span>
 						<h2 className="mt-2 text-3xl font-bold text-white">
 							{summary.provinceName}

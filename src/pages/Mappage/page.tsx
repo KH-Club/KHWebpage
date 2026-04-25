@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
+import { provinces } from "@/assets/data/provinces"
 import {
-	mapRegions,
 	visitedProvinceSummaries,
 	visitedProvinceSummaryById,
 } from "./data/campMapData"
@@ -55,7 +55,7 @@ const MapPage = () => {
 						</h1>
 						<p className="mt-4 text-base leading-7 text-gray-600 sm:text-lg">
 							Explore provinces where Kaihor Club has recorded volunteer camp
-							projects. Colored provinces have camp history; gray provinces have
+							projects. Green provinces have camp history; gray provinces have
 							no recorded visit in the current historical data.
 						</p>
 					</div>
@@ -77,12 +77,12 @@ const MapPage = () => {
 								Recorded visits
 							</p>
 						</div>
-						<div className="rounded-2xl bg-amber-50 p-5">
-							<p className="text-3xl font-bold text-amber-700">
-								{Object.keys(mapRegions).length}
+						<div className="rounded-2xl bg-stone-50 p-5">
+							<p className="text-3xl font-bold text-stone-700">
+								{provinces.length}
 							</p>
-							<p className="mt-1 text-sm font-medium text-amber-900">
-								Map regions
+							<p className="mt-1 text-sm font-medium text-stone-800">
+								Total provinces
 							</p>
 						</div>
 					</div>
@@ -102,27 +102,30 @@ const MapPage = () => {
 							className="rounded-2xl bg-white p-5 shadow-lg ring-1 ring-gray-100"
 						>
 							<h2 className="text-lg font-bold text-gray-900">Legend</h2>
-							<div className="mt-4 flex flex-wrap gap-3">
-								<span className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-3 py-2 text-sm font-medium text-gray-700">
-									<span className="h-3 w-3 rounded-full bg-gray-300" />
-									Not visited yet
-								</span>
-								<span className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-3 py-2 text-sm font-medium text-gray-700">
-									<span className="h-3 w-3 rounded-full bg-blue-600" />
-									Visited
-								</span>
-								{Object.values(mapRegions).map((region) => (
-									<span
-										key={region.id}
-										className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-3 py-2 text-sm font-medium text-gray-700"
-									>
-										<span
-											className="h-3 w-3 rounded-full"
-											style={{ backgroundColor: region.color }}
-										/>
-										{region.label}
-									</span>
-								))}
+							<p className="mt-1 text-sm text-gray-500">
+								The map uses only two states so it is easy to scan.
+							</p>
+							<div className="mt-4 grid gap-3 sm:grid-cols-2">
+								<div className="flex items-center gap-3 rounded-xl border border-emerald-100 bg-emerald-50 px-4 py-3">
+									<span className="h-4 w-4 rounded-full bg-emerald-600" />
+									<div>
+										<p className="font-semibold text-emerald-900">Visited</p>
+										<p className="text-sm text-emerald-700">
+											Province has recorded camp history
+										</p>
+									</div>
+								</div>
+								<div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3">
+									<span className="h-4 w-4 rounded-full bg-gray-300" />
+									<div>
+										<p className="font-semibold text-gray-800">
+											Not visited yet
+										</p>
+										<p className="text-sm text-gray-500">
+											No recorded camp in current data
+										</p>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

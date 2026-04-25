@@ -49,7 +49,7 @@ Application structure:
 
 Notes:
 
-- `src/pages/Mappage` contains the `/map` camp map feature. Update visited province data by editing `src/assets/data/KHdata.ts`; `src/pages/Mappage/data/campMapData.ts` normalizes camp province names to existing province SVG ids, classifies regions for map colors, and includes the known `Uttardit` -> `uttaradit` alias.
+- `src/pages/Mappage` contains the `/map` camp map feature. Update visited province data by editing `src/assets/data/KHdata.ts`; `src/pages/Mappage/data/campMapData.ts` normalizes camp province names to existing province SVG ids and includes the known `Uttardit` -> `uttaradit` alias. The user-facing map legend should stay simple: green means visited, gray means not visited yet.
 - `src/assets/data/KHdata.ts`, `KHdata.json`, and `provinces.ts` contain historical/static data, but the active camp list currently comes from Supabase.
 - `src/pages/Contactpage/components/InstagramEmbled.tsx` has an existing filename spelling; update imports carefully if renaming it.
 

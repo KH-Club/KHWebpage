@@ -29,6 +29,15 @@ describe("MapPage", () => {
 		).toHaveAttribute("href", "/camp/54")
 	})
 
+	it("shows a simple visited/not visited legend without region labels", () => {
+		render(<MapPage />)
+
+		expect(screen.getByText("Visited")).toBeInTheDocument()
+		expect(screen.getByText("Not visited yet")).toBeInTheDocument()
+		expect(screen.queryByText("North")).not.toBeInTheDocument()
+		expect(screen.queryByText("Northeast")).not.toBeInTheDocument()
+	})
+
 	it("clears selected province with Escape", () => {
 		render(<MapPage />)
 

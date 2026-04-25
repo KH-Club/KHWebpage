@@ -1,7 +1,7 @@
 import { KeyboardEvent, memo, useState } from "react"
 import { provinces } from "@/assets/data/provinces"
 import { cn } from "@/lib/utils"
-import { mapRegions, visitedProvinceSummaryById } from "../data/campMapData"
+import { visitedProvinceSummaryById } from "../data/campMapData"
 
 interface ThailandProvinceMapProps {
 	selectedProvinceId?: string
@@ -10,6 +10,8 @@ interface ThailandProvinceMapProps {
 
 const unvisitedFill = "#d1d5db"
 const unvisitedStroke = "#f8fafc"
+const visitedFill = "#059669"
+const selectedVisitedFill = "#047857"
 
 function handleProvinceKeyDown(
 	event: KeyboardEvent<SVGPathElement>,
@@ -38,18 +40,19 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 			>
 				<title id="thailand-map-title">Kaihor camp province map</title>
 				<desc id="thailand-map-desc">
-					Interactive Thailand map. Visited provinces are colored by region and
-					can be selected. Unvisited provinces are gray.
+					Interactive Thailand map. Visited provinces are green and can be
+					selected. Unvisited provinces are gray.
 				</desc>
 				{provinces.map((province) => {
 					const summary = visitedProvinceSummaryById.get(province.id)
 					const isVisited = Boolean(summary)
 					const isSelected = selectedProvinceId === province.id
 					const isFocused = focusedProvinceId === province.id
-					const region = summary ? mapRegions[summary.region] : undefined
 					const fill = isSelected
-						? region?.selectedColor
-						: region?.color ?? unvisitedFill
+						? selectedVisitedFill
+						: isVisited
+							? visitedFill
+							: unvisitedFill
 
 					return (
 						<path

@@ -1,6 +1,5 @@
 import { memo } from "react"
 import { cn } from "@/lib/utils"
-import { mapRegions } from "../data/campMapData"
 import { ProvinceSummary } from "../types"
 
 interface VisitedProvinceListProps {
@@ -28,17 +27,16 @@ export const VisitedProvinceList = memo(function VisitedProvinceList({
 						id="visited-provinces-heading"
 						className="text-2xl font-bold text-gray-900"
 					>
-						Choose from the list
+						Choose a visited province
 					</h2>
 				</div>
 				<p className="text-sm text-gray-500">
-					{summaries.length} provinces with recorded camps
+					{summaries.length} visited provinces
 				</p>
 			</div>
 
-			<div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+			<div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2">
 				{summaries.map((summary) => {
-					const region = mapRegions[summary.region]
 					const isSelected = selectedProvinceId === summary.provinceId
 
 					return (
@@ -52,32 +50,38 @@ export const VisitedProvinceList = memo(function VisitedProvinceList({
 								summary.visitCount === 1 ? "visit" : "visits"
 							}`}
 							className={cn(
-								"flex min-h-16 items-center justify-between gap-3 rounded-xl border px-4 py-3 text-left transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
+								"flex min-h-24 flex-col gap-3 rounded-xl border px-4 py-4 text-left transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:flex-row sm:items-center sm:justify-between",
 								isSelected
-									? "border-gray-900 bg-gray-900 text-white shadow-md"
-									: "border-gray-200 bg-white text-gray-800 hover:border-blue-300 hover:bg-blue-50",
+									? "border-emerald-700 bg-emerald-700 text-white shadow-md"
+									: "border-gray-200 bg-white text-gray-800 hover:border-emerald-300 hover:bg-emerald-50",
 							)}
 							aria-pressed={isSelected}
 						>
-							<span>
-								<span className="block font-semibold">
+							<span className="min-w-0">
+								<span className="block text-lg font-semibold">
 									{summary.provinceName}
 								</span>
 								<span
 									className={cn(
-										"mt-1 block text-xs",
-										isSelected ? "text-gray-200" : "text-gray-500",
+										"mt-1 block text-sm sm:line-clamp-2",
+										isSelected ? "text-emerald-50" : "text-gray-500",
 									)}
 								>
-									{summary.visitCount}{" "}
-									{summary.visitCount === 1 ? "visit" : "visits"}
+									Latest: #{summary.latestVisit.campID}{" "}
+									{summary.latestVisit.name}
 								</span>
 							</span>
 							<span
-								className="h-4 w-4 shrink-0 rounded-full ring-2 ring-white"
-								style={{ backgroundColor: region.color }}
-								aria-hidden="true"
-							/>
+								className={cn(
+									"inline-flex w-fit shrink-0 rounded-full px-3 py-1 text-xs font-semibold",
+									isSelected
+										? "bg-white text-emerald-700"
+										: "bg-emerald-100 text-emerald-800",
+								)}
+							>
+								{summary.visitCount}{" "}
+								{summary.visitCount === 1 ? "visit" : "visits"}
+							</span>
 						</button>
 					)
 				})}
