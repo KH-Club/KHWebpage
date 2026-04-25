@@ -16,22 +16,23 @@ export const VisitedProvinceList = memo(function VisitedProvinceList({
 	return (
 		<section
 			aria-labelledby="visited-provinces-heading"
+			aria-label="รายชื่อจังหวัดที่เคยไปแล้ว"
 			className="rounded-2xl bg-white p-5 shadow-lg ring-1 ring-gray-100"
 		>
 			<div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
 				<div>
 					<p className="text-sm font-semibold uppercase tracking-wide text-blue-600">
-						Visited provinces
+						จังหวัดที่เคยไปแล้ว
 					</p>
 					<h2
 						id="visited-provinces-heading"
 						className="text-2xl font-bold text-gray-900"
 					>
-						Choose a visited province
+						เลือกจังหวัดเพื่อดูรายละเอียด
 					</h2>
 				</div>
 				<p className="text-sm text-gray-500">
-					{summaries.length} visited provinces
+					{summaries.length} จังหวัดที่เคยไปแล้ว
 				</p>
 			</div>
 
@@ -44,11 +45,7 @@ export const VisitedProvinceList = memo(function VisitedProvinceList({
 							key={summary.provinceId}
 							type="button"
 							onClick={() => onSelectProvince(summary.provinceId)}
-							aria-label={`Select ${
-								summary.provinceName
-							} from visited province list, ${summary.visitCount} ${
-								summary.visitCount === 1 ? "visit" : "visits"
-							}`}
+							aria-label={`เลือกจังหวัด ${summary.provinceName} จากรายชื่อจังหวัดที่เคยไปแล้ว มีบันทึกค่าย ${summary.visitCount} ครั้ง`}
 							className={cn(
 								"flex min-h-24 flex-col gap-3 rounded-xl border px-4 py-4 text-left transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:flex-row sm:items-center sm:justify-between",
 								isSelected
@@ -67,7 +64,7 @@ export const VisitedProvinceList = memo(function VisitedProvinceList({
 										isSelected ? "text-blue-50" : "text-gray-500",
 									)}
 								>
-									Latest: #{summary.latestVisit.campID}{" "}
+									ล่าสุด: #{summary.latestVisit.campID}{" "}
 									{summary.latestVisit.name}
 								</span>
 							</span>
@@ -79,8 +76,7 @@ export const VisitedProvinceList = memo(function VisitedProvinceList({
 										: "bg-blue-100 text-blue-800",
 								)}
 							>
-								{summary.visitCount}{" "}
-								{summary.visitCount === 1 ? "visit" : "visits"}
+								{summary.visitCount} ครั้ง
 							</span>
 						</button>
 					)

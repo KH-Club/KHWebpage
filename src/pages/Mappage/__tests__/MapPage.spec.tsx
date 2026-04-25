@@ -8,16 +8,18 @@ describe("MapPage", () => {
 
 		expect(
 			screen.getByRole("heading", {
-				name: /Kaihor camp footprints across Thailand/i,
+				name: /แผนที่ร่องรอยค่ายอาสาทั่วประเทศไทย/i,
 			}),
 		).toBeInTheDocument()
 		expect(
-			screen.getByRole("img", { name: /Kaihor camp province map/i }),
+			screen.getByRole("img", {
+				name: /แผนที่จังหวัดที่ชมรมค่ายหอเคยไป/i,
+			}),
 		).toBeInTheDocument()
 
 		fireEvent.click(
 			screen.getByRole("button", {
-				name: /Select Sakon Nakhon from visited province list/i,
+				name: /เลือกจังหวัด Sakon Nakhon จากรายชื่อจังหวัดที่เคยไปแล้ว/i,
 			}),
 		)
 
@@ -25,15 +27,15 @@ describe("MapPage", () => {
 			screen.getByRole("heading", { name: "Sakon Nakhon" }),
 		).toBeInTheDocument()
 		expect(
-			screen.getByRole("link", { name: /View latest camp/i }),
+			screen.getByRole("link", { name: /ดูรายละเอียดค่ายล่าสุด/i }),
 		).toHaveAttribute("href", "/camp/54")
 	})
 
 	it("shows a simple visited/not visited legend without region labels", () => {
 		render(<MapPage />)
 
-		expect(screen.getByText("Visited")).toBeInTheDocument()
-		expect(screen.getByText("Not visited yet")).toBeInTheDocument()
+		expect(screen.getByText("เคยไปแล้ว")).toBeInTheDocument()
+		expect(screen.getByText("ยังไม่เคยไป")).toBeInTheDocument()
 		expect(screen.queryByText("North")).not.toBeInTheDocument()
 		expect(screen.queryByText("Northeast")).not.toBeInTheDocument()
 	})
@@ -43,23 +45,23 @@ describe("MapPage", () => {
 
 		fireEvent.click(
 			screen.getByRole("button", {
-				name: /Select Sakon Nakhon from visited province list/i,
+				name: /เลือกจังหวัด Sakon Nakhon จากรายชื่อจังหวัดที่เคยไปแล้ว/i,
 			}),
 		)
 		expect(
-			screen.getByText(/Recorded camps in this province/i),
+			screen.getByText(/ค่ายที่บันทึกไว้ในจังหวัดนี้/i),
 		).toBeInTheDocument()
 
 		fireEvent.keyDown(window, { key: "Escape" })
 
-		expect(screen.getByText(/Select a visited province/i)).toBeInTheDocument()
+		expect(screen.getByText(/เลือกจังหวัดที่เคยไปแล้ว/i)).toBeInTheDocument()
 	})
 
 	it("selects a visited province from the SVG map with keyboard support", () => {
 		render(<MapPage />)
 
 		const sakonNakhonPath = screen.getByRole("button", {
-			name: /Sakon Nakhon: \d+ recorded camp visits/i,
+			name: /Sakon Nakhon: มีบันทึกค่าย \d+ ครั้ง/i,
 		})
 
 		expect(sakonNakhonPath).toHaveAttribute("tabindex", "0")
@@ -71,7 +73,7 @@ describe("MapPage", () => {
 		).toBeInTheDocument()
 		expect(
 			screen.queryByRole("button", {
-				name: /Bangkok: \d+ recorded camp visits/i,
+				name: /Bangkok: มีบันทึกค่าย \d+ ครั้ง/i,
 			}),
 		).not.toBeInTheDocument()
 	})

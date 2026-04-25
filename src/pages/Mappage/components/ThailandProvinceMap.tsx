@@ -38,10 +38,10 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 				viewBox="0 0 1400 2500"
 				className="mx-auto block h-[64vh] min-h-[440px] w-full sm:h-[72vh] sm:min-h-[560px] xl:h-[780px] xl:max-h-[780px]"
 			>
-				<title id="thailand-map-title">Kaihor camp province map</title>
+				<title id="thailand-map-title">แผนที่จังหวัดที่ชมรมค่ายหอเคยไป</title>
 				<desc id="thailand-map-desc">
-					Interactive Thailand map. Visited provinces are blue and can be
-					selected. Unvisited provinces are gray.
+					แผนที่ประเทศไทยแบบโต้ตอบ จังหวัดสีน้ำเงินคือจังหวัดที่เคยไปและเลือก
+					ดูรายละเอียดได้ จังหวัดสีเทาคือยังไม่มีข้อมูลการไปค่าย
 				</desc>
 				{provinces.map((province) => {
 					const summary = visitedProvinceSummaryById.get(province.id)
@@ -65,7 +65,7 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 							tabIndex={isVisited ? 0 : undefined}
 							aria-label={
 								summary
-									? `${summary.provinceName}: ${summary.visitCount} recorded camp visits`
+									? `${summary.provinceName}: มีบันทึกค่าย ${summary.visitCount} ครั้ง`
 									: undefined
 							}
 							aria-pressed={isVisited ? isSelected : undefined}
@@ -97,7 +97,7 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 						>
 							<title>
 								{summary
-									? `${summary.provinceName}: ${summary.visitCount} visits`
+									? `${summary.provinceName}: ${summary.visitCount} ครั้ง`
 									: province.name}
 							</title>
 						</path>

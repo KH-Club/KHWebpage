@@ -154,15 +154,15 @@ export function getRegionForProvince(provinceId: string): CampMapRegion {
 }
 
 export function buildCampVisit(camp: CampData): CampVisit {
-	const name = camp.name || `Camp ${camp.campID}`
+	const name = camp.name || `ค่ายครั้งที่ ${camp.campID}`
 	const imageSrc = camp.imgSrc.find(Boolean)
 
 	return {
 		campID: camp.campID,
 		name,
-		date: camp.date || "Date not recorded",
-		location: camp.location || "Location details not recorded",
-		director: camp.director || "Director not recorded",
+		date: camp.date || "ยังไม่มีข้อมูลวันที่",
+		location: camp.location || "ยังไม่มีข้อมูลสถานที่",
+		director: camp.director || "ยังไม่มีข้อมูลผู้อำนวยค่าย",
 		imageSrc,
 		detailHref: Number.isFinite(camp.campID)
 			? `/camp/${camp.campID}`
@@ -213,7 +213,7 @@ export function buildProvinceSummaries(camps: CampData[]): ProvinceSummary[] {
 				visits,
 				visitCount: visits.length,
 				latestVisit,
-				description: `${latestVisit.location}. Latest recorded project: ${latestVisit.name}.`,
+				description: `${latestVisit.location} โครงการล่าสุดที่บันทึกไว้: ${latestVisit.name}`,
 				imageSrc: latestVisit.imageSrc ?? fallbackCampMapImage,
 			}
 		})

@@ -48,15 +48,14 @@ const MapPage = () => {
 				<div className="container mx-auto px-6 py-10 sm:py-14">
 					<div className="max-w-3xl">
 						<p className="text-sm font-semibold uppercase tracking-wide text-blue-600">
-							Camp map
+							แผนที่ค่าย
 						</p>
 						<h1 className="mt-3 text-4xl font-bold text-gray-950 sm:text-5xl">
-							Kaihor camp footprints across Thailand
+							แผนที่ร่องรอยค่ายอาสาทั่วประเทศไทย
 						</h1>
 						<p className="mt-4 text-base leading-7 text-gray-600 sm:text-lg">
-							Explore provinces where Kaihor Club has recorded volunteer camp
-							projects. Blue provinces have camp history; gray provinces have no
-							recorded visit in the current historical data.
+							ดูจังหวัดที่ชมรมค่ายหอมีบันทึกการออกค่ายอาสา จังหวัดสีน้ำเงินคือ
+							เคยไปแล้ว ส่วนสีเทาคือยังไม่มีข้อมูลการไปค่ายในชุดข้อมูลปัจจุบัน
 						</p>
 					</div>
 
@@ -66,13 +65,13 @@ const MapPage = () => {
 								{visitedProvinceSummaries.length}
 							</p>
 							<p className="mt-1 text-sm font-medium text-blue-900">
-								Visited provinces
+								จังหวัดที่เคยไปแล้ว
 							</p>
 						</div>
 						<div className="rounded-2xl bg-sky-50 p-5">
 							<p className="text-3xl font-bold text-sky-700">{totalVisits}</p>
 							<p className="mt-1 text-sm font-medium text-sky-900">
-								Recorded visits
+								ค่ายที่บันทึกไว้
 							</p>
 						</div>
 						<div className="rounded-2xl bg-stone-50 p-5">
@@ -80,7 +79,7 @@ const MapPage = () => {
 								{provinces.length}
 							</p>
 							<p className="mt-1 text-sm font-medium text-stone-800">
-								Total provinces
+								จังหวัดทั้งหมด
 							</p>
 						</div>
 					</div>
@@ -89,32 +88,32 @@ const MapPage = () => {
 
 			<section className="container mx-auto px-6 py-8 sm:py-12">
 				<div
-					aria-label="Map legend"
+					aria-label="คำอธิบายแผนที่"
 					className="mb-6 rounded-2xl bg-white p-5 shadow-lg ring-1 ring-gray-100"
 				>
 					<div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
 						<div>
-							<h2 className="text-lg font-bold text-gray-900">Legend</h2>
+							<h2 className="text-lg font-bold text-gray-900">คำอธิบายสี</h2>
 							<p className="mt-1 text-sm text-gray-500">
-								Only two states are shown so the map is easy to scan.
+								แสดงเพียง 2 สถานะ เพื่อให้ดูแผนที่ได้ง่ายและไม่สับสน
 							</p>
 						</div>
 						<div className="grid gap-3 sm:grid-cols-2 lg:min-w-[560px]">
 							<div className="flex items-center gap-3 rounded-xl border border-blue-100 bg-blue-50 px-4 py-3">
 								<span className="h-4 w-4 rounded-full bg-blue-600" />
 								<div>
-									<p className="font-semibold text-blue-900">Visited</p>
+									<p className="font-semibold text-blue-900">เคยไปแล้ว</p>
 									<p className="text-sm text-blue-700">
-										Province has recorded camp history
+										มีประวัติการออกค่ายในจังหวัดนี้
 									</p>
 								</div>
 							</div>
 							<div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3">
 								<span className="h-4 w-4 rounded-full bg-gray-300" />
 								<div>
-									<p className="font-semibold text-gray-800">Not visited yet</p>
+									<p className="font-semibold text-gray-800">ยังไม่เคยไป</p>
 									<p className="text-sm text-gray-500">
-										No recorded camp in current data
+										ยังไม่มีข้อมูลการออกค่ายในชุดข้อมูลปัจจุบัน
 									</p>
 								</div>
 							</div>
