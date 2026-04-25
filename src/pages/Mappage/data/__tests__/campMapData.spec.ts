@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest"
+import { provinces } from "@/assets/data/provinces"
 import {
 	buildProvinceSummaries,
+	getProvinceDisplayName,
 	isRegionConfigured,
 	toProvinceId,
 	visitedProvinceSummaries,
@@ -20,7 +22,8 @@ describe("camp map data", () => {
 		)
 
 		expect(uttaradit).toBeDefined()
-		expect(uttaradit?.provinceName).toBe("Uttaradit")
+		expect(uttaradit?.provinceName).toBe(getProvinceDisplayName("uttaradit"))
+		expect(uttaradit?.provinceName).not.toBe("Uttaradit")
 		expect(uttaradit?.visitCount).toBe(2)
 		expect(uttaradit?.latestVisit.campID).toBe(53)
 		expect(uttaradit?.latestVisit.detailHref).toBe("/camp/53")
@@ -49,5 +52,9 @@ describe("camp map data", () => {
 			.map((summary) => summary.provinceId)
 
 		expect(unconfiguredProvinceIds).toEqual([])
+	})
+
+	it("does not include unused label paths in the province payload", () => {
+		expect(provinces.some((province) => "labelPath" in province)).toBe(false)
 	})
 })

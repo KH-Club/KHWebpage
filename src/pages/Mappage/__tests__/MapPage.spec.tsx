@@ -1,9 +1,29 @@
 import { describe, expect, it } from "vitest"
-import { fireEvent, render, screen } from "@/test/test-utils"
+import { fireEvent, render, screen, within } from "@/test/test-utils"
+import {
+	getProvinceDisplayName,
+	visitedProvinceSummaryById,
+} from "../data/campMapData"
 import MapPage from "../page"
+
+function escapeRegExp(value: string) {
+	return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+}
+
+function getRequiredProvinceSummary(provinceId: string) {
+	const summary = visitedProvinceSummaryById.get(provinceId)
+
+	if (!summary) {
+		throw new Error(`Expected ${provinceId} to be a visited province`)
+	}
+
+	return summary
+}
 
 describe("MapPage", () => {
 	it("renders the interactive map and selects a province from the list", () => {
+		const sakonNakhon = getRequiredProvinceSummary("sakonNakhon")
+
 		render(<MapPage />)
 
 		expect(
@@ -12,23 +32,49 @@ describe("MapPage", () => {
 			}),
 		).toBeInTheDocument()
 		expect(
-			screen.getByRole("img", {
+			screen.getByRole("region", {
 				name: /แผนที่จังหวัดที่ชมรมค่ายหอเคยไป/i,
 			}),
 		).toBeInTheDocument()
 
+		const visitedProvinceList = screen.getByRole("region", {
+			name: /เลือกจังหวัดเพื่อดูรายละเอียด/i,
+		})
+
 		fireEvent.click(
-			screen.getByRole("button", {
-				name: /เลือกจังหวัด Sakon Nakhon จากรายชื่อจังหวัดที่เคยไปแล้ว/i,
+			within(visitedProvinceList).getByRole("button", {
+				name: new RegExp(escapeRegExp(sakonNakhon.provinceName), "i"),
 			}),
 		)
 
 		expect(
-			screen.getByRole("heading", { name: "Sakon Nakhon" }),
+			screen.getByRole("heading", { name: sakonNakhon.provinceName }),
 		).toBeInTheDocument()
 		expect(
 			screen.getByRole("link", { name: /ดูรายละเอียดค่ายล่าสุด/i }),
 		).toHaveAttribute("href", "/camp/54")
+	})
+
+	it("keeps province controls exposed inside a labelled map region", () => {
+		const sakonNakhon = getRequiredProvinceSummary("sakonNakhon")
+
+		render(<MapPage />)
+
+		const mapRegion = screen.getByRole("region", {
+			name: /แผนที่จังหวัดที่ชมรมค่ายหอเคยไป/i,
+		})
+
+		expect(within(mapRegion).queryByRole("img")).not.toBeInTheDocument()
+		expect(
+			within(mapRegion).getByRole("button", {
+				name: new RegExp(
+					`${escapeRegExp(sakonNakhon.provinceName)}: .*${
+						sakonNakhon.visitCount
+					}`,
+					"i",
+				),
+			}),
+		).toBeInTheDocument()
 	})
 
 	it("shows a simple visited/not visited legend without region labels", () => {
@@ -41,11 +87,17 @@ describe("MapPage", () => {
 	})
 
 	it("clears selected province with Escape", () => {
+		const sakonNakhon = getRequiredProvinceSummary("sakonNakhon")
+
 		render(<MapPage />)
 
+		const visitedProvinceList = screen.getByRole("region", {
+			name: /เลือกจังหวัดเพื่อดูรายละเอียด/i,
+		})
+
 		fireEvent.click(
-			screen.getByRole("button", {
-				name: /เลือกจังหวัด Sakon Nakhon จากรายชื่อจังหวัดที่เคยไปแล้ว/i,
+			within(visitedProvinceList).getByRole("button", {
+				name: new RegExp(escapeRegExp(sakonNakhon.provinceName), "i"),
 			}),
 		)
 		expect(
@@ -58,10 +110,18 @@ describe("MapPage", () => {
 	})
 
 	it("selects a visited province from the SVG map with keyboard support", () => {
+		const sakonNakhon = getRequiredProvinceSummary("sakonNakhon")
+		const bangkokName = getProvinceDisplayName("bangkok", "Bangkok")
+
 		render(<MapPage />)
 
 		const sakonNakhonPath = screen.getByRole("button", {
-			name: /Sakon Nakhon: มีบันทึกค่าย \d+ ครั้ง/i,
+			name: new RegExp(
+				`${escapeRegExp(sakonNakhon.provinceName)}: .*${
+					sakonNakhon.visitCount
+				}`,
+				"i",
+			),
 		})
 
 		expect(sakonNakhonPath).toHaveAttribute("tabindex", "0")
@@ -69,11 +129,11 @@ describe("MapPage", () => {
 		fireEvent.keyDown(sakonNakhonPath, { key: "Enter" })
 
 		expect(
-			screen.getByRole("heading", { name: "Sakon Nakhon" }),
+			screen.getByRole("heading", { name: sakonNakhon.provinceName }),
 		).toBeInTheDocument()
 		expect(
 			screen.queryByRole("button", {
-				name: /Bangkok: มีบันทึกค่าย \d+ ครั้ง/i,
+				name: new RegExp(`${escapeRegExp(bangkokName)}:`, "i"),
 			}),
 		).not.toBeInTheDocument()
 	})

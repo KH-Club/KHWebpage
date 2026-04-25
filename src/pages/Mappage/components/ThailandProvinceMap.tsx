@@ -31,18 +31,24 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 	const [focusedProvinceId, setFocusedProvinceId] = useState<string>()
 
 	return (
-		<div className="rounded-2xl bg-white p-4 shadow-lg ring-1 ring-gray-100 sm:p-6">
+		<div
+			role="region"
+			aria-labelledby="thailand-map-title"
+			aria-describedby="thailand-map-desc"
+			className="rounded-2xl bg-white p-4 shadow-lg ring-1 ring-gray-100 sm:p-6"
+		>
+			<h2 id="thailand-map-title" className="sr-only">
+				แผนที่จังหวัดที่ชมรมค่ายหอเคยไป
+			</h2>
+			<p id="thailand-map-desc" className="sr-only">
+				แผนที่ประเทศไทยแบบโต้ตอบ
+				จังหวัดสีน้ำเงินคือจังหวัดที่เคยไปและเลือกดูรายละเอียดได้
+				จังหวัดสีเทาคือยังไม่มีข้อมูลการไปค่าย
+			</p>
 			<svg
-				role="img"
-				aria-labelledby="thailand-map-title thailand-map-desc"
 				viewBox="0 0 1400 2500"
 				className="mx-auto block h-[64vh] min-h-[440px] w-full sm:h-[72vh] sm:min-h-[560px] xl:h-[780px] xl:max-h-[780px]"
 			>
-				<title id="thailand-map-title">แผนที่จังหวัดที่ชมรมค่ายหอเคยไป</title>
-				<desc id="thailand-map-desc">
-					แผนที่ประเทศไทยแบบโต้ตอบ จังหวัดสีน้ำเงินคือจังหวัดที่เคยไปและเลือก
-					ดูรายละเอียดได้ จังหวัดสีเทาคือยังไม่มีข้อมูลการไปค่าย
-				</desc>
 				{provinces.map((province) => {
 					const summary = visitedProvinceSummaryById.get(province.id)
 					const isVisited = Boolean(summary)
@@ -63,6 +69,7 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 							strokeWidth={isSelected || isFocused ? 5 : 2}
 							role={isVisited ? "button" : undefined}
 							tabIndex={isVisited ? 0 : undefined}
+							aria-hidden={isVisited ? undefined : true}
 							aria-label={
 								summary
 									? `${summary.provinceName}: มีบันทึกค่าย ${summary.visitCount} ครั้ง`

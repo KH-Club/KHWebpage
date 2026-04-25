@@ -53,6 +53,14 @@ const explicitProvinceAliases: Record<string, string> = {
 	uttardit: "uttaradit",
 }
 
+const provinceNamesById = provinces.reduce<Record<string, string>>(
+	(acc, province) => {
+		acc[province.id] = province.name
+		return acc
+	},
+	{},
+)
+
 const northProvinceIds = new Set([
 	"chiangMai",
 	"lampang",
@@ -120,6 +128,10 @@ export function toProvinceId(value: string) {
 	const aliasedKey = explicitProvinceAliases[comparableKey] ?? comparableKey
 
 	return provinceIdsByComparableKey[aliasedKey]
+}
+
+export function getProvinceDisplayName(provinceId: string, fallback?: string) {
+	return provinceNamesById[provinceId] ?? fallback ?? provinceId
 }
 
 export function getRegionForProvince(provinceId: string): CampMapRegion {
@@ -196,7 +208,10 @@ export function buildProvinceSummaries(camps: CampData[]): ProvinceSummary[] {
 		}
 
 		groupedVisits.set(provinceId, {
-			provinceName: camp.province === "Uttardit" ? "Uttaradit" : camp.province,
+			provinceName: getProvinceDisplayName(
+				provinceId,
+				camp.province === "Uttardit" ? "Uttaradit" : camp.province,
+			),
 			visits: [visit],
 		})
 	})
@@ -217,7 +232,7 @@ export function buildProvinceSummaries(camps: CampData[]): ProvinceSummary[] {
 				imageSrc: latestVisit.imageSrc ?? fallbackCampMapImage,
 			}
 		})
-		.sort((a, b) => a.provinceName.localeCompare(b.provinceName))
+		.sort((a, b) => a.provinceName.localeCompare(b.provinceName, "th"))
 }
 
 export const visitedProvinceSummaries = buildProvinceSummaries(KHCamps)
