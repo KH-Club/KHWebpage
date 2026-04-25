@@ -12,6 +12,7 @@ Existing user-facing features include:
 - Camp detail pages at `/camp/:campID` with hero image, location/date/director cards, loading/error states, and galleries.
 - A camp map page at `/map` in `src/pages/Mappage` with an interactive Thailand SVG using `src/assets/data/provinces.ts` geometry and visited province summaries derived from `src/assets/data/KHdata.ts`.
 - Activity cards and a popup modal on `/activity`, although the nav item is currently commented out in `src/config/site.ts`.
+- A homepage FAQ section in `src/pages/Homepage/components/FAQSection.tsx`, with editable content in `FAQ.data.ts`, reusable accordion rows in `FAQItem.tsx`, and shared shadcn-style accordion primitives in `src/components/ui/Accordion/Accordion.tsx`.
 - Contact content through an Instagram embed on `/contact`, though it is not currently in `mainNav`.
 - Shared header/footer, social links, reusable UI components, lazy-loaded routes, lazy-loaded images, Supabase-backed camp data, Vitest tests, and CI.
 
@@ -37,7 +38,8 @@ Application structure:
 - `src/pages/*/page.tsx`: route-level pages. This is a local convention, not Next.js routing.
 - `src/pages/*/components`: page-specific components.
 - `src/components/Header`, `src/components/Footer`: shared layout shell.
-- `src/components/ui`: shared UI components (`Button`, `LazyImage`, `InfoCard`, `SocialLinks`, `AnimatedCounter`, `ScrollIndicator`).
+- `src/components/ui`: shared UI components (`Button`, `LazyImage`, `InfoCard`, `SocialLinks`, `AnimatedCounter`, `ScrollIndicator`, `Accordion`).
+- `src/pages/Homepage/components/FAQ.data.ts`: homepage FAQ content. Edit `homepageFAQItems` to update applicant-facing questions and answers.
 - `src/hooks`: reusable hooks. `useCamps` and `useCampDetail` fetch Supabase camp data; `useSearch` debounces filtering.
 - `src/services/campService.ts`: Supabase `camps` table access and database-to-frontend mapping.
 - `src/lib/supabase.ts`: Supabase client using `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
@@ -124,7 +126,7 @@ Practical additions that fit this project:
 - Deeper location pages or map filters that expand the current `/map` camp impact view.
 - Requirements, eligibility, roles, and expected volunteer commitment.
 - Packing list and preparation checklist.
-- FAQ for applicants, parents, partners, and returning volunteers.
+- Expand the homepage FAQ into deeper FAQ content for applicants, parents, partners, and returning volunteers.
 - Testimonials from volunteers, alumni, schools, or communities.
 - Searchable/filterable gallery of camps and activities.
 - Contact section with email, social links, location, and optionally a contact form.
@@ -197,7 +199,7 @@ Short term:
 Medium term:
 
 - Build volunteer registration/apply pages with validation and clear confirmation states.
-- Add FAQ, packing list, requirements, safety, schedule, and testimonial sections.
+- Expand FAQ content, and add packing list, requirements, safety, schedule, and testimonial sections.
 - Extend the map with province filters, richer detail pages, or Supabase-backed updates if historical data moves out of `KHdata.ts`.
 - Add admin/content workflows for camps and announcements, likely through Supabase.
 - Improve empty, loading, offline, and Supabase misconfiguration states.

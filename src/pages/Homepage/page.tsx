@@ -1,4 +1,4 @@
-import { About, Core, LandingView } from "./components"
+import { About, Core, FAQ, LandingView } from "./components"
 
 const Home = () => {
 	return (
@@ -6,6 +6,7 @@ const Home = () => {
 			<LandingView />
 			<Core />
 			<About />
+			<FAQ />
 		</>
 	)
 }

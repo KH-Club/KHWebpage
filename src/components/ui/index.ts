@@ -16,3 +16,10 @@ export type { AnimatedCounterProps } from "./AnimatedCounter/AnimatedCounter"
 
 export { ScrollIndicator } from "./ScrollIndicator/ScrollIndicator"
 export type { ScrollIndicatorProps } from "./ScrollIndicator/ScrollIndicator"
+
+export {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "./Accordion/Accordion"
