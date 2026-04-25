@@ -10,6 +10,7 @@ const ActivityPage = lazy(() => import("@/pages/Activitypage/page"))
 const CampPage = lazy(() => import("@/pages/Camppage/page"))
 const ContactPage = lazy(() => import("@/pages/Contactpage/page"))
 const CampDetailPage = lazy(() => import("@/pages/CampDetailpage/page"))
+const MapPage = lazy(() => import("@/pages/Mappage/page"))
 
 // Loading fallback component
 const PageLoader = () => (
@@ -22,6 +23,7 @@ const routes = [
 	{ path: "/", element: <Home /> },
 	{ path: "/activity", element: <ActivityPage /> },
 	{ path: "/camp", element: <CampPage /> },
+	{ path: "/map", element: <MapPage /> },
 	{ path: "/contact", element: <ContactPage /> },
 	{ path: "/camp/:campID", element: <CampDetailPage /> },
 ]
