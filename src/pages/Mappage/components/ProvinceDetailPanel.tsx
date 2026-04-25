@@ -43,7 +43,7 @@ export const ProvinceDetailPanel = memo(function ProvinceDetailPanel({
 					/>
 					<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 					<div className="absolute inset-x-4 bottom-4">
-						<span className="inline-flex rounded-full bg-emerald-600 px-3 py-1 text-xs font-semibold text-white shadow">
+						<span className="inline-flex rounded-full bg-blue-600 px-3 py-1 text-xs font-semibold text-white shadow">
 							Visited province
 						</span>
 						<h2 className="mt-2 text-3xl font-bold text-white">

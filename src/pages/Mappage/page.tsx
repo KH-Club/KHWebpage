@@ -55,8 +55,8 @@ const MapPage = () => {
 						</h1>
 						<p className="mt-4 text-base leading-7 text-gray-600 sm:text-lg">
 							Explore provinces where Kaihor Club has recorded volunteer camp
-							projects. Green provinces have camp history; gray provinces have
-							no recorded visit in the current historical data.
+							projects. Blue provinces have camp history; gray provinces have no
+							recorded visit in the current historical data.
 						</p>
 					</div>
 
@@ -69,11 +69,9 @@ const MapPage = () => {
 								Visited provinces
 							</p>
 						</div>
-						<div className="rounded-2xl bg-emerald-50 p-5">
-							<p className="text-3xl font-bold text-emerald-700">
-								{totalVisits}
-							</p>
-							<p className="mt-1 text-sm font-medium text-emerald-900">
+						<div className="rounded-2xl bg-sky-50 p-5">
+							<p className="text-3xl font-bold text-sky-700">{totalVisits}</p>
+							<p className="mt-1 text-sm font-medium text-sky-900">
 								Recorded visits
 							</p>
 						</div>
@@ -90,45 +88,45 @@ const MapPage = () => {
 			</section>
 
 			<section className="container mx-auto px-6 py-8 sm:py-12">
-				<div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
-					<div className="space-y-6">
-						<ThailandProvinceMap
-							selectedProvinceId={selectedProvinceId}
-							onSelectProvince={setSelectedProvinceId}
-						/>
-
-						<div
-							aria-label="Map legend"
-							className="rounded-2xl bg-white p-5 shadow-lg ring-1 ring-gray-100"
-						>
+				<div
+					aria-label="Map legend"
+					className="mb-6 rounded-2xl bg-white p-5 shadow-lg ring-1 ring-gray-100"
+				>
+					<div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+						<div>
 							<h2 className="text-lg font-bold text-gray-900">Legend</h2>
 							<p className="mt-1 text-sm text-gray-500">
-								The map uses only two states so it is easy to scan.
+								Only two states are shown so the map is easy to scan.
 							</p>
-							<div className="mt-4 grid gap-3 sm:grid-cols-2">
-								<div className="flex items-center gap-3 rounded-xl border border-emerald-100 bg-emerald-50 px-4 py-3">
-									<span className="h-4 w-4 rounded-full bg-emerald-600" />
-									<div>
-										<p className="font-semibold text-emerald-900">Visited</p>
-										<p className="text-sm text-emerald-700">
-											Province has recorded camp history
-										</p>
-									</div>
+						</div>
+						<div className="grid gap-3 sm:grid-cols-2 lg:min-w-[560px]">
+							<div className="flex items-center gap-3 rounded-xl border border-blue-100 bg-blue-50 px-4 py-3">
+								<span className="h-4 w-4 rounded-full bg-blue-600" />
+								<div>
+									<p className="font-semibold text-blue-900">Visited</p>
+									<p className="text-sm text-blue-700">
+										Province has recorded camp history
+									</p>
 								</div>
-								<div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3">
-									<span className="h-4 w-4 rounded-full bg-gray-300" />
-									<div>
-										<p className="font-semibold text-gray-800">
-											Not visited yet
-										</p>
-										<p className="text-sm text-gray-500">
-											No recorded camp in current data
-										</p>
-									</div>
+							</div>
+							<div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3">
+								<span className="h-4 w-4 rounded-full bg-gray-300" />
+								<div>
+									<p className="font-semibold text-gray-800">Not visited yet</p>
+									<p className="text-sm text-gray-500">
+										No recorded camp in current data
+									</p>
 								</div>
 							</div>
 						</div>
 					</div>
+				</div>
+
+				<div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_440px]">
+					<ThailandProvinceMap
+						selectedProvinceId={selectedProvinceId}
+						onSelectProvince={setSelectedProvinceId}
+					/>
 
 					<ProvinceDetailPanel
 						summary={selectedSummary}

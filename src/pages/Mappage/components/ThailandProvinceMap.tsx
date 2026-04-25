@@ -10,8 +10,8 @@ interface ThailandProvinceMapProps {
 
 const unvisitedFill = "#d1d5db"
 const unvisitedStroke = "#f8fafc"
-const visitedFill = "#059669"
-const selectedVisitedFill = "#047857"
+const visitedFill = "#2563eb"
+const selectedVisitedFill = "#1d4ed8"
 
 function handleProvinceKeyDown(
 	event: KeyboardEvent<SVGPathElement>,
@@ -36,11 +36,11 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 				role="img"
 				aria-labelledby="thailand-map-title thailand-map-desc"
 				viewBox="0 0 1400 2500"
-				className="mx-auto block h-[70vh] max-h-[760px] min-h-[420px] w-full"
+				className="mx-auto block h-[64vh] min-h-[440px] w-full sm:h-[72vh] sm:min-h-[560px] xl:h-[780px] xl:max-h-[780px]"
 			>
 				<title id="thailand-map-title">Kaihor camp province map</title>
 				<desc id="thailand-map-desc">
-					Interactive Thailand map. Visited provinces are green and can be
+					Interactive Thailand map. Visited provinces are blue and can be
 					selected. Unvisited provinces are gray.
 				</desc>
 				{provinces.map((province) => {
