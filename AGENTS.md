@@ -10,6 +10,7 @@ Existing user-facing features include:
 - About, activities, vision, and values content in `Homepage/components/About.tsx` and `Core.tsx`.
 - A camp listing page at `/camp` with debounced search by name, location, camp ID, and province.
 - Camp detail pages at `/camp/:campID` with hero image, location/date/director cards, loading/error states, and galleries.
+- A camp map page at `/map` in `src/pages/Mappage` with an interactive Thailand SVG using `src/assets/data/provinces.ts` geometry and visited province summaries derived from `src/assets/data/KHdata.ts`.
 - Activity cards and a popup modal on `/activity`, although the nav item is currently commented out in `src/config/site.ts`.
 - Contact content through an Instagram embed on `/contact`, though it is not currently in `mainNav`.
 - Shared header/footer, social links, reusable UI components, lazy-loaded routes, lazy-loaded images, Supabase-backed camp data, Vitest tests, and CI.
@@ -48,7 +49,7 @@ Application structure:
 
 Notes:
 
-- `src/pages/Mappage` currently contains only empty folders and is not routed in `src/App.tsx`; treat it as unfinished.
+- `src/pages/Mappage` contains the `/map` camp map feature. Update visited province data by editing `src/assets/data/KHdata.ts`; `src/pages/Mappage/data/campMapData.ts` normalizes camp province names to existing province SVG ids, classifies regions for map colors, and includes the known `Uttardit` -> `uttaradit` alias.
 - `src/assets/data/KHdata.ts`, `KHdata.json`, and `provinces.ts` contain historical/static data, but the active camp list currently comes from Supabase.
 - `src/pages/Contactpage/components/InstagramEmbled.tsx` has an existing filename spelling; update imports carefully if renaming it.
 
@@ -120,7 +121,7 @@ Practical additions that fit this project:
 - About the camp, mission, values, and impact metrics.
 - Volunteer application or registration flow with status, deadlines, and confirmation states.
 - Event schedule, camp timeline, or preparation milestones.
-- Location and map section. The empty `src/pages/Mappage` folders suggest a map feature may have been planned.
+- Deeper location pages or map filters that expand the current `/map` camp impact view.
 - Requirements, eligibility, roles, and expected volunteer commitment.
 - Packing list and preparation checklist.
 - FAQ for applicants, parents, partners, and returning volunteers.
@@ -189,7 +190,7 @@ Short term:
 
 - Add SEO metadata and Open Graph tags in `index.html` or introduce a route-aware metadata solution.
 - Add a checked-in `.env.local.example` with placeholder Supabase keys.
-- Decide whether `/activity`, `/contact`, and the planned map page should appear in `siteConfig.mainNav`.
+- Decide whether `/activity` and `/contact` should appear in `siteConfig.mainNav` alongside the existing Home, Camp, and Map links.
 - Improve `ActivityCard` and `ActivityPopup` accessibility.
 - Review image duplication between `src/assets/images/camps` and `public/camps`.
 
@@ -197,7 +198,7 @@ Medium term:
 
 - Build volunteer registration/apply pages with validation and clear confirmation states.
 - Add FAQ, packing list, requirements, safety, schedule, and testimonial sections.
-- Complete a map/location feature using camp province/location data.
+- Extend the map with province filters, richer detail pages, or Supabase-backed updates if historical data moves out of `KHdata.ts`.
 - Add admin/content workflows for camps and announcements, likely through Supabase.
 - Improve empty, loading, offline, and Supabase misconfiguration states.
 
