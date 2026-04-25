@@ -18,7 +18,7 @@ export const siteConfig = {
 			href: "/camp",
 		},
 		{
-			title: "แผนที่",
+			title: "Map",
 			href: "/map",
 		},
 	],
