@@ -10,6 +10,7 @@ Existing user-facing features include:
 - About, activities, vision, and values content in `Homepage/components/About.tsx` and `Core.tsx`.
 - A camp listing page at `/camp` with debounced search by name, location, camp ID, and province.
 - Camp detail pages at `/camp/:campID` with hero image, location/date/director cards, loading/error states, and galleries.
+- A homepage Camp Voices section in `src/pages/Homepage/components/CampVoices.tsx` that shows placeholder testimonials from a current president, current volunteer, and alumni member.
 - A camp map page at `/map` in `src/pages/Mappage` with an interactive Thailand SVG using `src/assets/data/provinces.ts` geometry and visited province summaries derived from `src/assets/data/KHdata.ts`.
 - Activity cards and a popup modal on `/activity`, although the nav item is currently commented out in `src/config/site.ts`.
 - Contact content through an Instagram embed on `/contact`, though it is not currently in `mainNav`.
@@ -36,6 +37,7 @@ Application structure:
 - `src/App.tsx`: route declarations, lazy page imports, `SiteHeader`, `SiteFooter`, and `ErrorBoundary`.
 - `src/pages/*/page.tsx`: route-level pages. This is a local convention, not Next.js routing.
 - `src/pages/*/components`: page-specific components.
+- `src/pages/Homepage/data/campVoices.ts`: editable placeholder data for the homepage Camp Voices testimonials.
 - `src/components/Header`, `src/components/Footer`: shared layout shell.
 - `src/components/ui`: shared UI components (`Button`, `LazyImage`, `InfoCard`, `SocialLinks`, `AnimatedCounter`, `ScrollIndicator`).
 - `src/hooks`: reusable hooks. `useCamps` and `useCampDetail` fetch Supabase camp data; `useSearch` debounces filtering.
