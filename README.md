@@ -130,14 +130,13 @@ yarn preview
 | `yarn test:run` | Run tests once |
 | `yarn test:coverage` | Run tests with coverage report |
 
-## ✅ CI/CD
+## ✅ CI
 
-This project uses GitHub Actions for continuous integration. On every push and PR to `main`, `master`, or `develop`:
+This project uses GitHub Actions for continuous integration. Feature branches are merged into `dev`, then `dev` is promoted into `main` when the code is ready for production. The workflow runs checks on pushes and pull requests to `dev` and `main`.
 
 ### Pipeline Stages
 
 1. **Code Quality** (runs first)
-   - Prettier formatting check
    - ESLint linting
    - TypeScript type checking
 
@@ -148,6 +147,8 @@ This project uses GitHub Actions for continuous integration. On every push and P
 3. **Test** (after code quality passes)
    - Unit tests
    - Coverage report
+
+The workflow does not deploy to Vercel or require a Vercel token. Deploy manually only when the project owner explicitly decides to spend deployment/build usage.
 
 ## 🧪 Testing
 
@@ -218,6 +219,15 @@ Each camp entry in the database includes:
 - `date` - Camp date
 - `imgSrc` - Array of image URLs
 
+### Alumni/Student Voice Data
+
+The homepage Camp Voices section reads from the Supabase
+`alumni_student_voices` table through `src/services/alumniStudentVoiceService.ts`.
+Only rows where `is_published = true` are eligible, and the homepage renders the
+first 3 records by `display_order` then `created_at`. Content is managed in
+`kaihor-backoffice` at `/alumni-student-voices`; the required SQL contract is in
+that repo at `docs/alumni-student-voices.md`.
+
 ## 📱 Features
 
 - **Responsive Design** - Works on mobile, tablet, and desktop
@@ -232,7 +242,7 @@ Each camp entry in the database includes:
 Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
 
 **Quick Overview:**
-1. Create a feature branch from `develop`
+1. Create a feature branch from `dev`
 2. Make your changes and verify locally (`yarn format && yarn lint && yarn test:run`)
 3. Open a Pull Request
 4. **Make CI pass** before requesting review

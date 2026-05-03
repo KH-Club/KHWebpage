@@ -10,6 +10,7 @@ Existing user-facing features include:
 - About, activities, vision, and values content in `Homepage/components/About.tsx` and `Core.tsx`.
 - A camp listing page at `/camp` with debounced search by name, location, camp ID, and province.
 - Camp detail pages at `/camp/:campID` with hero image, location/date/director cards, loading/error states, and galleries.
+- A homepage Camp Voices section in `src/pages/Homepage/components/CampVoices.tsx` that reads the first 3 published alumni/student voices from Supabase.
 - A camp map page at `/map` in `src/pages/Mappage` with an interactive Thailand SVG using `src/assets/data/provinces.ts` geometry and visited province summaries derived from `src/assets/data/KHdata.ts`.
 - Activity cards and a popup modal on `/activity`, although the nav item is currently commented out in `src/config/site.ts`.
 - Contact content through an Instagram embed on `/contact`, though it is not currently in `mainNav`.
@@ -36,6 +37,8 @@ Application structure:
 - `src/App.tsx`: route declarations, lazy page imports, `SiteHeader`, `SiteFooter`, and `ErrorBoundary`.
 - `src/pages/*/page.tsx`: route-level pages. This is a local convention, not Next.js routing.
 - `src/pages/*/components`: page-specific components.
+- `src/services/alumniStudentVoiceService.ts`: Supabase `alumni_student_voices` delivery query for the homepage Camp Voices section.
+- `src/hooks/useAlumniStudentVoices`: hook for loading published alumni/student voices.
 - `src/components/Header`, `src/components/Footer`: shared layout shell.
 - `src/components/ui`: shared UI components (`Button`, `LazyImage`, `InfoCard`, `SocialLinks`, `AnimatedCounter`, `ScrollIndicator`).
 - `src/hooks`: reusable hooks. `useCamps` and `useCampDetail` fetch Supabase camp data; `useSearch` debounces filtering.
@@ -95,7 +98,7 @@ There is no end-to-end test script, sitemap generation script, or checked-in `.e
 - Use meaningful names that match domain concepts such as `CampCard`, `CampGallery`, `useCamps`, and `CampData`.
 - Prefer existing helpers such as `cn` from `src/lib/utils.ts`, `LazyImage`, and shared `Button` components before adding new abstractions.
 - Avoid new dependencies unless they remove clear complexity or provide accessibility/security/performance value.
-- Keep Supabase data transformation in `src/services/campService.ts` and frontend state in hooks.
+- Keep Supabase data transformation in `src/services/*Service.ts` and frontend state in hooks.
 - Do not expose `.env` values. `.env*` files are ignored; use `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
 - Be careful with `dangerouslySetInnerHTML`; the Instagram embed is the current exception and should be audited if modified.
 
@@ -165,7 +168,7 @@ Tests use Vitest, jsdom, React Testing Library, and `src/test/setup.ts`. Use `sr
 
 ## Commit, PR, and CI Notes
 
-Recent commits use short imperative messages, sometimes with Conventional Commit prefixes such as `feat(font): add font to project`. `CONTRIBUTING.md` recommends branching from `develop` with `feature/`, `fix/`, `refactor/`, or `docs/` prefixes.
+Recent commits use short imperative messages, sometimes with Conventional Commit prefixes such as `feat(font): add font to project`. `CONTRIBUTING.md` recommends branching from `dev` with `feature/`, `fix/`, `refactor/`, or `docs/` prefixes.
 
 Before opening or updating a PR:
 
@@ -173,6 +176,7 @@ Before opening or updating a PR:
 - Include a summary, test plan, related issue links if available, and screenshots for UI changes.
 - Wait for GitHub Actions to pass before requesting review.
 - Do not merge your own PR.
+- CI runs lint, typecheck, tests, and build on `dev` and `main`. Feature branches should merge into `dev`; `dev` then promotes into `main` when the code is production-ready. CI does not deploy to Vercel or require a Vercel token.
 
 ## Agent Workflow Rules
 

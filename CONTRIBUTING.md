@@ -7,9 +7,9 @@ Thank you for your interest in contributing! Please follow these guidelines to e
 ### 1. Create a Feature Branch
 
 ```bash
-# Make sure you're on the latest develop branch
-git checkout develop
-git pull origin develop
+# Make sure you're on the latest dev branch
+git checkout dev
+git pull origin dev
 
 # Create a new feature branch
 git checkout -b feature/your-feature-name
@@ -82,6 +82,15 @@ yarn build
   2. Fix the issues locally
   3. Push the fixes
   4. Wait for CI to pass
+
+### Branch Promotion Flow
+
+Use this branch flow for normal feature work:
+
+1. Create `feature/*`, `fix/*`, `refactor/*`, or `docs/*` branches from `dev`.
+2. Open pull requests from feature branches into `dev`.
+3. Merge `dev` into `main` only when the integrated feature set is ready for production.
+4. Production deployment is tied to `main`, not feature branches.
 
 ### Step 3: Request Review and Wait for Approval
 
