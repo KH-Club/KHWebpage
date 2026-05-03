@@ -218,6 +218,15 @@ Each camp entry in the database includes:
 - `date` - Camp date
 - `imgSrc` - Array of image URLs
 
+### Alumni/Student Voice Data
+
+The homepage Camp Voices section reads from the Supabase
+`alumni_student_voices` table through `src/services/alumniStudentVoiceService.ts`.
+Only rows where `is_published = true` are eligible, and the homepage renders the
+first 3 records by `display_order` then `created_at`. Content is managed in
+`kaihor-backoffice` at `/alumni-student-voices`; the required SQL contract is in
+that repo at `docs/alumni-student-voices.md`.
+
 ## 📱 Features
 
 - **Responsive Design** - Works on mobile, tablet, and desktop

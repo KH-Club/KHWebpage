@@ -5,4 +5,5 @@ export {
 	getCampsData,
 	getCampById,
 } from "./useCamps/useCamps"
+export { useAlumniStudentVoices } from "./useAlumniStudentVoices/useAlumniStudentVoices"
 export { useSearch, useDebounce } from "./useSearch/useSearch"
