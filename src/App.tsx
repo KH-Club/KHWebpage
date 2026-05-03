@@ -11,6 +11,10 @@ const CampPage = lazy(() => import("@/pages/Camppage/page"))
 const ContactPage = lazy(() => import("@/pages/Contactpage/page"))
 const CampDetailPage = lazy(() => import("@/pages/CampDetailpage/page"))
 const MapPage = lazy(() => import("@/pages/Mappage/page"))
+const NewsActivitiesPage = lazy(() => import("@/pages/NewsActivitiespage/page"))
+const NewsActivityDetailPage = lazy(
+	() => import("@/pages/NewsActivityDetailpage/page"),
+)
 
 // Loading fallback component
 const PageLoader = () => (
@@ -22,6 +26,8 @@ const PageLoader = () => (
 const routes = [
 	{ path: "/", element: <Home /> },
 	{ path: "/activity", element: <ActivityPage /> },
+	{ path: "/news-activities", element: <NewsActivitiesPage /> },
+	{ path: "/event/:eventId", element: <NewsActivityDetailPage /> },
 	{ path: "/camp", element: <CampPage /> },
 	{ path: "/map", element: <MapPage /> },
 	{ path: "/contact", element: <ContactPage /> },

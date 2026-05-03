@@ -18,6 +18,10 @@ export const siteConfig = {
 			href: "/camp",
 		},
 		{
+			title: "News",
+			href: "/news-activities",
+		},
+		{
 			title: "Map",
 			href: "/map",
 		},

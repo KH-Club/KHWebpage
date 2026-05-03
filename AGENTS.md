@@ -11,6 +11,8 @@ Existing user-facing features include:
 - A camp listing page at `/camp` with debounced search by name, location, camp ID, and province.
 - Camp detail pages at `/camp/:campID` with hero image, location/date/director cards, loading/error states, and galleries.
 - A homepage Camp Voices section in `src/pages/Homepage/components/CampVoices.tsx` that reads the first 3 published alumni/student voices from Supabase.
+- A News & Activities page at `/news-activities` in `src/pages/NewsActivitiespage` that reads published rows from the Supabase `events` table and filters them by upcoming, completed, and announcement status.
+- A News & Activities detail route at `/event/:eventId` in `src/pages/NewsActivityDetailpage` that shows the full item, image, event date, registration deadline/countdown, location, and action button.
 - A camp map page at `/map` in `src/pages/Mappage` with an interactive Thailand SVG using `src/assets/data/provinces.ts` geometry and visited province summaries derived from `src/assets/data/KHdata.ts`.
 - Activity cards and a popup modal on `/activity`, although the nav item is currently commented out in `src/config/site.ts`.
 - Contact content through an Instagram embed on `/contact`, though it is not currently in `mainNav`.
@@ -38,7 +40,10 @@ Application structure:
 - `src/pages/*/page.tsx`: route-level pages. This is a local convention, not Next.js routing.
 - `src/pages/*/components`: page-specific components.
 - `src/services/alumniStudentVoiceService.ts`: Supabase `alumni_student_voices` delivery query for the homepage Camp Voices section.
+- `src/services/newsActivityService.ts`: Supabase `events` delivery query for the public News & Activities page.
+- `src/lib/newsActivityDates.ts`: date formatting and countdown helpers for News & Activities.
 - `src/hooks/useAlumniStudentVoices`: hook for loading published alumni/student voices.
+- `src/hooks/useNewsActivities`: hook for loading published news/activity rows.
 - `src/components/Header`, `src/components/Footer`: shared layout shell.
 - `src/components/ui`: shared UI components (`Button`, `LazyImage`, `InfoCard`, `SocialLinks`, `AnimatedCounter`, `ScrollIndicator`).
 - `src/hooks`: reusable hooks. `useCamps` and `useCampDetail` fetch Supabase camp data; `useSearch` debounces filtering.
@@ -99,6 +104,9 @@ There is no end-to-end test script, sitemap generation script, or checked-in `.e
 - Prefer existing helpers such as `cn` from `src/lib/utils.ts`, `LazyImage`, and shared `Button` components before adding new abstractions.
 - Avoid new dependencies unless they remove clear complexity or provide accessibility/security/performance value.
 - Keep Supabase data transformation in `src/services/*Service.ts` and frontend state in hooks.
+- Keep News & Activities public delivery constrained to published `events` rows. Backoffice owns the editing flow and SQL contract in `docs/news-activities.md`.
+- Use `events.event_date` as the main event date. Use `events.start_date` and `events.end_date` as the registration window/deadline fields that drive countdown labels such as `5 days left`, `Ends today`, and `Registration closed`.
+- The News & Activities large panel should use the newest created published record for the active filter. Keep the empty state honest when no published CMS records exist.
 - Do not expose `.env` values. `.env*` files are ignored; use `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
 - Be careful with `dangerouslySetInnerHTML`; the Instagram embed is the current exception and should be audited if modified.
 
