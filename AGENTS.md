@@ -168,7 +168,7 @@ Tests use Vitest, jsdom, React Testing Library, and `src/test/setup.ts`. Use `sr
 
 ## Commit, PR, and CI Notes
 
-Recent commits use short imperative messages, sometimes with Conventional Commit prefixes such as `feat(font): add font to project`. `CONTRIBUTING.md` recommends branching from `develop` with `feature/`, `fix/`, `refactor/`, or `docs/` prefixes.
+Recent commits use short imperative messages, sometimes with Conventional Commit prefixes such as `feat(font): add font to project`. `CONTRIBUTING.md` recommends branching from `dev` with `feature/`, `fix/`, `refactor/`, or `docs/` prefixes.
 
 Before opening or updating a PR:
 
@@ -176,6 +176,7 @@ Before opening or updating a PR:
 - Include a summary, test plan, related issue links if available, and screenshots for UI changes.
 - Wait for GitHub Actions to pass before requesting review.
 - Do not merge your own PR.
+- CI runs lint, typecheck, tests, and build on `dev` and `main`. Feature branches should merge into `dev`; `dev` then promotes into `main` when the code is production-ready. CI does not deploy to Vercel or require a Vercel token.
 
 ## Agent Workflow Rules
 
