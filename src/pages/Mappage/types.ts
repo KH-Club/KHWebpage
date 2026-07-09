@@ -8,9 +8,22 @@ export type CampMapRegion =
 	| "west"
 	| "south"
 
+/** Filter / highlight mode for the memory map */
+export type MapMode = "all" | "visited" | "unvisited"
+
+export interface MapStats {
+	visitedCount: number
+	campRecords: number
+	totalProvinces: number
+	unvisitedCount: number
+	explorePercent: number
+}
+
 export interface CampMapRegionInfo {
 	id: CampMapRegion
 	label: string
+	/** Thai UI label for region chips and detail panels */
+	labelTh: string
 	color: string
 	selectedColor: string
 }

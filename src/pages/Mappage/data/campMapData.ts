@@ -5,6 +5,7 @@ import {
 	CampMapRegion,
 	CampMapRegionInfo,
 	CampVisit,
+	MapStats,
 	ProvinceSummary,
 } from "../types"
 
@@ -14,39 +15,90 @@ export const mapRegions: Record<CampMapRegion, CampMapRegionInfo> = {
 	north: {
 		id: "north",
 		label: "North",
+		labelTh: "ภาคเหนือ",
 		color: "#16a34a",
 		selectedColor: "#15803d",
 	},
 	northeast: {
 		id: "northeast",
 		label: "Northeast",
+		labelTh: "ภาคตะวันออกเฉียงเหนือ",
 		color: "#f59e0b",
 		selectedColor: "#d97706",
 	},
 	central: {
 		id: "central",
 		label: "Central",
+		labelTh: "ภาคกลาง",
 		color: "#2563eb",
 		selectedColor: "#1d4ed8",
 	},
 	east: {
 		id: "east",
 		label: "East",
+		labelTh: "ภาคตะวันออก",
 		color: "#0d9488",
 		selectedColor: "#0f766e",
 	},
 	west: {
 		id: "west",
 		label: "West",
+		labelTh: "ภาคตะวันตก",
 		color: "#e11d48",
 		selectedColor: "#be123c",
 	},
 	south: {
 		id: "south",
 		label: "South",
+		labelTh: "ภาคใต้",
 		color: "#7c3aed",
 		selectedColor: "#6d28d9",
 	},
+}
+
+/**
+ * Share of Thailand provinces with at least one camp record (0–100).
+ */
+export function getExplorePercent(
+	visitedCount: number,
+	totalProvinces: number,
+): number {
+	if (totalProvinces <= 0) return 0
+	return Math.round((visitedCount / totalProvinces) * 100)
+}
+
+/**
+ * Aggregate stats for the memory map hero and cards.
+ */
+export function getMapStats(
+	summaries: ProvinceSummary[],
+	totalProvinces: number,
+): MapStats {
+	const visitedCount = summaries.length
+	const campRecords = summaries.reduce(
+		(total, summary) => total + summary.visitCount,
+		0,
+	)
+	const unvisitedCount = Math.max(totalProvinces - visitedCount, 0)
+
+	return {
+		visitedCount,
+		campRecords,
+		totalProvinces,
+		unvisitedCount,
+		explorePercent: getExplorePercent(visitedCount, totalProvinces),
+	}
+}
+
+/**
+ * Visit-intensity fill for choropleth (used in Phase 2 map engine).
+ * 0 unvisited · 1 light · 2 mid · 3+ deep ocean.
+ */
+export function getVisitFill(visitCount: number): string {
+	if (visitCount <= 0) return "#E5E7EB"
+	if (visitCount === 1) return "#3B82F6"
+	if (visitCount === 2) return "#2563EB"
+	return "#1D4ED8"
 }
 
 const explicitProvinceAliases: Record<string, string> = {
