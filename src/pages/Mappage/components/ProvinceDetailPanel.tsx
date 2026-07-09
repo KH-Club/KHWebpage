@@ -13,25 +13,74 @@ import { LazyImage } from "@/components/ui"
 import { mapRegions } from "../data/campMapData"
 import { ProvinceSummary } from "../types"
 
+export interface UnvisitedProvinceInfo {
+	id: string
+	name: string
+}
+
 interface ProvinceDetailPanelProps {
 	summary?: ProvinceSummary
+	/** Set when a non-visited province is selected on the map */
+	unvisitedProvince?: UnvisitedProvinceInfo
 	onClearSelection: () => void
 }
 
 export const ProvinceDetailPanel = memo(function ProvinceDetailPanel({
 	summary,
+	unvisitedProvince,
 	onClearSelection,
 }: ProvinceDetailPanelProps) {
+	if (!summary && unvisitedProvince) {
+		return (
+			<aside className="flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+				<div className="border-b border-slate-100 bg-gradient-to-br from-slate-50 to-sky-50 px-6 py-8">
+					<span className="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-600">
+						ยังไม่เคยไป
+					</span>
+					<h2 className="mt-3 text-3xl font-bold text-slate-900">
+						{unvisitedProvince.name}
+					</h2>
+					<p className="mt-1 text-sm text-slate-500">จังหวัดในประเทศไทย</p>
+				</div>
+				<div className="flex flex-1 flex-col p-6">
+					<p className="text-sm leading-7 text-slate-600">
+						จังหวัดนี้ยังไม่มีบันทึกค่ายอาสาในชุดข้อมูลปัจจุบัน
+						— ยังรอเรื่องราวครั้งแรกจากชมรมค่ายหอ
+					</p>
+					<div
+						className="mt-6 flex flex-1 flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-6 py-8 text-center"
+						aria-hidden
+					>
+						<div className="relative mb-3 flex h-16 w-16 items-center justify-center">
+							<span className="absolute inset-0 rounded-full bg-slate-200/80" />
+							<FiMapPin className="relative h-7 w-7 text-slate-500" />
+						</div>
+						<p className="max-w-[220px] text-xs leading-5 text-slate-500">
+							เริ่มต้นเรื่องราวค่ายอาสาที่นี่ในอนาคต
+						</p>
+					</div>
+					<button
+						type="button"
+						onClick={onClearSelection}
+						className="mt-6 rounded-full px-3 py-2 text-sm font-semibold text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
+					>
+						ล้างการเลือก
+					</button>
+				</div>
+			</aside>
+		)
+	}
+
 	if (!summary) {
 		return (
-			<aside className="flex h-full flex-col rounded-3xl border border-[#E2E8F0] bg-white p-6 shadow-sm">
-				<p className="text-sm font-semibold text-[#0E4F79]">
+			<aside className="flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+				<p className="text-sm font-semibold text-sky-900">
 					รายละเอียดจังหวัด
 				</p>
-				<h2 className="mt-2 text-2xl font-bold text-[#102033]">
+				<h2 className="mt-2 text-2xl font-bold text-slate-900">
 					เลือกจังหวัด
 				</h2>
-				<p className="mt-3 text-sm leading-7 text-[#334B5F]">
+				<p className="mt-3 text-sm leading-7 text-slate-600">
 					คลิกจังหวัดบนแผนที่หรือเลือกรายชื่อด้านล่าง
 					เพื่อซูมเข้าและดูประวัติค่าย จำนวนครั้งที่เคยไป และบันทึกล่าสุด
 				</p>

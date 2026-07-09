@@ -22,6 +22,13 @@ const MapPage = () => {
 		? visitedProvinceSummaryById.get(selectedProvinceId)
 		: undefined
 
+	const unvisitedProvince = useMemo(() => {
+		if (!selectedProvinceId || selectedSummary) return undefined
+		const province = provinces.find((item) => item.id === selectedProvinceId)
+		if (!province) return undefined
+		return { id: province.id, name: province.name }
+	}, [selectedProvinceId, selectedSummary])
+
 	const stats = useMemo(
 		() => getMapStats(visitedProvinceSummaries, provinces.length),
 		[],
@@ -81,12 +88,14 @@ const MapPage = () => {
 						<ThailandProvinceMap
 							selectedProvinceId={selectedProvinceId}
 							onSelectProvince={setSelectedProvinceId}
+							mapMode={mapMode}
 						/>
 					</div>
 
 					<div className="xl:sticky xl:top-24 xl:self-start">
 						<ProvinceDetailPanel
 							summary={selectedSummary}
+							unvisitedProvince={unvisitedProvince}
 							onClearSelection={handleClearSelection}
 						/>
 					</div>
