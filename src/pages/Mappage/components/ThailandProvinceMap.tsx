@@ -35,11 +35,19 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 			role="region"
 			aria-labelledby="thailand-map-title"
 			aria-describedby="thailand-map-desc"
-			className="rounded-2xl bg-white p-4 shadow-lg ring-1 ring-gray-100 sm:p-6"
+			className="rounded-3xl border border-[#E2E8F0] bg-white p-4 shadow-sm sm:p-6"
 		>
-			<h2 id="thailand-map-title" className="sr-only">
-				แผนที่จังหวัดที่ชมรมค่ายหอเคยไป
-			</h2>
+			<div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+				<div>
+					<p className="text-sm font-semibold text-[#0E4F79]">แผนที่โต้ตอบ</p>
+					<h2
+						id="thailand-map-title"
+						className="text-lg font-bold text-[#102033] sm:text-xl"
+					>
+						แผนที่จังหวัดที่ชมรมค่ายหอเคยไป
+					</h2>
+				</div>
+			</div>
 			<p id="thailand-map-desc" className="sr-only">
 				แผนที่ประเทศไทยแบบโต้ตอบ
 				จังหวัดสีน้ำเงินคือจังหวัดที่เคยไปและเลือกดูรายละเอียดได้
@@ -111,6 +119,9 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 					)
 				})}
 			</svg>
+			<p className="mt-3 text-center text-xs text-[#64748B] sm:text-sm">
+				คลิกจังหวัดสีน้ำเงินเพื่อดูรายละเอียด · กด Esc เพื่อล้างการเลือก
+			</p>
 		</div>
 	)
 })
