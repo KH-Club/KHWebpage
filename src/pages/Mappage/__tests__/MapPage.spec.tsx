@@ -28,7 +28,7 @@ describe("MapPage", () => {
 
 		expect(
 			screen.getByRole("heading", {
-				name: /แผนที่ร่องรอยค่ายอาสาทั่วประเทศไทย/i,
+				name: /แผนที่ความทรงจำค่ายอาสา/i,
 			}),
 		).toBeInTheDocument()
 		expect(
@@ -80,10 +80,31 @@ describe("MapPage", () => {
 	it("shows a simple visited/not visited legend without region labels", () => {
 		render(<MapPage />)
 
-		expect(screen.getByText("เคยไปแล้ว")).toBeInTheDocument()
-		expect(screen.getByText("ยังไม่เคยไป")).toBeInTheDocument()
+		const legend = screen.getByLabelText(/คำอธิบายแผนที่/i)
+		expect(within(legend).getByText("เคยไปแล้ว")).toBeInTheDocument()
+		expect(within(legend).getByText("ยังไม่เคยไป")).toBeInTheDocument()
 		expect(screen.queryByText("North")).not.toBeInTheDocument()
 		expect(screen.queryByText("Northeast")).not.toBeInTheDocument()
+	})
+
+	it("renders memory map stats and mode chips", () => {
+		render(<MapPage />)
+
+		expect(
+			screen.getByLabelText(/สถิติแผนที่ความทรงจำ/i),
+		).toBeInTheDocument()
+		expect(
+			screen.getByRole("button", { name: /สำรวจจังหวัดที่เคยไป/i }),
+		).toBeInTheDocument()
+		expect(
+			screen.getByRole("button", { name: /แสดงจังหวัดที่ยังไม่เคยไป/i }),
+		).toBeInTheDocument()
+
+		const visitedChip = screen.getByRole("button", {
+			name: /สำรวจจังหวัดที่เคยไป/i,
+		})
+		fireEvent.click(visitedChip)
+		expect(visitedChip).toHaveAttribute("aria-pressed", "true")
 	})
 
 	it("clears selected province with Escape", () => {
@@ -106,7 +127,9 @@ describe("MapPage", () => {
 
 		fireEvent.keyDown(window, { key: "Escape" })
 
-		expect(screen.getByText(/เลือกจังหวัดที่เคยไปแล้ว/i)).toBeInTheDocument()
+		expect(
+			screen.getByRole("heading", { name: /^เลือกจังหวัด$/i }),
+		).toBeInTheDocument()
 	})
 
 	it("selects a visited province from the SVG map with keyboard support", () => {
