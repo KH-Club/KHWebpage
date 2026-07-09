@@ -16,6 +16,13 @@ const modeChips: { mode: MapMode; label: string }[] = [
 	{ mode: "unvisited", label: "แสดงจังหวัดที่ยังไม่เคยไป" },
 ]
 
+const heroBackgroundStyle = {
+	background:
+		"linear-gradient(145deg, #F6FAFC 0%, #DCEFF7 42%, #E8F4FA 70%, #F6FAFC 100%)",
+} as const
+
+const progressRingCircumference = 2 * Math.PI * 40
+
 export const MapHero = memo(function MapHero({
 	stats,
 	mapMode,
@@ -30,25 +37,25 @@ export const MapHero = memo(function MapHero({
 		explorePercent,
 	} = stats
 
+	const progressOffset =
+		progressRingCircumference * (1 - explorePercent / 100)
+
 	return (
 		<section
 			aria-labelledby="map-hero-heading"
-			className="relative overflow-hidden border-b border-[#DCEFF7]/
-			style={{
-				background:
-					"linear-gradient(145deg, #F6FAFC 0%, #DCEFF7 42%, #E8F4FA 70%, #F6FAFC 100%)",
-			}}
+			className="relative overflow-hidden border-b border-sky-100"
+			style={heroBackgroundStyle}
 		>
 			{/* Soft map / pin decoration */}
 			<div
 				aria-hidden
 				className="pointer-events-none absolute inset-0 overflow-hidden"
 			>
-				<div className="absolute -right-16 -top-20 h-64 w-64 rounded-full bg-[#69B7D9]/20 blur-3xl" />
-				<div className="absolute -bottom-24 left-1/4 h-56 w-56 rounded-full bg-[#2478A8]/10 blur-3xl" />
-				<MapPin className="absolute right-8 top-10 h-24 w-24 text-[#0E4F79]/[0.07] sm:right-16 sm:top-14 sm:h-32 sm:w-32" />
+				<div className="absolute -right-16 -top-20 h-64 w-64 rounded-full bg-sky-300/20 blur-3xl" />
+				<div className="absolute -bottom-24 left-1/4 h-56 w-56 rounded-full bg-sky-600/10 blur-3xl" />
+				<MapPin className="absolute right-8 top-10 h-24 w-24 text-slate-800/10 sm:right-16 sm:top-14 sm:h-32 sm:w-32" />
 				<svg
-					className="absolute bottom-0 right-0 h-40 w-40 text-[#0E4F79]/[0.06] sm:h-52 sm:w-52"
+					className="absolute bottom-0 right-0 h-40 w-40 text-slate-800/10 sm:h-52 sm:w-52"
 					viewBox="0 0 100 100"
 					fill="none"
 					aria-hidden
@@ -67,38 +74,38 @@ export const MapHero = memo(function MapHero({
 			<div className="container relative mx-auto px-6 py-10 sm:py-14">
 				<div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
 					<div className="max-w-2xl">
-						<p className="text-sm font-semibold text-[#0E4F79]">
+						<p className="text-sm font-semibold text-sky-900">
 							แผนที่ความทรงจำค่ายหอ
 						</p>
 						<h1
 							id="map-hero-heading"
-							className="mt-3 text-balance text-4xl font-bold text-[#102033] sm:text-5xl"
+							className="mt-3 text-balance text-4xl font-bold text-slate-900 sm:text-5xl"
 						>
 							แผนที่ความทรงจำค่ายอาสา
 						</h1>
-						<p className="mt-2 text-lg font-medium text-[#2478A8] sm:text-xl">
+						<p className="mt-2 text-lg font-medium text-sky-700 sm:text-xl">
 							Thailand Volunteer Camp Journey
 						</p>
-						<p className="mt-4 max-w-xl text-base leading-7 text-[#334B5F] sm:text-lg sm:leading-8">
+						<p className="mt-4 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
 							ร่องรอยค่ายอาสาของชมรมค่ายหอทั่วประเทศไทย — จังหวัดสีน้ำเงินคือ
 							เคยมีบันทึกค่าย ส่วนสีเทาคือยังรอเรื่องราวครั้งแรก
 						</p>
 
-						<ul className="mt-6 space-y-2 text-base leading-7 text-[#102033] sm:text-lg">
+						<ul className="mt-6 space-y-2 text-base leading-7 text-slate-900 sm:text-lg">
 							<li>
-								<span className="font-semibold text-[#0E4F79]">
+								<span className="font-semibold text-sky-900">
 									{visitedCount} จังหวัด
 								</span>{" "}
 								ที่มีความทรงจำ
 							</li>
 							<li>
-								<span className="font-semibold text-[#0E4F79]">
+								<span className="font-semibold text-sky-900">
 									{campRecords} ค่ายอาสา
 								</span>{" "}
 								ที่บันทึกไว้ทั่วไทย
 							</li>
 							<li>
-								<span className="font-semibold text-[#B7792E]">
+								<span className="font-semibold text-amber-700">
 									{unvisitedCount} จังหวัด
 								</span>{" "}
 								ที่ยังรอเรื่องราวครั้งแรก
@@ -108,7 +115,7 @@ export const MapHero = memo(function MapHero({
 
 					{/* Progress ring */}
 					<div className="flex shrink-0 flex-col items-start gap-4 sm:flex-row sm:items-center lg:flex-col lg:items-end">
-						<div className="flex items-center gap-4 rounded-3xl border border-[#E2E8F0] bg-white/80 px-5 py-4 shadow-sm backdrop-blur-sm">
+						<div className="flex items-center gap-4 rounded-3xl border border-slate-200 bg-white/80 px-5 py-4 shadow-sm backdrop-blur-sm">
 							<div
 								className="relative grid h-24 w-24 place-items-center"
 								role="img"
@@ -131,34 +138,32 @@ export const MapHero = memo(function MapHero({
 										stroke="#B7792E"
 										strokeWidth="8"
 										strokeLinecap="round"
-										strokeDasharray={`${2 * Math.PI * 40}`}
-										strokeDashoffset={`${
-											2 * Math.PI * 40 * (1 - explorePercent / 100)
-										}`}
+										strokeDasharray={progressRingCircumference}
+										strokeDashoffset={progressOffset}
 									/>
 								</svg>
 								<div className="absolute inset-0 flex flex-col items-center justify-center">
-									<span className="text-xl font-bold tabular-nums text-[#102033]">
+									<span className="text-xl font-bold tabular-nums text-slate-900">
 										{explorePercent}%
 									</span>
-									<span className="text-[10px] font-medium uppercase tracking-wide text-[#64748B]">
+									<span className="text-[10px] font-medium uppercase tracking-wide text-slate-500">
 										explored
 									</span>
 								</div>
 							</div>
 							<div>
-								<p className="text-2xl font-bold tabular-nums text-[#102033]">
+								<p className="text-2xl font-bold tabular-nums text-slate-900">
 									{visitedCount}
-									<span className="text-base font-semibold text-[#64748B]">
+									<span className="text-base font-semibold text-slate-500">
 										{" "}
 										/ {totalProvinces}
 									</span>
 								</p>
-								<p className="mt-0.5 text-sm font-medium text-[#334B5F]">
+								<p className="mt-0.5 text-sm font-medium text-slate-600">
 									จังหวัดที่เคยไปแล้ว
 								</p>
 								<div
-									className="mt-3 h-2 w-36 overflow-hidden rounded-full bg-[#E5E8EA]"
+									className="mt-3 h-2 w-36 overflow-hidden rounded-full bg-slate-200"
 									role="progressbar"
 									aria-valuenow={visitedCount}
 									aria-valuemin={0}
@@ -166,10 +171,8 @@ export const MapHero = memo(function MapHero({
 									aria-label="ความคืบหน้าจังหวัดที่เคยไป"
 								>
 									<div
-										className="h-full rounded-full bg-[#2478A8] transition-all duration-500"
-										style={{
-											width: `${explorePercent}%`,
-										}}
+										className="h-full rounded-full bg-sky-700 transition-all duration-500"
+										style={{ width: `${explorePercent}%` }}
 									/>
 								</div>
 							</div>
@@ -196,10 +199,10 @@ export const MapHero = memo(function MapHero({
 									}}
 									aria-pressed={isActive}
 									className={cn(
-										"rounded-full border px-4 py-2.5 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2478A8] focus-visible:ring-offset-2",
+										"rounded-full border px-4 py-2.5 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-600 focus-visible:ring-offset-2",
 										isActive
-											? "border-[#0E4F79] bg-[#0E4F79] text-white shadow-sm"
-											: "border-[#E2E8F0] bg-white/90 text-[#102033] hover:border-[#69B7D9] hover:bg-white",
+											? "border-sky-900 bg-sky-900 text-white shadow-sm"
+											: "border-slate-200 bg-white/90 text-slate-900 hover:border-sky-300 hover:bg-white",
 									)}
 								>
 									{label}

@@ -1,11 +1,5 @@
-import { memo } from "react"
-import {
-	Flag,
-	MapPinned,
-	BookOpen,
-	Compass,
-	type LucideIcon,
-} from "lucide-react"
+import { memo, type ComponentType } from "react"
+import { FiBookOpen, FiCompass, FiFlag, FiMapPin } from "react-icons/fi"
 import { cn } from "@/lib/utils"
 import { MapStats as MapStatsData } from "../types"
 
@@ -19,7 +13,7 @@ interface StatCardConfig {
 	value: number
 	label: string
 	hint: string
-	icon: LucideIcon
+	icon: ComponentType<{ className?: string; "aria-hidden"?: boolean }>
 	accent: string
 	iconBg: string
 	valueClass: string
@@ -35,40 +29,40 @@ export const MapStats = memo(function MapStats({
 			value: stats.visitedCount,
 			label: "จังหวัดที่เคยไป",
 			hint: "มีบันทึกค่ายอาสา",
-			icon: MapPinned,
-			accent: "border-[#BFDBFE] hover:border-[#93C5FD]",
-			iconBg: "bg-[#DBEAFE] text-[#1D4ED8]",
-			valueClass: "text-[#0E4F79]",
+			icon: FiMapPin,
+			accent: "border-blue-200 hover:border-blue-300",
+			iconBg: "bg-blue-100 text-blue-700",
+			valueClass: "text-sky-900",
 		},
 		{
 			key: "camps",
 			value: stats.campRecords,
 			label: "ค่ายที่บันทึกไว้",
 			hint: "รายการค่ายทั้งหมด",
-			icon: BookOpen,
-			accent: "border-[#BAE6FD] hover:border-[#7DD3FC]",
-			iconBg: "bg-[#E0F2FE] text-[#0369A1]",
-			valueClass: "text-[#2478A8]",
+			icon: FiBookOpen,
+			accent: "border-sky-200 hover:border-sky-300",
+			iconBg: "bg-sky-100 text-sky-700",
+			valueClass: "text-sky-700",
 		},
 		{
 			key: "total",
 			value: stats.totalProvinces,
 			label: "จังหวัดทั้งหมด",
 			hint: "ทั่วประเทศไทย",
-			icon: Flag,
-			accent: "border-[#E2E8F0] hover:border-[#CBD5E1]",
-			iconBg: "bg-[#F1F5F9] text-[#475569]",
-			valueClass: "text-[#102033]",
+			icon: FiFlag,
+			accent: "border-slate-200 hover:border-slate-300",
+			iconBg: "bg-slate-100 text-slate-600",
+			valueClass: "text-slate-900",
 		},
 		{
 			key: "explored",
 			value: stats.explorePercent,
 			label: "สัดส่วนที่สำรวจแล้ว",
 			hint: `${stats.visitedCount} จาก ${stats.totalProvinces} จังหวัด`,
-			icon: Compass,
-			accent: "border-[#FDE68A] hover:border-[#FCD34D]",
-			iconBg: "bg-[#FEF3C7] text-[#B7792E]",
-			valueClass: "text-[#B7792E]",
+			icon: FiCompass,
+			accent: "border-amber-200 hover:border-amber-300",
+			iconBg: "bg-amber-100 text-amber-700",
+			valueClass: "text-amber-700",
 		},
 	]
 
