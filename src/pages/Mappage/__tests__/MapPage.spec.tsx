@@ -134,7 +134,6 @@ describe("MapPage", () => {
 
 	it("selects a visited province from the SVG map with keyboard support", () => {
 		const sakonNakhon = getRequiredProvinceSummary("sakonNakhon")
-		const bangkokName = getProvinceDisplayName("bangkok", "Bangkok")
 
 		render(<MapPage />)
 
@@ -154,10 +153,43 @@ describe("MapPage", () => {
 		expect(
 			screen.getByRole("heading", { name: sakonNakhon.provinceName }),
 		).toBeInTheDocument()
+	})
+
+	it("exposes unvisited provinces as selectable map controls", () => {
+		const bangkokName = getProvinceDisplayName("bangkok", "Bangkok")
+
+		render(<MapPage />)
+
+		const bangkokPath = screen.getByRole("button", {
+			name: new RegExp(`${escapeRegExp(bangkokName)}: ยังไม่เคยไป`, "i"),
+		})
+
+		expect(bangkokPath).toHaveAttribute("tabindex", "0")
+		fireEvent.click(bangkokPath)
+
 		expect(
-			screen.queryByRole("button", {
-				name: new RegExp(`${escapeRegExp(bangkokName)}:`, "i"),
-			}),
-		).not.toBeInTheDocument()
+			screen.getByRole("heading", { name: bangkokName }),
+		).toBeInTheDocument()
+		expect(screen.getByText(/ยังไม่มีบันทึกค่ายอาสา/i)).toBeInTheDocument()
+	})
+
+	it("renders map zoom controls", () => {
+		render(<MapPage />)
+
+		const toolbar = screen.getByRole("toolbar", {
+			name: /ตัวควบคุมแผนที่/i,
+		})
+		expect(
+			within(toolbar).getByRole("button", { name: /ขยายแผนที่/i }),
+		).toBeInTheDocument()
+		expect(
+			within(toolbar).getByRole("button", { name: /ย่อแผนที่/i }),
+		).toBeInTheDocument()
+		expect(
+			within(toolbar).getByRole("button", { name: /รีเซ็ตมุมมองแผนที่/i }),
+		).toBeInTheDocument()
+		expect(
+			within(toolbar).getByRole("button", { name: /พอดีทั้งประเทศไทย/i }),
+		).toBeInTheDocument()
 	})
 })
