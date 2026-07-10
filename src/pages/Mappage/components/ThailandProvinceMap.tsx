@@ -573,14 +573,6 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 							strokeWidth="1.5"
 							strokeDasharray="3 4"
 						/>
-						<circle
-							cx={calloutPosition.anchorX}
-							cy={calloutPosition.anchorY}
-							r="4.5"
-							fill="#FFFFFF"
-							stroke="#0E5F9A"
-							strokeWidth="2"
-						/>
 					</svg>
 				) : null}
 
