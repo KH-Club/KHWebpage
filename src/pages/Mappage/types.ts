@@ -25,6 +25,27 @@ export interface UnvisitedProvinceInfo {
 	name: string
 }
 
+/** Status filter for the province archive list */
+export type ProvinceStatusFilter = "all" | "visited" | "unvisited"
+
+/** Sort options for the province archive list */
+export type ProvinceSortOption =
+	| "mostVisited"
+	| "recentlyVisited"
+	| "alphabetical"
+	| "region"
+
+/** One row in the full Thailand province archive (visited + unvisited) */
+export interface ArchiveProvinceCard {
+	provinceId: string
+	provinceName: string
+	region: CampMapRegion
+	isVisited: boolean
+	visitCount: number
+	latestVisitName?: string
+	latestVisitCampId?: number
+}
+
 export interface CampMapRegionInfo {
 	id: CampMapRegion
 	label: string
