@@ -1,4 +1,5 @@
 import { About, CampVoices, Core, LandingView } from "./components"
+import { FeatureGate } from "@/features/featureFlags"
 
 const Home = () => {
 	return (
@@ -6,7 +7,9 @@ const Home = () => {
 			<LandingView />
 			<Core />
 			<About />
-			<CampVoices />
+			<FeatureGate flag="camp_voices">
+				<CampVoices />
+			</FeatureGate>
 		</>
 	)
 }
