@@ -1,8 +1,9 @@
 import { lazy, Suspense } from "react"
 import { SiteHeader } from "@/components/Header/site-header"
-import { useLocation, useRoutes } from "react-router-dom"
+import { Navigate, useLocation, useRoutes } from "react-router-dom"
 import ErrorBoundary from "@/layouts/ErrorBoundary"
 import SiteFooter from "@/components/Footer/Footer"
+import { FeatureGate, FeatureFlagProvider } from "@/features/featureFlags"
 import { cn } from "@/lib/utils"
 
 // Lazy load pages for better performance (code splitting)
@@ -27,15 +28,37 @@ const PageLoader = () => (
 const routes = [
 	{ path: "/", element: <Home /> },
 	{ path: "/activity", element: <ActivityPage /> },
-	{ path: "/news-activities", element: <NewsActivitiesPage /> },
-	{ path: "/event/:eventId", element: <NewsActivityDetailPage /> },
+	{
+		path: "/news-activities",
+		element: (
+			<FeatureGate
+				flag="news_activities"
+				fallback={<Navigate to="/" replace />}
+				loadingFallback={<PageLoader />}
+			>
+				<NewsActivitiesPage />
+			</FeatureGate>
+		),
+	},
+	{
+		path: "/event/:eventId",
+		element: (
+			<FeatureGate
+				flag="news_activities"
+				fallback={<Navigate to="/" replace />}
+				loadingFallback={<PageLoader />}
+			>
+				<NewsActivityDetailPage />
+			</FeatureGate>
+		),
+	},
 	{ path: "/camp", element: <CampPage /> },
 	{ path: "/map", element: <MapPage /> },
 	{ path: "/contact", element: <ContactPage /> },
 	{ path: "/camp/:campID", element: <CampDetailPage /> },
 ]
 
-function App() {
+function AppShell() {
 	const children = useRoutes(routes)
 	const location = useLocation()
 	const isMapPage = location.pathname === "/map"
@@ -54,6 +77,14 @@ function App() {
 				</div>
 			</div>
 		</ErrorBoundary>
+	)
+}
+
+function App() {
+	return (
+		<FeatureFlagProvider>
+			<AppShell />
+		</FeatureFlagProvider>
 	)
 }
 

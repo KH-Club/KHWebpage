@@ -3,7 +3,8 @@ import { MainNav } from "@/components/Header/main-nav"
 import { buttonVariants } from "@/components/Header/ui/button"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-import { useEffect, useState } from "react"
+import { useFeatureFlags } from "@/features/featureFlags"
+import { useEffect, useMemo, useState } from "react"
 import { FiMenu, FiX } from "react-icons/fi"
 import { Link, useLocation } from "react-router-dom"
 
@@ -15,6 +16,15 @@ function isActivePath(pathname: string, href: string) {
 export function SiteHeader() {
 	const [mobileOpen, setMobileOpen] = useState(false)
 	const location = useLocation()
+	const { isEnabled, isLoading } = useFeatureFlags()
+	const visibleNavItems = useMemo(
+		() =>
+			siteConfig.mainNav.filter(
+				(item) =>
+					!item.featureFlag || (!isLoading && isEnabled(item.featureFlag)),
+			),
+		[isEnabled, isLoading],
+	)
 
 	useEffect(() => {
 		setMobileOpen(false)
@@ -35,7 +45,7 @@ export function SiteHeader() {
 						</span>
 					</Link>
 					<div className="hidden md:block">
-						<MainNav items={siteConfig.mainNav} showLogo={false} />
+						<MainNav items={visibleNavItems} showLogo={false} />
 					</div>
 				</div>
 
@@ -83,7 +93,7 @@ export function SiteHeader() {
 					className="border-t border-slate-100 bg-white p-4 shadow-lg md:hidden"
 				>
 					<nav className="flex flex-col gap-1" aria-label="เมนูหลัก">
-						{siteConfig.mainNav.map((item) =>
+						{visibleNavItems.map((item) =>
 							item.href ? (
 								<Link
 									key={item.href}

@@ -20,6 +20,7 @@ export const siteConfig = {
 		{
 			title: "News",
 			href: "/news-activities",
+			featureFlag: "news_activities" as const,
 		},
 		{
 			title: "Map",
