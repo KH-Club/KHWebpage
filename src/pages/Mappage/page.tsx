@@ -10,8 +10,8 @@ import { MapLegend } from "./components/MapLegend"
 import { MapStats } from "./components/MapStats"
 import { ProvinceDetailPanel } from "./components/ProvinceDetailPanel"
 import { ProvinceDetailSheet } from "./components/ProvinceDetailSheet"
+import { ProvinceArchiveList } from "./components/ProvinceArchiveList"
 import { ThailandProvinceMap } from "./components/ThailandProvinceMap"
-import { VisitedProvinceList } from "./components/VisitedProvinceList"
 import { useMediaQuery } from "./hooks/useMediaQuery"
 import { MapMode } from "./types"
 
@@ -128,10 +128,11 @@ const MapPage = () => {
 				) : null}
 
 				<div className="mt-6">
-					<VisitedProvinceList
-						summaries={visitedProvinceSummaries}
+					<ProvinceArchiveList
 						selectedProvinceId={selectedProvinceId}
 						onSelectProvince={setSelectedProvinceId}
+						statusFilter={mapMode}
+						onStatusFilterChange={setMapMode}
 					/>
 				</div>
 			</section>
