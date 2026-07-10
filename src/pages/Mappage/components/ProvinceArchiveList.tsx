@@ -20,6 +20,8 @@ interface ProvinceArchiveListProps {
 	/** Synced with hero map mode chips */
 	statusFilter: ProvinceStatusFilter
 	onStatusFilterChange: (status: ProvinceStatusFilter) => void
+	/** Softer explorer chrome under the immersive map */
+	variant?: "default" | "explorer"
 }
 
 const regionOptions: { value: CampMapRegion | "all"; label: string }[] = [
@@ -44,7 +46,7 @@ const sortOptions: { value: ProvinceSortOption; label: string }[] = [
 ]
 
 const selectClassName =
-	"h-11 rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-800 shadow-sm focus:border-sky-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
+	"h-11 rounded-2xl border border-white/60 bg-white/80 px-3 text-sm font-medium text-slate-800 shadow-sm backdrop-blur-sm focus:border-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
 
 function useDebouncedValue<T>(value: T, delayMs: number): T {
 	const [debounced, setDebounced] = useState(value)
@@ -84,8 +86,8 @@ const ArchiveCard = memo(function ArchiveCard({
 			className={cn(
 				"flex min-h-[6.5rem] w-full flex-col gap-3 rounded-2xl border px-4 py-4 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-600 focus-visible:ring-offset-2 sm:flex-row sm:items-center sm:justify-between",
 				isSelected
-					? "border-sky-900 bg-sky-900 text-white shadow-md"
-					: "border-slate-200 bg-white text-slate-900 hover:border-sky-300 hover:bg-sky-50",
+					? "border-blue-600 bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+					: "border-white/70 bg-white/80 text-slate-900 shadow-sm backdrop-blur-sm hover:border-blue-200 hover:bg-white",
 			)}
 		>
 			<span className="min-w-0">
@@ -162,12 +164,14 @@ export const ProvinceArchiveList = memo(function ProvinceArchiveList({
 	onSelectProvince,
 	statusFilter,
 	onStatusFilterChange,
+	variant = "default",
 }: ProvinceArchiveListProps) {
 	const reduceMotion = useReducedMotion()
 	const [query, setQuery] = useState("")
 	const [region, setRegion] = useState<CampMapRegion | "all">("all")
 	const [sort, setSort] = useState<ProvinceSortOption>("mostVisited")
 	const debouncedQuery = useDebouncedValue(query, 200)
+	const isExplorer = variant === "explorer"
 
 	const filteredCards = useMemo(
 		() =>
@@ -186,16 +190,24 @@ export const ProvinceArchiveList = memo(function ProvinceArchiveList({
 		<section
 			aria-labelledby="province-archive-heading"
 			aria-label="ดัชนีจังหวัดทั่วประเทศไทย"
-			className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
+			className={cn(
+				isExplorer
+					? "rounded-[1.75rem] border border-white/70 bg-white/75 p-5 shadow-[0_16px_40px_-24px_rgba(15,23,42,0.28)] backdrop-blur-md sm:p-7"
+					: "rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6",
+			)}
 		>
 			<div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
 				<div>
-					<p className="text-sm font-semibold text-sky-900">ดัชนีความทรงจำ</p>
+					<p className="text-xs font-semibold uppercase tracking-[0.12em] text-blue-600">
+						{isExplorer ? "Province Explorer" : "ดัชนีความทรงจำ"}
+					</p>
 					<h2
 						id="province-archive-heading"
-						className="text-2xl font-bold text-slate-900"
+						className="mt-1 text-2xl font-bold text-slate-900"
 					>
-						เลือกจังหวัดเพื่อดูรายละเอียด
+						{isExplorer
+							? "สำรวจจังหวัดทั่วประเทศไทย"
+							: "เลือกจังหวัดเพื่อดูรายละเอียด"}
 					</h2>
 				</div>
 				<p className="text-sm text-slate-500">
@@ -207,8 +219,36 @@ export const ProvinceArchiveList = memo(function ProvinceArchiveList({
 				</p>
 			</div>
 
-			<div className="mt-5 grid grid-cols-1 gap-3 lg:grid-cols-4">
-				<label className="relative block lg:col-span-2">
+			{/* Status tabs */}
+			<div
+				role="tablist"
+				aria-label="กรองสถานะ"
+				className="mt-5 flex flex-wrap gap-2"
+			>
+				{statusOptions.map((option) => {
+					const selected = statusFilter === option.value
+					return (
+						<button
+							key={option.value}
+							type="button"
+							role="tab"
+							aria-selected={selected}
+							onClick={() => onStatusFilterChange(option.value)}
+							className={cn(
+								"rounded-full px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+								selected
+									? "bg-blue-600 text-white shadow-sm"
+									: "bg-white/80 text-slate-700 ring-1 ring-slate-200/80 hover:bg-white",
+							)}
+						>
+							{option.label}
+						</button>
+					)
+				})}
+			</div>
+
+			<div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-3">
+				<label className="relative block lg:col-span-1">
 					<span className="sr-only">ค้นหาจังหวัด</span>
 					<FiSearch
 						className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
@@ -219,7 +259,7 @@ export const ProvinceArchiveList = memo(function ProvinceArchiveList({
 						value={query}
 						onChange={(event) => setQuery(event.target.value)}
 						placeholder="ค้นหาจังหวัด"
-						className="h-11 w-full rounded-xl border border-slate-200 bg-white py-2 pl-10 pr-3 text-sm text-slate-800 shadow-sm placeholder:text-slate-400 focus:border-sky-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
+						className="h-11 w-full rounded-2xl border border-white/60 bg-white/80 py-2 pl-10 pr-3 text-sm text-slate-800 shadow-sm backdrop-blur-sm placeholder:text-slate-400 focus:border-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
 					/>
 				</label>
 
@@ -241,25 +281,6 @@ export const ProvinceArchiveList = memo(function ProvinceArchiveList({
 				</label>
 
 				<label className="block">
-					<span className="sr-only">กรองสถานะ</span>
-					<select
-						value={statusFilter}
-						onChange={(event) =>
-							onStatusFilterChange(
-								event.target.value as ProvinceStatusFilter,
-							)
-						}
-						className={cn(selectClassName, "w-full")}
-					>
-						{statusOptions.map((option) => (
-							<option key={option.value} value={option.value}>
-								{option.label}
-							</option>
-						))}
-					</select>
-				</label>
-
-				<label className="block lg:col-span-2">
 					<span className="sr-only">เรียงลำดับ</span>
 					<select
 						value={sort}
