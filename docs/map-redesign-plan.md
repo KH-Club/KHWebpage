@@ -10,14 +10,16 @@
 
 ## 1. Current state
 
-| Area | Today |
-|------|--------|
-| Entry | `src/pages/Mappage/page.tsx` |
-| Map | Static SVG paths (`ThailandProvinceMap.tsx`) — no pan/zoom |
-| Data | Static summaries from `data/campMapData.ts` + `KHdata` + `provinces.ts` |
-| Selection | Visited-only click → side panel + list sync; Escape clears |
-| Visual | Generic blue/gray cards, flat visited fill |
-| Tests | `MapPage.spec.tsx`, `campMapData.spec.ts` |
+> **Implementation status (2026-07-11):** Phases 1–4 plus immersive stage, map-first mobile layout, memory atlas, and anchored callout are **landed on `dev`**. See `docs/map-session-prep.md` for architecture, file map, and test baseline. The table below was the **pre-redesign** baseline used when this plan was written.
+
+| Area | Pre-redesign (plan start) | Now (on `dev`) |
+|------|---------------------------|----------------|
+| Entry | `src/pages/Mappage/page.tsx` | Same; dual layout via `useMediaQuery` |
+| Map | Static SVG — no pan/zoom | `d3-zoom` + controls + cinematic select + callout |
+| Data | Static `campMapData` + `KHdata` + `provinces.ts` | Same source; + archive helpers + regions |
+| Selection | Visited-only → side panel | Any province; desktop callout / mobile sheet; Escape |
+| Visual | Generic blue/gray cards | Memory atlas stage, journey insights, explorer list |
+| Tests | `MapPage.spec`, `campMapData.spec` | + `archiveList.spec` (24 tests total, green) |
 
 **Baseline metrics (from current data; recompute at build/runtime):**
 
