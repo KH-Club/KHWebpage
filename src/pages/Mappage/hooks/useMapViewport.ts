@@ -33,11 +33,14 @@ export interface UseMapViewportResult {
  */
 export function useMapViewport(
 	svgRef: RefObject<SVGSVGElement | null>,
+	onViewportChange?: () => void,
 ): UseMapViewportResult {
 	const contentRef = useRef<SVGGElement>(null)
+	const onViewportChangeRef = useRef(onViewportChange)
 	const zoomBehaviorRef = useRef<ZoomBehavior<SVGSVGElement, unknown> | null>(
 		null,
 	)
+	onViewportChangeRef.current = onViewportChange
 
 	const applyTransform = useCallback((transform: ZoomTransform) => {
 		if (contentRef.current) {
@@ -92,6 +95,7 @@ export function useMapViewport(
 			})
 			.on("zoom", (event) => {
 				applyTransform(event.transform)
+				onViewportChangeRef.current?.()
 			})
 
 		const selection = select(svg)
@@ -152,7 +156,10 @@ export function useMapViewport(
 
 			const scaleX = VIEW_WIDTH / (bbox.width + padding * 2)
 			const scaleY = VIEW_HEIGHT / (bbox.height + padding * 2)
-			const scale = Math.max(MIN_SCALE, Math.min(Math.min(scaleX, scaleY), 4.5))
+			const scale = Math.max(
+				MIN_SCALE,
+				Math.min(Math.min(scaleX, scaleY), 2.35),
+			)
 
 			const cx = bbox.x + bbox.width / 2
 			const cy = bbox.y + bbox.height / 2

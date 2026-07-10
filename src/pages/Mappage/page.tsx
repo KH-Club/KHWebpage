@@ -4,6 +4,7 @@ import {
 	getMapStats,
 	visitedProvinceSummaries,
 	visitedProvinceSummaryById,
+	getRegionForProvince,
 } from "./data/campMapData"
 import { JourneyInsights } from "./components/JourneyInsights"
 import { MapStage } from "./components/MapStage"
@@ -16,6 +17,8 @@ const MapPage = () => {
 	const [selectedProvinceId, setSelectedProvinceId] = useState<string>()
 	const [mapMode, setMapMode] = useState<MapMode>("visited")
 	const isDesktop = useMediaQuery("(min-width: 1024px)")
+	const isTablet = useMediaQuery("(min-width: 768px)")
+	const useAnchoredMap = isDesktop || isTablet
 
 	const selectedSummary = selectedProvinceId
 		? visitedProvinceSummaryById.get(selectedProvinceId)
@@ -25,7 +28,11 @@ const MapPage = () => {
 		if (!selectedProvinceId || selectedSummary) return undefined
 		const province = provinces.find((item) => item.id === selectedProvinceId)
 		if (!province) return undefined
-		return { id: province.id, name: province.name }
+		return {
+			id: province.id,
+			name: province.name,
+			region: getRegionForProvince(province.id),
+		}
 	}, [selectedProvinceId, selectedSummary])
 
 	const stats = useMemo(
@@ -64,7 +71,7 @@ const MapPage = () => {
 
 	return (
 		<div className="min-h-screen bg-[#F6FAFC] text-[#102033]">
-			{!isDesktop ? (
+			{!useAnchoredMap ? (
 				<MobileMapExperience {...shared} />
 			) : (
 				<>

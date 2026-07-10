@@ -197,10 +197,10 @@
 @keyframes map-province-selected {
 	0%,
 	100% {
-		filter: drop-shadow(0 0 8px rgba(183, 121, 46, 0.45));
+		filter: drop-shadow(0 0 8px rgba(14, 95, 186, 0.5));
 	}
 	50% {
-		filter: drop-shadow(0 0 16px rgba(233, 162, 59, 0.72));
+		filter: drop-shadow(0 0 17px rgba(37, 99, 235, 0.78));
 	}
 }
 

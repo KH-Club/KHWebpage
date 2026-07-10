@@ -9,7 +9,6 @@ import {
 import { MapAtmosphere } from "./MapAtmosphere"
 import { MapStageHero } from "./MapStageHero"
 import { MapStageLegend } from "./MapStageLegend"
-import { MapStoryCard } from "./MapStoryCard"
 import { ThailandProvinceMap } from "./ThailandProvinceMap"
 
 interface MapStageProps {
@@ -57,6 +56,9 @@ export const MapStage = memo(function MapStage({
 					immersive
 					selectedProvinceId={selectedProvinceId}
 					onSelectProvince={onSelectProvince}
+					selectedSummary={selectedSummary}
+					unvisitedProvince={unvisitedProvince}
+					onClearSelection={onClearSelection}
 					mapMode={mapMode}
 				/>
 			</div>
@@ -82,12 +84,6 @@ export const MapStage = memo(function MapStage({
 					<MapStageLegend />
 				</div>
 			</div>
-
-			<MapStoryCard
-				summary={selectedSummary}
-				unvisitedProvince={unvisitedProvince}
-				onClearSelection={onClearSelection}
-			/>
 		</section>
 	)
 })

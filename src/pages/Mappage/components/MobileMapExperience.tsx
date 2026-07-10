@@ -65,6 +65,9 @@ export const MobileMapExperience = memo(function MobileMapExperience({
 						mobileApp
 						selectedProvinceId={selectedProvinceId}
 						onSelectProvince={onSelectProvince}
+						selectedSummary={selectedSummary}
+						unvisitedProvince={unvisitedProvince}
+						onClearSelection={onClearSelection}
 						mapMode={mapMode}
 					/>
 				</div>

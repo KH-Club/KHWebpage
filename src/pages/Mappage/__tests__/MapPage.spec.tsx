@@ -21,7 +21,7 @@ function getRequiredProvinceSummary(provinceId: string) {
 }
 
 describe("MapPage", () => {
-	it("renders immersive stage and selects a province from the explorer", () => {
+	it("renders immersive stage and selects a province from the explorer", async () => {
 		const sakonNakhon = getRequiredProvinceSummary("sakonNakhon")
 
 		render(<MapPage />)
@@ -53,11 +53,12 @@ describe("MapPage", () => {
 		)
 
 		expect(
-			screen.getByRole("heading", { name: sakonNakhon.provinceName }),
+			await screen.findByRole("heading", { name: sakonNakhon.provinceName }),
 		).toBeInTheDocument()
-		expect(
-			screen.getByRole("link", { name: /ดูรายละเอียดค่ายล่าสุด/i }),
-		).toHaveAttribute("href", "/camp/54")
+		expect(screen.getByRole("link", { name: /ดูความทรงจำ/i })).toHaveAttribute(
+			"href",
+			"/camp/54",
+		)
 	})
 
 	it("keeps province controls exposed inside a labelled map region", () => {
@@ -127,19 +128,55 @@ describe("MapPage", () => {
 				name: new RegExp(escapeRegExp(sakonNakhon.provinceName), "i"),
 			}),
 		)
-		expect(screen.getByText(/ไทม์ไลน์ค่ายในจังหวัดนี้/i)).toBeInTheDocument()
+		expect(
+			await screen.findByRole("dialog", {
+				name: new RegExp(`รายละเอียดจังหวัด${sakonNakhon.provinceName}`),
+			}),
+		).toBeInTheDocument()
 
 		fireEvent.keyDown(window, { key: "Escape" })
 
-		// Floating story card may animate out via AnimatePresence
+		// Anchored callout may animate out via AnimatePresence
 		await waitFor(() => {
 			expect(
-				screen.queryByText(/ไทม์ไลน์ค่ายในจังหวัดนี้/i),
+				screen.queryByRole("dialog", {
+					name: new RegExp(`รายละเอียดจังหวัด${sakonNakhon.provinceName}`),
+				}),
 			).not.toBeInTheDocument()
 		})
 	})
 
-	it("selects a visited province from the SVG map with keyboard support", () => {
+	it("closes the anchored callout from its close button and empty map space", async () => {
+		const sakonNakhon = getRequiredProvinceSummary("sakonNakhon")
+		render(<MapPage />)
+
+		const mapRegion = screen.getByRole("region", {
+			name: /แผนที่จังหวัดที่ชมรมค่ายหอเคยไป/i,
+		})
+		const provincePath = within(mapRegion).getByRole("button", {
+			name: new RegExp(escapeRegExp(sakonNakhon.provinceName), "i"),
+		})
+
+		fireEvent.click(provincePath)
+		await screen.findByRole("dialog")
+		fireEvent.click(
+			screen.getByRole("button", { name: /ปิดรายละเอียดจังหวัด/i }),
+		)
+		await waitFor(() =>
+			expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+		)
+
+		fireEvent.click(provincePath)
+		await screen.findByRole("dialog")
+		const mapSvg = mapRegion.querySelector('svg[viewBox="0 0 1400 2500"]')
+		expect(mapSvg).not.toBeNull()
+		fireEvent.click(mapSvg as SVGSVGElement)
+		await waitFor(() =>
+			expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+		)
+	})
+
+	it("selects a visited province from the SVG map with keyboard support", async () => {
 		const sakonNakhon = getRequiredProvinceSummary("sakonNakhon")
 
 		render(<MapPage />)
@@ -158,11 +195,11 @@ describe("MapPage", () => {
 		fireEvent.keyDown(sakonNakhonPath, { key: "Enter" })
 
 		expect(
-			screen.getByRole("heading", { name: sakonNakhon.provinceName }),
+			await screen.findByRole("heading", { name: sakonNakhon.provinceName }),
 		).toBeInTheDocument()
 	})
 
-	it("exposes unvisited provinces as selectable map controls", () => {
+	it("exposes unvisited provinces as selectable map controls", async () => {
 		const bangkokName = getProvinceDisplayName("bangkok", "Bangkok")
 
 		render(<MapPage />)
@@ -175,9 +212,9 @@ describe("MapPage", () => {
 		fireEvent.click(bangkokPath)
 
 		expect(
-			screen.getByRole("heading", { name: bangkokName }),
+			await screen.findByRole("heading", { name: bangkokName }),
 		).toBeInTheDocument()
-		expect(screen.getByText(/ยังไม่มีบันทึกค่ายอาสา/i)).toBeInTheDocument()
+		expect(screen.getByText(/ยังไม่มีบันทึกค่าย/i)).toBeInTheDocument()
 	})
 
 	it("renders map zoom controls", () => {
@@ -197,7 +234,7 @@ describe("MapPage", () => {
 		).toBeInTheDocument()
 	})
 
-	it("zooms focus when selecting a province from the list", () => {
+	it("zooms focus when selecting a province from the list", async () => {
 		const sakonNakhon = getRequiredProvinceSummary("sakonNakhon")
 
 		render(<MapPage />)
@@ -212,7 +249,7 @@ describe("MapPage", () => {
 			}),
 		)
 
-		expect(screen.getByText(/ไทม์ไลน์ค่ายในจังหวัดนี้/i)).toBeInTheDocument()
+		expect(await screen.findByText(/ร่องรอยล่าสุด/i)).toBeInTheDocument()
 		expect(
 			screen.getByRole("button", { name: /ปิดรายละเอียดจังหวัด/i }),
 		).toBeInTheDocument()

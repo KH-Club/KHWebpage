@@ -80,6 +80,7 @@ export const MapStageHero = memo(function MapStageHero({
 
 				<motion.h1
 					id="map-hero-heading"
+					aria-label="ร่องรอยค่ายหอทั่วไทย"
 					className="mt-3 text-balance text-[clamp(2.75rem,4.3vw,4.75rem)] font-bold leading-[1.08] tracking-[-0.03em] text-[#102033]"
 					initial={reduceMotion ? false : { opacity: 0.65, y: 12 }}
 					animate={{ opacity: 1, y: 0 }}
@@ -89,7 +90,7 @@ export const MapStageHero = memo(function MapStageHero({
 						ease: [0.22, 1, 0.36, 1],
 					}}
 				>
-					ร่องรอยค่ายหอทั่วไทย
+					ร่องรอย<span className="whitespace-nowrap">ค่ายหอ</span>ทั่วไทย
 				</motion.h1>
 
 				<motion.p

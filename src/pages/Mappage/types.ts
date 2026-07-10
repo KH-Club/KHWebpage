@@ -23,6 +23,7 @@ export interface MapStats {
 export interface UnvisitedProvinceInfo {
 	id: string
 	name: string
+	region: CampMapRegion
 }
 
 /** Status filter for the province archive list */

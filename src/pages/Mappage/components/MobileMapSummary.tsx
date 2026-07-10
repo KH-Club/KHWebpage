@@ -35,9 +35,10 @@ export const MobileMapSummary = memo(function MobileMapSummary({
 			<p className="text-sm font-semibold text-[#2478A8]">แผนที่ความทรงจำ</p>
 			<h1
 				id="mobile-map-title"
+				aria-label="ร่องรอยค่ายหอทั่วไทย"
 				className="mt-1 text-balance text-[1.75rem] font-bold leading-[1.2] tracking-[-0.02em] text-[#102033]"
 			>
-				ร่องรอยค่ายหอทั่วไทย
+				ร่องรอย<span className="whitespace-nowrap">ค่ายหอ</span>ทั่วไทย
 			</h1>
 
 			<div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-[#334B5F]">
