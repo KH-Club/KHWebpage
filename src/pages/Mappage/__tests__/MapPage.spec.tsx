@@ -121,15 +121,16 @@ describe("MapPage", () => {
 				name: new RegExp(escapeRegExp(sakonNakhon.provinceName), "i"),
 			}),
 		)
-		expect(
-			screen.getByText(/ค่ายที่บันทึกไว้ในจังหวัดนี้/i),
-		).toBeInTheDocument()
+		expect(screen.getByText(/ไทม์ไลน์ค่ายในจังหวัดนี้/i)).toBeInTheDocument()
 
 		fireEvent.keyDown(window, { key: "Escape" })
 
 		expect(
 			screen.getByRole("heading", { name: /^เลือกจังหวัด$/i }),
 		).toBeInTheDocument()
+		expect(
+			screen.queryByText(/ไทม์ไลน์ค่ายในจังหวัดนี้/i),
+		).not.toBeInTheDocument()
 	})
 
 	it("selects a visited province from the SVG map with keyboard support", () => {
@@ -190,6 +191,28 @@ describe("MapPage", () => {
 		).toBeInTheDocument()
 		expect(
 			within(toolbar).getByRole("button", { name: /พอดีทั้งประเทศไทย/i }),
+		).toBeInTheDocument()
+	})
+
+	it("zooms focus when selecting a province from the list", () => {
+		const sakonNakhon = getRequiredProvinceSummary("sakonNakhon")
+
+		render(<MapPage />)
+
+		const visitedProvinceList = screen.getByRole("region", {
+			name: /เลือกจังหวัดเพื่อดูรายละเอียด/i,
+		})
+
+		fireEvent.click(
+			within(visitedProvinceList).getByRole("button", {
+				name: new RegExp(escapeRegExp(sakonNakhon.provinceName), "i"),
+			}),
+		)
+
+		// Desktop panel shows timeline after list-driven selection
+		expect(screen.getByText(/ไทม์ไลน์ค่ายในจังหวัดนี้/i)).toBeInTheDocument()
+		expect(
+			screen.getByRole("button", { name: /ปิดรายละเอียดจังหวัด/i }),
 		).toBeInTheDocument()
 	})
 })
