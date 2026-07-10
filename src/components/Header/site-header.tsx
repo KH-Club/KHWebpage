@@ -32,8 +32,10 @@ export function SiteHeader() {
 
 	return (
 		<header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-background/95 backdrop-blur-md">
-			<div className="container flex h-14 items-center justify-between gap-3 sm:h-16">
-				<div className="flex min-w-0 items-center gap-3">
+			{/* Three-zone bar: logo | nav | actions — equal side columns keep the center true */}
+			<div className="container grid h-14 grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 sm:h-16 sm:gap-4">
+				{/* Left: brand */}
+				<div className="flex min-w-0 items-center justify-self-start">
 					<Link
 						to="/"
 						className="flex min-w-0 items-center gap-2"
@@ -44,47 +46,60 @@ export function SiteHeader() {
 							{siteConfig.name}
 						</span>
 					</Link>
-					<div className="hidden md:block">
-						<MainNav items={visibleNavItems} showLogo={false} />
-					</div>
 				</div>
 
-				<nav
-					className="hidden items-center space-x-1 md:flex"
-					aria-label="Social links"
-				>
-					<Link to={siteConfig.links.facebook} target="_blank" rel="noreferrer">
-						<div className={buttonVariants({ size: "icon", variant: "ghost" })}>
-							<Icons.facebook className="h-5 w-5" />
-							<span className="sr-only">Facebook</span>
-						</div>
-					</Link>
-					<Link
-						to={siteConfig.links.instagram}
-						target="_blank"
-						rel="noreferrer"
-					>
-						<div className={buttonVariants({ size: "icon", variant: "ghost" })}>
-							<Icons.instagram className="h-5 w-5" />
-							<span className="sr-only">Instagram</span>
-						</div>
-					</Link>
-				</nav>
+				{/* Center: primary nav (desktop) */}
+				<div className="hidden justify-self-center md:block">
+					<MainNav items={visibleNavItems} showLogo={false} />
+				</div>
 
-				<button
-					type="button"
-					className="grid h-11 w-11 place-items-center rounded-2xl text-slate-700 transition hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 md:hidden"
-					aria-controls="mobile-navigation"
-					aria-label={mobileOpen ? "ปิดเมนู" : "เปิดเมนู"}
-					aria-expanded={mobileOpen}
-					onClick={() => setMobileOpen((open) => !open)}
-				>
-					{mobileOpen ? (
-						<FiX className="h-5 w-5" aria-hidden />
-					) : (
-						<FiMenu className="h-5 w-5" aria-hidden />
-					)}
-				</button>
+				{/* Right: social (desktop) / menu (mobile) */}
+				<div className="flex items-center justify-end justify-self-end">
+					<nav
+						className="hidden items-center gap-0.5 md:flex"
+						aria-label="Social links"
+					>
+						<Link
+							to={siteConfig.links.facebook}
+							target="_blank"
+							rel="noreferrer"
+						>
+							<div
+								className={buttonVariants({ size: "icon", variant: "ghost" })}
+							>
+								<Icons.facebook className="h-5 w-5" />
+								<span className="sr-only">Facebook</span>
+							</div>
+						</Link>
+						<Link
+							to={siteConfig.links.instagram}
+							target="_blank"
+							rel="noreferrer"
+						>
+							<div
+								className={buttonVariants({ size: "icon", variant: "ghost" })}
+							>
+								<Icons.instagram className="h-5 w-5" />
+								<span className="sr-only">Instagram</span>
+							</div>
+						</Link>
+					</nav>
+
+					<button
+						type="button"
+						className="grid h-11 w-11 place-items-center rounded-2xl text-slate-700 transition hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 md:hidden"
+						aria-controls="mobile-navigation"
+						aria-label={mobileOpen ? "ปิดเมนู" : "เปิดเมนู"}
+						aria-expanded={mobileOpen}
+						onClick={() => setMobileOpen((open) => !open)}
+					>
+						{mobileOpen ? (
+							<FiX className="h-5 w-5" aria-hidden />
+						) : (
+							<FiMenu className="h-5 w-5" aria-hidden />
+						)}
+					</button>
+				</div>
 			</div>
 
 			{mobileOpen ? (
