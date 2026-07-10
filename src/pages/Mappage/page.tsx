@@ -9,14 +9,17 @@ import { MapHero } from "./components/MapHero"
 import { MapLegend } from "./components/MapLegend"
 import { MapStats } from "./components/MapStats"
 import { ProvinceDetailPanel } from "./components/ProvinceDetailPanel"
+import { ProvinceDetailSheet } from "./components/ProvinceDetailSheet"
 import { ThailandProvinceMap } from "./components/ThailandProvinceMap"
 import { VisitedProvinceList } from "./components/VisitedProvinceList"
+import { useMediaQuery } from "./hooks/useMediaQuery"
 import { MapMode } from "./types"
 
 const MapPage = () => {
 	const [selectedProvinceId, setSelectedProvinceId] = useState<string>()
 	const [mapMode, setMapMode] = useState<MapMode>("all")
 	const mapSectionRef = useRef<HTMLElement>(null)
+	const isDesktop = useMediaQuery("(min-width: 1280px)")
 
 	const selectedSummary = selectedProvinceId
 		? visitedProvinceSummaryById.get(selectedProvinceId)
@@ -37,6 +40,15 @@ const MapPage = () => {
 	const handleClearSelection = useCallback(() => {
 		setSelectedProvinceId(undefined)
 	}, [])
+
+	const handleSheetOpenChange = useCallback(
+		(open: boolean) => {
+			if (!open) {
+				handleClearSelection()
+			}
+		},
+		[handleClearSelection],
+	)
 
 	const handleExploreMap = useCallback(() => {
 		const node = mapSectionRef.current
@@ -61,6 +73,8 @@ const MapPage = () => {
 			window.removeEventListener("keydown", handleKeyDown)
 		}
 	}, [handleClearSelection])
+
+	const hasSelection = Boolean(selectedProvinceId)
 
 	return (
 		<div className="min-h-screen bg-[#F8FAFC]">
@@ -92,7 +106,8 @@ const MapPage = () => {
 						/>
 					</div>
 
-					<div className="xl:sticky xl:top-24 xl:self-start">
+					{/* Desktop / large screens: persistent side panel */}
+					<div className="hidden xl:sticky xl:top-24 xl:block xl:self-start">
 						<ProvinceDetailPanel
 							summary={selectedSummary}
 							unvisitedProvince={unvisitedProvince}
@@ -100,6 +115,17 @@ const MapPage = () => {
 						/>
 					</div>
 				</div>
+
+				{/* Mobile / tablet: bottom sheet when a province is selected */}
+				{!isDesktop ? (
+					<ProvinceDetailSheet
+						open={hasSelection}
+						onOpenChange={handleSheetOpenChange}
+						summary={selectedSummary}
+						unvisitedProvince={unvisitedProvince}
+						onClearSelection={handleClearSelection}
+					/>
+				) : null}
 
 				<div className="mt-6">
 					<VisitedProvinceList

@@ -3,6 +3,7 @@ import {
 	MouseEvent,
 	memo,
 	useCallback,
+	useEffect,
 	useRef,
 	useState,
 } from "react"
@@ -21,6 +22,12 @@ interface ThailandProvinceMapProps {
 	selectedProvinceId?: string
 	onSelectProvince: (provinceId: string) => void
 	mapMode?: MapMode
+}
+
+interface RippleState {
+	id: number
+	x: number
+	y: number
 }
 
 const unvisitedStroke = "#f8fafc"
@@ -52,6 +59,19 @@ function resolveProvinceFill(options: {
 	return getVisitFill(visitCount)
 }
 
+function getPathCentroid(path: SVGPathElement): { x: number; y: number } | null {
+	try {
+		const bbox = path.getBBox()
+		if (!bbox.width && !bbox.height) return null
+		return {
+			x: bbox.x + bbox.width / 2,
+			y: bbox.y + bbox.height / 2,
+		}
+	} catch {
+		return null
+	}
+}
+
 export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 	selectedProvinceId,
 	onSelectProvince,
@@ -60,8 +80,10 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 	const svgRef = useRef<SVGSVGElement>(null)
 	const containerRef = useRef<HTMLDivElement>(null)
 	const pathRefs = useRef(new Map<string, SVGPathElement>())
+	const lastZoomedId = useRef<string | undefined>()
 	const [focusedProvinceId, setFocusedProvinceId] = useState<string>()
 	const [tooltip, setTooltip] = useState<ProvinceTooltipData | null>(null)
+	const [ripple, setRipple] = useState<RippleState | null>(null)
 
 	const { contentRef, zoomIn, zoomOut, resetView, fitThailand, zoomToElement } =
 		useMapViewport(svgRef)
@@ -77,16 +99,42 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 		[],
 	)
 
+	const triggerRipple = useCallback((provinceId: string) => {
+		const path = pathRefs.current.get(provinceId)
+		if (!path) return
+		const center = getPathCentroid(path)
+		if (!center) return
+		setRipple({ id: Date.now(), x: center.x, y: center.y })
+	}, [])
+
 	const handleSelect = useCallback(
 		(provinceId: string) => {
+			triggerRipple(provinceId)
 			onSelectProvince(provinceId)
-			const path = pathRefs.current.get(provinceId)
-			if (path) {
-				zoomToElement(path)
-			}
 		},
-		[onSelectProvince, zoomToElement],
+		[onSelectProvince, triggerRipple],
 	)
+
+	// Zoom when selection changes (map click or list) — cinematic focus
+	useEffect(() => {
+		if (!selectedProvinceId) {
+			lastZoomedId.current = undefined
+			return
+		}
+		if (lastZoomedId.current === selectedProvinceId) return
+
+		const path = pathRefs.current.get(selectedProvinceId)
+		if (!path) return
+
+		lastZoomedId.current = selectedProvinceId
+		zoomToElement(path, 64, 620)
+	}, [selectedProvinceId, zoomToElement])
+
+	useEffect(() => {
+		if (!ripple) return
+		const timer = window.setTimeout(() => setRipple(null), 700)
+		return () => window.clearTimeout(timer)
+	}, [ripple])
 
 	const handlePointerMove = useCallback(
 		(
@@ -135,13 +183,16 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 			</div>
 			<p id="thailand-map-desc" className="sr-only">
 				แผนที่ประเทศไทยแบบโต้ตอบ ลากเพื่อเลื่อน เลื่อนเพื่อซูม
-				คลิกจังหวัดเพื่อดูรายละเอียด
+				คลิกจังหวัดเพื่อซูมและดูรายละเอียด
 				จังหวัดสีน้ำเงินคือเคยไป จังหวัดสีเทาคือยังไม่เคยไป
 			</p>
 
 			<div
 				ref={containerRef}
-				className="relative overflow-hidden rounded-2xl bg-slate-50"
+				className={cn(
+					"relative overflow-hidden rounded-2xl bg-slate-50 transition-[filter] duration-300",
+					selectedProvinceId && "ring-1 ring-sky-100",
+				)}
 			>
 				<MapControls
 					onZoomIn={zoomIn}
@@ -170,10 +221,12 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 								isSelected,
 							})
 
-							// Mode-based dimming (not the only status signal)
-							const dimmed =
+							const modeDimmed =
 								(mapMode === "visited" && !isVisited) ||
 								(mapMode === "unvisited" && isVisited)
+							const selectionDimmed = Boolean(
+								selectedProvinceId && !isSelected,
+							)
 							const emphasized =
 								(mapMode === "visited" && isVisited) ||
 								(mapMode === "unvisited" && !isVisited)
@@ -193,7 +246,7 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 									stroke={
 										isSelected || isFocused ? selectedStroke : unvisitedStroke
 									}
-									strokeWidth={isSelected || isFocused ? 5 : 2}
+									strokeWidth={isSelected || isFocused ? 6 : 2}
 									role="button"
 									tabIndex={0}
 									aria-label={ariaLabel}
@@ -224,20 +277,36 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 									}
 									onMouseLeave={clearTooltip}
 									className={cn(
-										"cursor-pointer transition-[filter,opacity] duration-150 hover:brightness-95 focus:outline-none",
-										dimmed && "opacity-30",
+										"cursor-pointer transition-[filter,opacity,stroke-width] duration-200 hover:brightness-95 focus:outline-none",
+										modeDimmed && "opacity-30",
+										selectionDimmed && !modeDimmed && "opacity-40",
 										emphasized && "drop-shadow-sm",
-										isSelected && "drop-shadow-md",
+										isSelected &&
+											"drop-shadow-md [filter:drop-shadow(0_0_10px_rgba(37,99,235,0.55))]",
 									)}
 								/>
 							)
 						})}
+
+						{ripple ? (
+							<circle
+								key={ripple.id}
+								cx={ripple.x}
+								cy={ripple.y}
+								r={12}
+								fill="none"
+								stroke="#38BDF8"
+								strokeWidth={10}
+								className="pointer-events-none origin-center animate-map-ripple"
+								style={{ transformOrigin: `${ripple.x}px ${ripple.y}px` }}
+							/>
+						) : null}
 					</g>
 				</svg>
 			</div>
 
 			<p className="mt-3 text-center text-xs text-slate-500 sm:text-sm">
-				ลากเพื่อเลื่อน · เลื่อนเพื่อซูม · คลิกจังหวัดเพื่อดูรายละเอียด
+				ลากเพื่อเลื่อน · เลื่อนเพื่อซูม · คลิกจังหวัดเพื่อซูมและดูรายละเอียด
 			</p>
 		</div>
 	)
