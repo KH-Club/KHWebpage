@@ -20,11 +20,11 @@ Object.defineProperty(window, "IntersectionObserver", {
 	value: MockIntersectionObserver,
 })
 
-// Mock matchMedia
+// Mock matchMedia — treat xl desktop breakpoint as matched for stable map tests
 Object.defineProperty(window, "matchMedia", {
 	writable: true,
 	value: vi.fn().mockImplementation((query: string) => ({
-		matches: false,
+		matches: /min-width:\s*(1024|1280)px/.test(query),
 		media: query,
 		onchange: null,
 		addListener: vi.fn(),

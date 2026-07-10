@@ -1,8 +1,10 @@
 import { lazy, Suspense } from "react"
 import { SiteHeader } from "@/components/Header/site-header"
-import { useRoutes } from "react-router-dom"
+import { Navigate, useLocation, useRoutes } from "react-router-dom"
 import ErrorBoundary from "@/layouts/ErrorBoundary"
 import SiteFooter from "@/components/Footer/Footer"
+import { FeatureGate, FeatureFlagProvider } from "@/features/featureFlags"
+import { cn } from "@/lib/utils"
 
 // Lazy load pages for better performance (code splitting)
 const Home = lazy(() => import("@/pages/Homepage/page"))
@@ -11,6 +13,10 @@ const CampPage = lazy(() => import("@/pages/Camppage/page"))
 const ContactPage = lazy(() => import("@/pages/Contactpage/page"))
 const CampDetailPage = lazy(() => import("@/pages/CampDetailpage/page"))
 const MapPage = lazy(() => import("@/pages/Mappage/page"))
+const NewsActivitiesPage = lazy(() => import("@/pages/NewsActivitiespage/page"))
+const NewsActivityDetailPage = lazy(
+	() => import("@/pages/NewsActivityDetailpage/page"),
+)
 
 // Loading fallback component
 const PageLoader = () => (
@@ -22,25 +28,63 @@ const PageLoader = () => (
 const routes = [
 	{ path: "/", element: <Home /> },
 	{ path: "/activity", element: <ActivityPage /> },
+	{
+		path: "/news-activities",
+		element: (
+			<FeatureGate
+				flag="news_activities"
+				fallback={<Navigate to="/" replace />}
+				loadingFallback={<PageLoader />}
+			>
+				<NewsActivitiesPage />
+			</FeatureGate>
+		),
+	},
+	{
+		path: "/event/:eventId",
+		element: (
+			<FeatureGate
+				flag="news_activities"
+				fallback={<Navigate to="/" replace />}
+				loadingFallback={<PageLoader />}
+			>
+				<NewsActivityDetailPage />
+			</FeatureGate>
+		),
+	},
 	{ path: "/camp", element: <CampPage /> },
 	{ path: "/map", element: <MapPage /> },
 	{ path: "/contact", element: <ContactPage /> },
 	{ path: "/camp/:campID", element: <CampDetailPage /> },
 ]
 
-function App() {
+function AppShell() {
 	const children = useRoutes(routes)
+	const location = useLocation()
+	const isMapPage = location.pathname === "/map"
 
 	return (
 		<ErrorBoundary>
-			<div className="relative flex min-h-screen w-full flex-col overflow-hidden">
+			<div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+				{/* Compact sticky app bar; map page keeps it for logo/hamburger only */}
 				<SiteHeader />
 				<main className="w-full max-w-full flex-1">
 					<Suspense fallback={<PageLoader />}>{children}</Suspense>
 				</main>
-				<SiteFooter />
+				{/* Footer competes with map bottom sheet on mobile */}
+				<div className={cn(isMapPage && "max-lg:hidden")}>
+					<SiteFooter />
+				</div>
 			</div>
 		</ErrorBoundary>
+	)
+}
+
+function App() {
+	return (
+		<FeatureFlagProvider>
+			<AppShell />
+		</FeatureFlagProvider>
 	)
 }
 
