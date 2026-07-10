@@ -46,7 +46,7 @@ const sortOptions: { value: ProvinceSortOption; label: string }[] = [
 ]
 
 const selectClassName =
-	"h-11 rounded-2xl border border-white/60 bg-white/80 px-3 text-sm font-medium text-slate-800 shadow-sm backdrop-blur-sm focus:border-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+	"h-11 border-b border-[#A7CEE5] bg-transparent px-1 text-sm font-medium text-[#102033] focus:border-[#2478A8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2478A8]"
 
 function useDebouncedValue<T>(value: T, delayMs: number): T {
 	const [debounced, setDebounced] = useState(value)
@@ -84,10 +84,10 @@ const ArchiveCard = memo(function ArchiveCard({
 			}
 			aria-pressed={isSelected}
 			className={cn(
-				"flex min-h-[6.5rem] w-full flex-col gap-3 rounded-2xl border px-4 py-4 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-600 focus-visible:ring-offset-2 sm:flex-row sm:items-center sm:justify-between",
+				"group flex min-h-[6.5rem] w-full flex-col gap-3 border-b px-1 py-5 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2478A8] sm:flex-row sm:items-center sm:justify-between",
 				isSelected
-					? "border-blue-600 bg-blue-600 text-white shadow-lg shadow-blue-600/20"
-					: "border-white/70 bg-white/80 text-slate-900 shadow-sm backdrop-blur-sm hover:border-blue-200 hover:bg-white",
+					? "border-[#2478A8] bg-[#DCEFF7] text-[#102033]"
+					: "border-[#D7E6EF] text-[#102033] hover:border-[#69B7D9] hover:bg-white/55",
 			)}
 		>
 			<span className="min-w-0">
@@ -97,30 +97,22 @@ const ArchiveCard = memo(function ArchiveCard({
 					</span>
 					<span
 						className={cn(
-							"inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold",
+							"inline-flex text-xs font-semibold",
 							isSelected
-								? "bg-white/15 text-white"
+								? "text-[#0E4F79]"
 								: card.isVisited
-									? "bg-sky-100 text-sky-800"
-									: "bg-slate-100 text-slate-600",
+									? "text-[#2478A8]"
+									: "text-[#526A7C]",
 						)}
 					>
 						{card.isVisited ? "เคยไปแล้ว" : "ยังไม่เคยไป"}
 					</span>
 				</span>
-				<span
-					className={cn(
-						"mt-1 block text-sm",
-						isSelected ? "text-white/80" : "text-slate-500",
-					)}
-				>
+				<span className={cn("mt-1 block text-sm", "text-[#526A7C]")}>
 					{regionLabel}
 				</span>
 				<span
-					className={cn(
-						"mt-1 block text-sm sm:line-clamp-2",
-						isSelected ? "text-white/85" : "text-slate-600",
-					)}
+					className={cn("mt-1 block text-sm sm:line-clamp-2", "text-[#334B5F]")}
 				>
 					{card.isVisited
 						? `ล่าสุด: #${card.latestVisitCampId} ${card.latestVisitName}`
@@ -129,15 +121,21 @@ const ArchiveCard = memo(function ArchiveCard({
 			</span>
 			<span
 				className={cn(
-					"inline-flex w-fit shrink-0 rounded-full px-3 py-1 text-xs font-semibold",
+					"inline-flex w-fit shrink-0 items-center gap-2 text-sm font-semibold tabular-nums",
 					isSelected
-						? "bg-white text-sky-900"
+						? "text-[#0E4F79]"
 						: card.isVisited
-							? "bg-blue-100 text-blue-800"
-							: "bg-slate-100 text-slate-600",
+							? "text-[#2478A8]"
+							: "text-[#526A7C]",
 				)}
 			>
-				{card.isVisited ? `${card.visitCount} ครั้ง` : "0 ครั้ง"}
+				{card.isVisited ? `${card.visitCount} ครั้ง` : "ยังไม่มีบันทึก"}
+				<span
+					aria-hidden
+					className="transition-transform group-hover:translate-x-1"
+				>
+					→
+				</span>
 			</span>
 		</button>
 	)
@@ -190,27 +188,21 @@ export const ProvinceArchiveList = memo(function ProvinceArchiveList({
 		<section
 			aria-labelledby="province-archive-heading"
 			aria-label="ดัชนีจังหวัดทั่วประเทศไทย"
-			className={cn(
-				isExplorer
-					? "rounded-[1.75rem] border border-white/70 bg-white/75 p-5 shadow-[0_16px_40px_-24px_rgba(15,23,42,0.28)] backdrop-blur-md sm:p-7"
-					: "rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6",
-			)}
+			className="bg-transparent"
 		>
 			<div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
 				<div>
-					<p className="text-xs font-semibold uppercase tracking-[0.12em] text-blue-600">
-						{isExplorer ? "Province Explorer" : "ดัชนีความทรงจำ"}
-					</p>
+					<p className="text-sm font-semibold text-[#2478A8]">ดัชนีความทรงจำ</p>
 					<h2
 						id="province-archive-heading"
-						className="mt-1 text-2xl font-bold text-slate-900"
+						className="mt-2 text-balance text-3xl font-bold tracking-[-0.02em] text-[#102033] sm:text-4xl"
 					>
 						{isExplorer
 							? "สำรวจจังหวัดทั่วประเทศไทย"
 							: "เลือกจังหวัดเพื่อดูรายละเอียด"}
 					</h2>
 				</div>
-				<p className="text-sm text-slate-500">
+				<p className="text-sm text-[#526A7C]">
 					แสดง {filteredCards.length} จาก {allArchiveProvinceCards.length}{" "}
 					จังหวัด
 					{statusFilter !== "unvisited"
@@ -223,7 +215,7 @@ export const ProvinceArchiveList = memo(function ProvinceArchiveList({
 			<div
 				role="tablist"
 				aria-label="กรองสถานะ"
-				className="mt-5 flex flex-wrap gap-2"
+				className="mt-8 flex border-b border-[#A7CEE5]"
 			>
 				{statusOptions.map((option) => {
 					const selected = statusFilter === option.value
@@ -235,10 +227,10 @@ export const ProvinceArchiveList = memo(function ProvinceArchiveList({
 							aria-selected={selected}
 							onClick={() => onStatusFilterChange(option.value)}
 							className={cn(
-								"rounded-full px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+								"relative min-h-11 px-4 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2478A8]",
 								selected
-									? "bg-blue-600 text-white shadow-sm"
-									: "bg-white/80 text-slate-700 ring-1 ring-slate-200/80 hover:bg-white",
+									? "text-[#0E4F79] after:absolute after:inset-x-2 after:bottom-[-1px] after:h-1 after:bg-[#2478A8]"
+									: "text-[#526A7C] hover:text-[#102033]",
 							)}
 						>
 							{option.label}
@@ -247,7 +239,7 @@ export const ProvinceArchiveList = memo(function ProvinceArchiveList({
 				})}
 			</div>
 
-			<div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-3">
+			<div className="mt-6 grid grid-cols-1 gap-5 lg:grid-cols-3">
 				<label className="relative block lg:col-span-1">
 					<span className="sr-only">ค้นหาจังหวัด</span>
 					<FiSearch
@@ -259,7 +251,7 @@ export const ProvinceArchiveList = memo(function ProvinceArchiveList({
 						value={query}
 						onChange={(event) => setQuery(event.target.value)}
 						placeholder="ค้นหาจังหวัด"
-						className="h-11 w-full rounded-2xl border border-white/60 bg-white/80 py-2 pl-10 pr-3 text-sm text-slate-800 shadow-sm backdrop-blur-sm placeholder:text-slate-400 focus:border-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+						className="h-11 w-full border-b border-[#A7CEE5] bg-transparent py-2 pl-10 pr-3 text-sm text-[#102033] placeholder:text-[#526A7C] focus:border-[#2478A8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2478A8]"
 					/>
 				</label>
 
@@ -299,11 +291,11 @@ export const ProvinceArchiveList = memo(function ProvinceArchiveList({
 			</div>
 
 			{filteredCards.length === 0 ? (
-				<p className="mt-8 rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-10 text-center text-sm text-slate-500">
+				<p className="mt-8 border-y border-[#D7E6EF] px-4 py-10 text-center text-sm text-[#526A7C]">
 					ไม่พบจังหวัดที่ตรงกับตัวกรอง ลองเปลี่ยนคำค้นหาหรือสถานะ
 				</p>
 			) : (
-				<div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2">
+				<div className="mt-8 grid grid-cols-1 gap-x-10 md:grid-cols-2">
 					{filteredCards.map((card, index) => (
 						<ArchiveCard
 							key={card.provinceId}
@@ -319,4 +311,3 @@ export const ProvinceArchiveList = memo(function ProvinceArchiveList({
 		</section>
 	)
 })
-

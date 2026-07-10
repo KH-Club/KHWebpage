@@ -1,11 +1,10 @@
 import { memo } from "react"
-import { FiHome, FiMaximize2, FiMinus, FiPlus } from "react-icons/fi"
+import { FiMaximize2, FiMinus, FiPlus } from "react-icons/fi"
 import { cn } from "@/lib/utils"
 
 interface MapControlsProps {
 	onZoomIn: () => void
 	onZoomOut: () => void
-	onReset: () => void
 	onFit: () => void
 	className?: string
 	/** Touch-friendly 44px targets for mobile map app layout */
@@ -15,13 +14,12 @@ interface MapControlsProps {
 export const MapControls = memo(function MapControls({
 	onZoomIn,
 	onZoomOut,
-	onReset,
 	onFit,
 	className,
 	touchFriendly = false,
 }: MapControlsProps) {
 	const controlClass = cn(
-		"place-items-center rounded-2xl border border-white/60 bg-white/85 text-slate-700 shadow-md backdrop-blur-md transition hover:bg-white hover:text-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+		"place-items-center rounded-xl border border-[#A7CEE5] bg-[#F6FAFC] text-[#334B5F] transition hover:border-[#2478A8] hover:text-[#2478A8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2478A8]",
 		touchFriendly ? "grid h-11 w-11" : "grid h-10 w-10",
 	)
 
@@ -54,15 +52,6 @@ export const MapControls = memo(function MapControls({
 				title="ย่อ"
 			>
 				<FiMinus className="h-5 w-5" aria-hidden />
-			</button>
-			<button
-				type="button"
-				onClick={onReset}
-				className={controlClass}
-				aria-label="รีเซ็ตมุมมองแผนที่"
-				title="รีเซ็ต"
-			>
-				<FiHome className="h-5 w-5" aria-hidden />
 			</button>
 			<button
 				type="button"

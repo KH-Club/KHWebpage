@@ -81,7 +81,12 @@ export function useMapViewport(
 			])
 			.clickDistance(4)
 			.filter((event) => {
-				if (event.type === "wheel") return true
+				// Keep normal page scrolling available while the pointer is over the map.
+				// Mobile visitors use the visible controls for zooming, so one-finger
+				// gestures remain available to scroll the page.
+				if (event.type === "wheel" || event.type.startsWith("touch")) {
+					return false
+				}
 				if ("button" in event && event.button !== 0) return false
 				return !event.ctrlKey
 			})
@@ -100,13 +105,7 @@ export function useMapViewport(
 
 		zoomBehaviorRef.current = behavior
 
-		const onWheel = (event: WheelEvent) => {
-			event.preventDefault()
-		}
-		svg.addEventListener("wheel", onWheel, { passive: false })
-
 		return () => {
-			svg.removeEventListener("wheel", onWheel)
 			selection.on(".zoom", null)
 			zoomBehaviorRef.current = null
 		}
@@ -119,10 +118,7 @@ export function useMapViewport(
 			if (!svg || !behavior) return
 
 			try {
-				select(svg)
-					.transition()
-					.duration(220)
-					.call(behavior.scaleBy, factor)
+				select(svg).transition().duration(220).call(behavior.scaleBy, factor)
 			} catch {
 				select(svg).call(behavior.scaleBy, factor)
 			}
@@ -156,10 +152,7 @@ export function useMapViewport(
 
 			const scaleX = VIEW_WIDTH / (bbox.width + padding * 2)
 			const scaleY = VIEW_HEIGHT / (bbox.height + padding * 2)
-			const scale = Math.max(
-				MIN_SCALE,
-				Math.min(Math.min(scaleX, scaleY), 4.5),
-			)
+			const scale = Math.max(MIN_SCALE, Math.min(Math.min(scaleX, scaleY), 4.5))
 
 			const cx = bbox.x + bbox.width / 2
 			const cy = bbox.y + bbox.height / 2

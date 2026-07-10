@@ -11,9 +11,7 @@ interface MapStoryCardProps {
 	className?: string
 }
 
-/**
- * Floating glass story card over the map stage (desktop / large screens).
- */
+/** Integrated edge panel for province stories on larger screens. */
 export const MapStoryCard = memo(function MapStoryCard({
 	summary,
 	unvisitedProvince,
@@ -27,7 +25,7 @@ export const MapStoryCard = memo(function MapStoryCard({
 	return (
 		<div
 			className={cn(
-				"pointer-events-none absolute inset-y-0 right-0 z-30 hidden w-full max-w-md p-4 sm:p-6 lg:block",
+				"pointer-events-none absolute inset-y-0 right-0 z-30 hidden w-[min(27rem,34vw)] lg:block",
 				className,
 			)}
 		>
@@ -38,24 +36,16 @@ export const MapStoryCard = memo(function MapStoryCard({
 						role="dialog"
 						aria-modal="false"
 						aria-label="เรื่องราวจังหวัดที่เลือก"
-						initial={
-							reduceMotion
-								? false
-								: { opacity: 0, x: 28, scale: 0.97 }
-						}
-						animate={{ opacity: 1, x: 0, scale: 1 }}
-						exit={
-							reduceMotion
-								? undefined
-								: { opacity: 0, x: 20, scale: 0.98 }
-						}
+						initial={reduceMotion ? false : { opacity: 0, x: 44 }}
+						animate={{ opacity: 1, x: 0 }}
+						exit={reduceMotion ? undefined : { opacity: 0, x: 32 }}
 						transition={{
 							duration: 0.35,
 							ease: [0.22, 1, 0.36, 1],
 						}}
-						className="pointer-events-auto flex h-full max-h-[calc(70vh-2rem)] flex-col overflow-hidden rounded-[1.75rem] border border-white/60 bg-white/80 shadow-[0_24px_60px_-20px_rgba(15,23,42,0.45)] backdrop-blur-xl"
+						className="pointer-events-auto flex h-full flex-col overflow-hidden border-l border-[#BFD9EB] bg-[#F6FAFC]"
 					>
-						<div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+						<div className="min-h-0 flex-1 overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]">
 							<ProvinceDetailContent
 								summary={summary}
 								unvisitedProvince={unvisitedProvince}

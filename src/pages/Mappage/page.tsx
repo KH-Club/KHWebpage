@@ -5,7 +5,6 @@ import {
 	visitedProvinceSummaries,
 	visitedProvinceSummaryById,
 } from "./data/campMapData"
-import { JourneyInsights } from "./components/JourneyInsights"
 import { MapStage } from "./components/MapStage"
 import { MobileMapExperience } from "./components/MobileMapExperience"
 import { ProvinceArchiveList } from "./components/ProvinceArchiveList"
@@ -14,7 +13,7 @@ import { MapMode } from "./types"
 
 const MapPage = () => {
 	const [selectedProvinceId, setSelectedProvinceId] = useState<string>()
-	const [mapMode, setMapMode] = useState<MapMode>("all")
+	const [mapMode, setMapMode] = useState<MapMode>("visited")
 	const isDesktop = useMediaQuery("(min-width: 1024px)")
 
 	const selectedSummary = selectedProvinceId
@@ -63,26 +62,14 @@ const MapPage = () => {
 	}
 
 	return (
-		<div
-			className="min-h-screen bg-[#F8FAFC]"
-			style={{
-				backgroundImage:
-					"radial-gradient(ellipse 100% 40% at 50% 0%, rgba(191,219,254,0.35) 0%, transparent 55%)",
-			}}
-		>
+		<div className="min-h-screen bg-[#F6FAFC] text-[#102033]">
 			{!isDesktop ? (
 				<MobileMapExperience {...shared} />
 			) : (
 				<>
-					<section className="relative w-full">
-						<MapStage {...shared} />
-					</section>
+					<MapStage {...shared} />
 
-					<section className="relative z-10 -mt-6 pb-6 sm:-mt-8 sm:pb-8">
-						<JourneyInsights stats={stats} />
-					</section>
-
-					<section className="relative z-10 mx-auto max-w-6xl px-4 pb-16 sm:px-6">
+					<section className="mx-auto max-w-6xl px-6 py-20 xl:px-0">
 						<ProvinceArchiveList
 							selectedProvinceId={selectedProvinceId}
 							onSelectProvince={setSelectedProvinceId}

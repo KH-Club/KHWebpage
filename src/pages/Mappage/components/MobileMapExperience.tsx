@@ -1,6 +1,10 @@
 import { memo } from "react"
-import { MapMode, MapStats, ProvinceSummary, UnvisitedProvinceInfo } from "../types"
-import { JourneyInsights } from "./JourneyInsights"
+import {
+	MapMode,
+	MapStats,
+	ProvinceSummary,
+	UnvisitedProvinceInfo,
+} from "../types"
 import { MapStageLegend } from "./MapStageLegend"
 import { MobileMapSummary } from "./MobileMapSummary"
 import { ProvinceArchiveList } from "./ProvinceArchiveList"
@@ -35,7 +39,7 @@ export const MobileMapExperience = memo(function MobileMapExperience({
 	const hasSelection = Boolean(selectedProvinceId)
 
 	return (
-		<div className="relative bg-[#F8FAFC] pb-[18svh]">
+		<div className="relative bg-[#F6FAFC]">
 			{/* Compact summary — never overlaps map */}
 			<MobileMapSummary
 				stats={stats}
@@ -46,11 +50,11 @@ export const MobileMapExperience = memo(function MobileMapExperience({
 			{/* Full-width map stage */}
 			<section
 				aria-label="เวทีแผนที่ความทรงจำ"
-				className="relative w-full bg-gradient-to-b from-sky-50 to-[#F8FAFC]"
+				className="relative w-full border-b border-[#BFD9EB] bg-[#EAF5FF]"
 			>
 				<div className="relative w-full">
 					{/* Legend chip — top-left inside map, small footprint */}
-					<div className="pointer-events-none absolute left-3 top-3 z-20">
+					<div className="pointer-events-none absolute bottom-3 left-4 z-20">
 						<div className="pointer-events-auto">
 							<MapStageLegend variant="chip" />
 						</div>
@@ -65,12 +69,7 @@ export const MobileMapExperience = memo(function MobileMapExperience({
 				</div>
 			</section>
 
-			{/* Below fold — not competing with map */}
-			<section className="px-0 pb-4 pt-5">
-				<JourneyInsights stats={stats} />
-			</section>
-
-			<section className="mx-auto max-w-6xl px-4 pb-8">
+			<section className="mx-auto max-w-6xl px-5 py-16">
 				<ProvinceArchiveList
 					selectedProvinceId={selectedProvinceId}
 					onSelectProvince={onSelectProvince}
@@ -80,13 +79,14 @@ export const MobileMapExperience = memo(function MobileMapExperience({
 				/>
 			</section>
 
-			{/* Always-on snap bottom sheet */}
-			<ProvinceDetailSheet
-				hasSelection={hasSelection}
-				summary={selectedSummary}
-				unvisitedProvince={unvisitedProvince}
-				onClearSelection={onClearSelection}
-			/>
+			{hasSelection ? (
+				<ProvinceDetailSheet
+					hasSelection
+					summary={selectedSummary}
+					unvisitedProvince={unvisitedProvince}
+					onClearSelection={onClearSelection}
+				/>
+			) : null}
 		</div>
 	)
 })

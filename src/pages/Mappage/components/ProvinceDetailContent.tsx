@@ -38,10 +38,10 @@ export const ProvinceDetailContent = memo(function ProvinceDetailContent({
 
 	if (!summary && unvisitedProvince) {
 		return (
-			<div className="flex h-full flex-col overflow-hidden">
-				<div className="border-b border-slate-100 bg-gradient-to-br from-slate-50 to-sky-50 p-6 sm:py-8">
+			<div className="flex min-h-full flex-col">
+				<div className="border-b border-[#D7E6EF] bg-[#EAF5FF] p-6 sm:py-8">
 					<div className="flex items-start justify-between gap-3">
-						<span className="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-600">
+						<span className="inline-flex text-xs font-semibold text-[#526A7C]">
 							ยังไม่เคยไป
 						</span>
 						<button
@@ -56,25 +56,15 @@ export const ProvinceDetailContent = memo(function ProvinceDetailContent({
 					<h2 className="mt-3 text-3xl font-bold text-slate-900">
 						{unvisitedProvince.name}
 					</h2>
-					<p className="mt-1 text-sm text-slate-500">จังหวัดในประเทศไทย</p>
+					<p className="mt-1 text-sm text-[#526A7C]">จังหวัดในประเทศไทย</p>
 				</div>
 				<div className="flex flex-1 flex-col p-6">
-					<p className="text-sm leading-7 text-slate-600">
-						จังหวัดนี้ยังไม่มีบันทึกค่ายอาสาในชุดข้อมูลปัจจุบัน —
-						ยังรอเรื่องราวครั้งแรกจากชมรมค่ายหอ
+					<p className="text-sm leading-7 text-[#334B5F]">
+						จังหวัดนี้ยังไม่มีบันทึกค่ายอาสาในชุดข้อมูลปัจจุบัน
 					</p>
-					<div
-						className="mt-6 flex flex-1 flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-6 py-8 text-center"
-						aria-hidden
-					>
-						<div className="relative mb-3 flex h-16 w-16 items-center justify-center">
-							<span className="absolute inset-0 rounded-full bg-slate-200/80" />
-							<FiMapPin className="relative h-7 w-7 text-slate-500" />
-						</div>
-						<p className="max-w-[220px] text-xs leading-5 text-slate-500">
-							เริ่มต้นเรื่องราวค่ายอาสาที่นี่ในอนาคต
-						</p>
-					</div>
+					<p className="mt-8 border-t border-[#D7E6EF] pt-5 text-sm font-medium text-[#526A7C]">
+						เลือกจังหวัดอื่นเพื่ออ่านบันทึกค่ายที่มีอยู่
+					</p>
 				</div>
 			</div>
 		)
@@ -82,12 +72,12 @@ export const ProvinceDetailContent = memo(function ProvinceDetailContent({
 
 	if (!summary) {
 		return (
-			<div className={`flex h-full flex-col ${compact ? "p-5" : "p-6"}`}>
+			<div className={`flex min-h-full flex-col ${compact ? "p-5" : "p-6"}`}>
 				<p className="text-sm font-semibold text-sky-900">รายละเอียดจังหวัด</p>
 				<h2 className="mt-2 text-2xl font-bold text-slate-900">เลือกจังหวัด</h2>
 				<p className="mt-3 text-sm leading-7 text-slate-600">
-					คลิกจังหวัดบนแผนที่หรือเลือกรายชื่อด้านล่าง เพื่อซูมเข้าและดูประวัติค่าย
-					จำนวนครั้งที่เคยไป และบันทึกล่าสุด
+					คลิกจังหวัดบนแผนที่หรือเลือกรายชื่อด้านล่าง
+					เพื่อซูมเข้าและดูประวัติค่าย จำนวนครั้งที่เคยไป และบันทึกล่าสุด
 				</p>
 				<div
 					className="mt-8 flex flex-1 flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-gradient-to-b from-slate-50 to-sky-50 px-6 py-10 text-center"
@@ -113,9 +103,9 @@ export const ProvinceDetailContent = memo(function ProvinceDetailContent({
 	const regionLabel = mapRegions[summary.region]?.labelTh ?? summary.region
 
 	return (
-		<div className="flex h-full flex-col overflow-hidden">
+		<div className="flex min-h-full flex-col">
 			{summary.imageSrc ? (
-				<div className={`relative ${compact ? "h-40" : "h-52"}`}>
+				<div className={`relative shrink-0 ${compact ? "h-40" : "h-52"}`}>
 					<LazyImage
 						src={summary.imageSrc}
 						alt={`${summary.provinceName} รูปค่ายอาสา`}
@@ -132,7 +122,7 @@ export const ProvinceDetailContent = memo(function ProvinceDetailContent({
 						<FiX className="h-4 w-4" />
 					</button>
 					<div className="absolute inset-x-4 bottom-4">
-						<span className="inline-flex rounded-full bg-sky-600 px-3 py-1 text-xs font-semibold text-white shadow">
+						<span className="inline-flex bg-[#2478A8] px-3 py-1 text-xs font-semibold text-white">
 							เคยไปแล้ว
 						</span>
 						<h2 className="mt-2 text-3xl font-bold text-white">
@@ -164,15 +154,15 @@ export const ProvinceDetailContent = memo(function ProvinceDetailContent({
 				</div>
 			)}
 
-			<div className={`space-y-5 ${compact ? "p-5" : "p-6"}`}>
+			<div className={`space-y-6 ${compact ? "p-5" : "p-6"}`}>
 				<div>
-					<p className="text-sm font-semibold text-sky-900">
+					<p className="text-sm font-semibold text-[#2478A8]">
 						บันทึกไว้ {summary.visitCount} ครั้ง
 					</p>
 					<h3 className="mt-1 text-xl font-bold text-slate-900">
 						ล่าสุด: {summary.latestVisit.name}
 					</h3>
-					<p className="mt-2 text-sm leading-7 text-slate-600">
+					<p className="mt-3 text-sm leading-7 text-[#334B5F]">
 						{summary.description}
 					</p>
 				</div>
@@ -195,7 +185,7 @@ export const ProvinceDetailContent = memo(function ProvinceDetailContent({
 				{summary.latestVisit.detailHref ? (
 					<Link
 						to={summary.latestVisit.detailHref}
-						className="inline-flex items-center gap-2 rounded-xl bg-sky-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-600 focus-visible:ring-offset-2"
+						className="inline-flex min-h-11 items-center gap-2 bg-[#0E4F79] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#082A3D] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2478A8] focus-visible:ring-offset-2"
 					>
 						ดูรายละเอียดค่ายล่าสุด
 						<FiExternalLink className="h-4 w-4" />
@@ -206,7 +196,7 @@ export const ProvinceDetailContent = memo(function ProvinceDetailContent({
 					<h4 className="text-sm font-semibold text-slate-900">
 						ไทม์ไลน์ค่ายในจังหวัดนี้
 					</h4>
-					<ol className="relative mt-4 space-y-0 border-l border-sky-200 pl-5">
+					<ol className="relative mt-4 space-y-0 border-l border-[#A7CEE5] pl-5">
 						{summary.visits.map((visit, index) => {
 							const year = extractYearLabel(visit.date)
 							const body = (
@@ -221,7 +211,7 @@ export const ProvinceDetailContent = memo(function ProvinceDetailContent({
 									{visit.detailHref ? (
 										<Link
 											to={visit.detailHref}
-											className="mt-1 flex items-start justify-between gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm transition hover:border-sky-300 hover:bg-sky-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
+											className="mt-1 flex items-start justify-between gap-3 border-b border-[#D7E6EF] py-2.5 text-sm transition hover:border-[#2478A8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2478A8]"
 										>
 											<span className="min-w-0">
 												<span className="block font-medium text-slate-900">
@@ -236,7 +226,7 @@ export const ProvinceDetailContent = memo(function ProvinceDetailContent({
 											</span>
 										</Link>
 									) : (
-										<span className="mt-1 block rounded-xl border border-slate-200 px-3 py-2.5 text-sm text-slate-700">
+										<span className="mt-1 block border-b border-[#D7E6EF] py-2.5 text-sm text-slate-700">
 											{visit.name}
 										</span>
 									)}

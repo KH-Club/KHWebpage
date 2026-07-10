@@ -29,22 +29,17 @@ export const MobileMapSummary = memo(function MobileMapSummary({
 	return (
 		<section
 			aria-labelledby="mobile-map-title"
-			className={cn(
-				"border-b border-slate-100 bg-white px-4 py-3 shadow-sm",
-				className,
-			)}
+			className={cn("bg-[#EAF5FF] px-5 pb-3 pt-5", className)}
 		>
-			<p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-blue-600">
-				Memory Map
-			</p>
+			<p className="text-sm font-semibold text-[#2478A8]">แผนที่ความทรงจำ</p>
 			<h1
 				id="mobile-map-title"
-				className="mt-0.5 text-lg font-bold leading-snug text-slate-900"
+				className="mt-1 text-balance text-[1.75rem] font-bold leading-[1.2] tracking-[-0.02em] text-[#102033]"
 			>
-				แผนที่ความทรงจำค่ายอาสา
+				ร่องรอยค่ายหอทั่วไทย
 			</h1>
 
-			<div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-600">
+			<div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-[#334B5F]">
 				<span className="font-semibold tabular-nums text-slate-900">
 					{visitedCount}/{totalProvinces}
 				</span>
@@ -61,7 +56,7 @@ export const MobileMapSummary = memo(function MobileMapSummary({
 			</div>
 
 			<div
-				className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-100"
+				className="mt-3 h-1 overflow-hidden bg-white"
 				role="progressbar"
 				aria-valuenow={visitedCount}
 				aria-valuemin={0}
@@ -69,7 +64,7 @@ export const MobileMapSummary = memo(function MobileMapSummary({
 				aria-label="ความคืบหน้าจังหวัดที่เคยไป"
 			>
 				<div
-					className="h-full rounded-full bg-blue-600 transition-all duration-300"
+					className="h-full bg-[#2478A8] transition-[width] duration-300"
 					style={{ width: `${explorePercent}%` }}
 				/>
 			</div>
@@ -77,7 +72,7 @@ export const MobileMapSummary = memo(function MobileMapSummary({
 			<div
 				role="group"
 				aria-label="ตัวกรองมุมมองแผนที่"
-				className="mt-3 flex gap-2 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+				className="mt-4 flex overflow-x-auto border-b border-[#A7CEE5] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
 			>
 				{modeChips.map(({ mode, label }) => {
 					const active = mapMode === mode
@@ -88,10 +83,10 @@ export const MobileMapSummary = memo(function MobileMapSummary({
 							onClick={() => onMapModeChange(mode)}
 							aria-pressed={active}
 							className={cn(
-								"h-9 shrink-0 rounded-full px-3.5 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+								"relative h-11 shrink-0 px-4 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2478A8]",
 								active
-									? "bg-blue-600 text-white shadow-sm"
-									: "bg-slate-100 text-slate-700 hover:bg-slate-200",
+									? "text-[#0E4F79] after:absolute after:inset-x-2 after:bottom-[-1px] after:h-1 after:bg-[#2478A8]"
+									: "text-[#526A7C]",
 							)}
 						>
 							{label}

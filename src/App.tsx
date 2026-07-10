@@ -36,7 +36,7 @@ function App() {
 
 	return (
 		<ErrorBoundary>
-			<div className="relative flex min-h-screen w-full flex-col overflow-hidden">
+			<div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
 				{/* Compact sticky app bar; map page keeps it for logo/hamburger only */}
 				<SiteHeader />
 				<main className="w-full max-w-full flex-1">

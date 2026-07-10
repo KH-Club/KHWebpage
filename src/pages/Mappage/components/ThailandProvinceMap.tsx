@@ -9,10 +9,7 @@ import {
 } from "react"
 import { provinces } from "@/assets/data/provinces"
 import { cn } from "@/lib/utils"
-import {
-	getVisitFill,
-	visitedProvinceSummaryById,
-} from "../data/campMapData"
+import { getVisitFill, visitedProvinceSummaryById } from "../data/campMapData"
 import { useMapViewport } from "../hooks/useMapViewport"
 import { MapMode } from "../types"
 import { MapControls } from "./MapControls"
@@ -36,9 +33,9 @@ interface RippleState {
 }
 
 const unvisitedStroke = "#f1f5f9"
-const selectedStroke = "#1e3a8a"
-const selectedVisitedFill = "#1D4ED8"
-const selectedUnvisitedFill = "#94A3B8"
+const selectedStroke = "#8A531F"
+const selectedVisitedFill = "#E9A23B"
+const selectedUnvisitedFill = "#D8BF91"
 
 function handleProvinceKeyDown(
 	event: KeyboardEvent<SVGPathElement>,
@@ -64,7 +61,9 @@ function resolveProvinceFill(options: {
 	return getVisitFill(visitCount)
 }
 
-function getPathCentroid(path: SVGPathElement): { x: number; y: number } | null {
+function getPathCentroid(
+	path: SVGPathElement,
+): { x: number; y: number } | null {
 	try {
 		const bbox = path.getBBox()
 		if (!bbox.width && !bbox.height) return null
@@ -93,7 +92,7 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 	const [tooltip, setTooltip] = useState<ProvinceTooltipData | null>(null)
 	const [ripple, setRipple] = useState<RippleState | null>(null)
 
-	const { contentRef, zoomIn, zoomOut, resetView, fitThailand, zoomToElement } =
+	const { contentRef, zoomIn, zoomOut, fitThailand, zoomToElement } =
 		useMapViewport(svgRef)
 
 	const setPathRef = useCallback(
@@ -177,7 +176,7 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 			aria-describedby="thailand-map-desc"
 			className={cn(
 				"relative",
-				immersive ? "h-full w-full" : "rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6",
+				immersive ? "h-full w-full" : "h-full w-full",
 				className,
 			)}
 		>
@@ -186,23 +185,20 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 			</h2>
 			<p id="thailand-map-desc" className="sr-only">
 				แผนที่ประเทศไทยแบบโต้ตอบ ลากเพื่อเลื่อน เลื่อนเพื่อซูม
-				คลิกจังหวัดเพื่อซูมและดูรายละเอียด
-				จังหวัดสีน้ำเงินคือเคยไป จังหวัดสีเทาคือยังไม่เคยไป
+				คลิกจังหวัดเพื่อซูมและดูรายละเอียด จังหวัดสีน้ำเงินคือเคยไป
+				จังหวัดสีเทาคือยังไม่เคยไป
 			</p>
 
 			<div
 				ref={containerRef}
 				className={cn(
 					"relative h-full overflow-hidden transition-[filter] duration-300",
-					immersive
-						? "bg-transparent"
-						: "rounded-2xl bg-slate-50",
+					immersive ? "bg-transparent" : "bg-[#EAF5FF]",
 				)}
 			>
 				<MapControls
 					onZoomIn={zoomIn}
 					onZoomOut={zoomOut}
-					onReset={resetView}
 					onFit={fitThailand}
 					touchFriendly={mobileApp}
 				/>
@@ -212,35 +208,19 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 					ref={svgRef}
 					viewBox="0 0 1400 2500"
 					className={cn(
-						"mx-auto block w-full cursor-grab touch-none active:cursor-grabbing",
+						"mx-auto block w-full cursor-grab touch-pan-y transition-transform duration-500 ease-out active:cursor-grabbing",
+						immersive &&
+							(selectedProvinceId
+								? "-translate-x-[10vw]"
+								: "translate-x-[11vw]"),
 						mobileApp
-							? "h-[min(60svh,560px)] min-h-[420px] max-h-[560px]"
+							? "h-[64svh] max-h-[620px] min-h-[500px]"
 							: immersive
-								? "h-full min-h-[70vh]"
+								? "h-[calc(100svh-4rem)] min-h-[680px]"
 								: "h-[64vh] min-h-[440px] sm:h-[72vh] sm:min-h-[560px] xl:h-[780px] xl:max-h-[780px]",
 					)}
 					onMouseLeave={clearTooltip}
 				>
-					{immersive ? (
-						<>
-							<defs>
-								<radialGradient id="mapStageWash" cx="50%" cy="42%" r="65%">
-									<stop offset="0%" stopColor="#E0F2FE" stopOpacity="0.55" />
-									<stop offset="55%" stopColor="#F0F9FF" stopOpacity="0.35" />
-									<stop offset="100%" stopColor="#F8FAFC" stopOpacity="0" />
-								</radialGradient>
-							</defs>
-							<rect
-								x="0"
-								y="0"
-								width="1400"
-								height="2500"
-								fill="url(#mapStageWash)"
-								className="pointer-events-none"
-							/>
-						</>
-					) : null}
-
 					<g ref={contentRef}>
 						{provinces.map((province) => {
 							const summary = visitedProvinceSummaryById.get(province.id)
@@ -257,9 +237,7 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 							const modeDimmed =
 								(mapMode === "visited" && !isVisited) ||
 								(mapMode === "unvisited" && isVisited)
-							const selectionDimmed = Boolean(
-								selectedProvinceId && !isSelected,
-							)
+							const selectionDimmed = Boolean(selectedProvinceId && !isSelected)
 							const emphasized =
 								(mapMode === "visited" && isVisited) ||
 								(mapMode === "unvisited" && !isVisited)
@@ -338,7 +316,7 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 				</svg>
 
 				{mobileApp ? (
-					<p className="pointer-events-none absolute bottom-3 left-3 z-10 max-w-[55%] text-left text-[10px] leading-4 text-slate-500">
+					<p className="pointer-events-none absolute bottom-3 left-4 z-10 max-w-[55%] text-left text-[10px] leading-4 text-[#526A7C]">
 						ลาก · ซูม · แตะจังหวัด
 					</p>
 				) : immersive ? (

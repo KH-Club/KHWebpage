@@ -26,41 +26,37 @@ export const MapStageHero = memo(function MapStageHero({
 	return (
 		<div
 			className={cn(
-				"pointer-events-none absolute inset-x-0 top-0 z-20 p-4 sm:p-6 lg:p-8",
+				"pointer-events-none absolute left-0 top-0 z-20 flex h-full w-[min(38rem,42vw)] items-start px-8 py-[clamp(3rem,9vh,7rem)] xl:px-14",
 				className,
 			)}
 		>
-			<div className="pointer-events-auto max-w-xl rounded-[1.75rem] border border-white/50 bg-white/70 p-5 shadow-[0_20px_50px_-24px_rgba(15,23,42,0.35)] backdrop-blur-xl sm:p-6">
-				<p className="text-xs font-semibold uppercase tracking-[0.14em] text-blue-600">
-					Volunteer Camp Memory Map
-				</p>
+			<div className="pointer-events-auto max-w-md">
+				<p className="text-sm font-semibold text-[#2478A8]">แผนที่ความทรงจำ</p>
 				<h1
 					id="map-hero-heading"
-					className="mt-2 text-balance text-2xl font-bold leading-tight text-slate-900 sm:text-3xl lg:text-4xl"
+					className="mt-3 text-balance text-[clamp(2.75rem,4.3vw,4.75rem)] font-bold leading-[1.08] tracking-[-0.03em] text-[#102033]"
 				>
-					แผนที่ความทรงจำค่ายอาสา
+					ร่องรอยค่ายหอทั่วไทย
 				</h1>
-				<p className="mt-2 text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
-					ร่องรอยค่ายหอทั่วไทย — {visitedCount} จังหวัด · {campRecords} ค่าย ·
-					สำรวจแล้ว {explorePercent}%
+				<p className="mt-5 max-w-[34rem] text-lg leading-8 text-[#334B5F]">
+					{campRecords} ค่ายอาสาใน {visitedCount} จังหวัด
+					แต่ละพื้นที่เก็บเรื่องของการเดินทาง การลงมือทำ และผู้คนที่เราได้พบ
 				</p>
 
-				{/* Compact journey progress */}
-				<div className="mt-4">
-					<div className="flex items-end justify-between gap-3 text-sm">
-						<span className="font-semibold tabular-nums text-slate-900">
-							{visitedCount}
-							<span className="font-medium text-slate-500">
-								{" "}
-								/ {totalProvinces} จังหวัด
-							</span>
+				<div className="mt-8 border-y border-[#A7CEE5] py-4">
+					<p className="font-semibold tabular-nums text-[#102033]">
+						{visitedCount} จังหวัด
+						<span className="mx-3 text-[#69B7D9]" aria-hidden>
+							·
 						</span>
-						<span className="font-semibold tabular-nums text-blue-600">
-							{explorePercent}%
+						{campRecords} ค่าย
+						<span className="mx-3 text-[#69B7D9]" aria-hidden>
+							·
 						</span>
-					</div>
+						{explorePercent}% ของประเทศไทย
+					</p>
 					<div
-						className="mt-2 h-2 overflow-hidden rounded-full bg-slate-200/80"
+						className="mt-3 h-1 overflow-hidden bg-white"
 						role="progressbar"
 						aria-valuenow={visitedCount}
 						aria-valuemin={0}
@@ -68,7 +64,7 @@ export const MapStageHero = memo(function MapStageHero({
 						aria-label="ความคืบหน้าจังหวัดที่เคยไป"
 					>
 						<div
-							className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-500"
+							className="h-full bg-[#2478A8] transition-[width] duration-500"
 							style={{ width: `${explorePercent}%` }}
 						/>
 					</div>
@@ -77,7 +73,7 @@ export const MapStageHero = memo(function MapStageHero({
 				<div
 					role="group"
 					aria-label="ตัวกรองมุมมองแผนที่"
-					className="mt-4 flex flex-wrap gap-2"
+					className="mt-7 flex border-b border-[#A7CEE5]"
 				>
 					{modeChips.map(({ mode, label }) => {
 						const isActive = mapMode === mode
@@ -88,10 +84,10 @@ export const MapStageHero = memo(function MapStageHero({
 								onClick={() => onMapModeChange(mode)}
 								aria-pressed={isActive}
 								className={cn(
-									"rounded-full px-3.5 py-1.5 text-xs font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 sm:text-sm",
+									"relative min-h-11 px-4 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2478A8]",
 									isActive
-										? "bg-blue-600 text-white shadow-sm"
-										: "bg-white/80 text-slate-700 ring-1 ring-slate-200/80 hover:bg-white",
+										? "text-[#0E4F79] after:absolute after:inset-x-2 after:bottom-[-1px] after:h-1 after:bg-[#2478A8]"
+										: "text-[#526A7C] hover:text-[#102033]",
 								)}
 							>
 								{label}

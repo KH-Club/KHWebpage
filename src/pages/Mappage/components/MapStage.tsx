@@ -1,6 +1,11 @@
 import { memo } from "react"
 import { cn } from "@/lib/utils"
-import { MapMode, MapStats, ProvinceSummary, UnvisitedProvinceInfo } from "../types"
+import {
+	MapMode,
+	MapStats,
+	ProvinceSummary,
+	UnvisitedProvinceInfo,
+} from "../types"
 import { MapStageHero } from "./MapStageHero"
 import { MapStageLegend } from "./MapStageLegend"
 import { MapStoryCard } from "./MapStoryCard"
@@ -18,9 +23,7 @@ interface MapStageProps {
 	className?: string
 }
 
-/**
- * Immersive full-width map stage with floating glass overlays.
- */
+/** Bright, continuous atlas stage. The map is the dominant surface. */
 export const MapStage = memo(function MapStage({
 	stats,
 	mapMode,
@@ -36,25 +39,10 @@ export const MapStage = memo(function MapStage({
 		<section
 			aria-label="เวทีแผนที่ความทรงจำ"
 			className={cn(
-				"relative min-h-[70vh] w-full overflow-hidden",
+				"relative min-h-[calc(100svh-4rem)] w-full overflow-hidden border-b border-[#BFD9EB] bg-[#EAF5FF]",
 				className,
 			)}
-			style={{
-				background:
-					"radial-gradient(ellipse 80% 60% at 50% 35%, rgba(191,219,254,0.55) 0%, rgba(224,242,254,0.35) 40%, rgba(248,250,252,0.9) 70%, #F8FAFC 100%)",
-			}}
 		>
-			{/* Decorative soft orbs */}
-			<div
-				aria-hidden
-				className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-sky-200/30 blur-3xl"
-			/>
-			<div
-				aria-hidden
-				className="pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-blue-200/25 blur-3xl"
-			/>
-
-			{/* Full-bleed interactive map */}
 			<div className="absolute inset-0 z-0">
 				<ThailandProvinceMap
 					immersive
@@ -64,14 +52,22 @@ export const MapStage = memo(function MapStage({
 				/>
 			</div>
 
-			{/* Floating overlays */}
 			<MapStageHero
 				stats={stats}
 				mapMode={mapMode}
 				onMapModeChange={onMapModeChange}
+				className={cn(
+					"transition-[opacity,transform] duration-300",
+					selectedProvinceId && "pointer-events-none -translate-x-4 opacity-0",
+				)}
 			/>
 
-			<div className="pointer-events-none absolute bottom-14 left-4 z-20 sm:bottom-16 sm:left-6 lg:bottom-8">
+			<div
+				className={cn(
+					"pointer-events-none absolute bottom-7 left-8 z-20 transition-opacity duration-300",
+					selectedProvinceId && "opacity-0",
+				)}
+			>
 				<div className="pointer-events-auto">
 					<MapStageLegend />
 				</div>

@@ -28,7 +28,7 @@ describe("MapPage", () => {
 
 		expect(
 			screen.getByRole("heading", {
-				name: /แผนที่ความทรงจำค่ายอาสา/i,
+				name: /ร่องรอยค่ายหอทั่วไทย/i,
 			}),
 		).toBeInTheDocument()
 		expect(
@@ -92,12 +92,10 @@ describe("MapPage", () => {
 		expect(screen.queryByText("Northeast")).not.toBeInTheDocument()
 	})
 
-	it("renders journey insights and map mode chips", () => {
+	it("renders inline journey progress and map mode controls", () => {
 		render(<MapPage />)
 
-		expect(
-			screen.getByLabelText(/สถิติแผนที่ความทรงจำ/i),
-		).toBeInTheDocument()
+		expect(screen.getByRole("progressbar")).toBeInTheDocument()
 
 		const modeGroup = screen.getByRole("group", {
 			name: /ตัวกรองมุมมองแผนที่/i,
@@ -195,9 +193,6 @@ describe("MapPage", () => {
 			within(toolbar).getByRole("button", { name: /ย่อแผนที่/i }),
 		).toBeInTheDocument()
 		expect(
-			within(toolbar).getByRole("button", { name: /รีเซ็ตมุมมองแผนที่/i }),
-		).toBeInTheDocument()
-		expect(
 			within(toolbar).getByRole("button", { name: /พอดีทั้งประเทศไทย/i }),
 		).toBeInTheDocument()
 	})
@@ -244,10 +239,7 @@ describe("MapPage", () => {
 		await waitFor(() => {
 			expect(
 				within(archiveList).getByRole("button", {
-					name: new RegExp(
-						`${escapeRegExp(bangkokName)}.*ยังไม่เคยไป`,
-						"i",
-					),
+					name: new RegExp(`${escapeRegExp(bangkokName)}.*ยังไม่เคยไป`, "i"),
 				}),
 			).toBeInTheDocument()
 		})
