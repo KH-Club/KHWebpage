@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { fireEvent, render, screen, within } from "@/test/test-utils"
+import { fireEvent, render, screen, waitFor, within } from "@/test/test-utils"
 import {
 	getProvinceDisplayName,
 	visitedProvinceSummaryById,
@@ -199,12 +199,12 @@ describe("MapPage", () => {
 
 		render(<MapPage />)
 
-		const visitedProvinceList = screen.getByRole("region", {
+		const archiveList = screen.getByRole("region", {
 			name: /เลือกจังหวัดเพื่อดูรายละเอียด/i,
 		})
 
 		fireEvent.click(
-			within(visitedProvinceList).getByRole("button", {
+			within(archiveList).getByRole("button", {
 				name: new RegExp(escapeRegExp(sakonNakhon.provinceName), "i"),
 			}),
 		)
@@ -214,5 +214,32 @@ describe("MapPage", () => {
 		expect(
 			screen.getByRole("button", { name: /ปิดรายละเอียดจังหวัด/i }),
 		).toBeInTheDocument()
+	})
+
+	it("filters archive list by status and search", async () => {
+		const bangkokName = getProvinceDisplayName("bangkok", "Bangkok")
+
+		render(<MapPage />)
+
+		const archiveList = screen.getByRole("region", {
+			name: /เลือกจังหวัดเพื่อดูรายละเอียด/i,
+		})
+
+		const statusSelect = within(archiveList).getByLabelText(/กรองสถานะ/i)
+		fireEvent.change(statusSelect, { target: { value: "unvisited" } })
+
+		const search = within(archiveList).getByPlaceholderText(/ค้นหาจังหวัด/i)
+		fireEvent.change(search, { target: { value: bangkokName } })
+
+		await waitFor(() => {
+			expect(
+				within(archiveList).getByRole("button", {
+					name: new RegExp(
+						`${escapeRegExp(bangkokName)}.*ยังไม่เคยไป`,
+						"i",
+					),
+				}),
+			).toBeInTheDocument()
+		})
 	})
 })
