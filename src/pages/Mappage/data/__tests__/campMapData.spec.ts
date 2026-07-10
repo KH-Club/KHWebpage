@@ -2,7 +2,10 @@ import { describe, expect, it } from "vitest"
 import { provinces } from "@/assets/data/provinces"
 import {
 	buildProvinceSummaries,
+	getExplorePercent,
+	getMapStats,
 	getProvinceDisplayName,
+	getVisitFill,
 	isRegionConfigured,
 	toProvinceId,
 	visitedProvinceSummaries,
@@ -56,5 +59,35 @@ describe("camp map data", () => {
 
 	it("does not include unused label paths in the province payload", () => {
 		expect(provinces.some((province) => "labelPath" in province)).toBe(false)
+	})
+
+	it("computes explore percent from visited and total provinces", () => {
+		expect(getExplorePercent(29, 77)).toBe(38)
+		expect(getExplorePercent(0, 77)).toBe(0)
+		expect(getExplorePercent(10, 0)).toBe(0)
+	})
+
+	it("aggregates map stats from province summaries", () => {
+		const stats = getMapStats(visitedProvinceSummaries, provinces.length)
+
+		expect(stats.visitedCount).toBe(visitedProvinceSummaries.length)
+		expect(stats.totalProvinces).toBe(provinces.length)
+		expect(stats.unvisitedCount).toBe(
+			provinces.length - visitedProvinceSummaries.length,
+		)
+		expect(stats.campRecords).toBe(
+			visitedProvinceSummaries.reduce((sum, s) => sum + s.visitCount, 0),
+		)
+		expect(stats.explorePercent).toBe(
+			getExplorePercent(stats.visitedCount, stats.totalProvinces),
+		)
+	})
+
+	it("returns visit-intensity fills for choropleth levels", () => {
+		expect(getVisitFill(0)).toBe("#E5E7EB")
+		expect(getVisitFill(1)).toBe("#3B82F6")
+		expect(getVisitFill(2)).toBe("#2563EB")
+		expect(getVisitFill(3)).toBe("#1D4ED8")
+		expect(getVisitFill(5)).toBe("#1D4ED8")
 	})
 })

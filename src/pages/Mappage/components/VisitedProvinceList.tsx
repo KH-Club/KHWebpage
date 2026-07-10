@@ -17,21 +17,21 @@ export const VisitedProvinceList = memo(function VisitedProvinceList({
 		<section
 			aria-labelledby="visited-provinces-heading"
 			aria-label="รายชื่อจังหวัดที่เคยไปแล้ว"
-			className="rounded-2xl bg-white p-5 shadow-lg ring-1 ring-gray-100"
+			className="rounded-3xl border border-[#E2E8F0] bg-white p-5 shadow-sm sm:p-6"
 		>
 			<div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
 				<div>
-					<p className="text-sm font-semibold uppercase tracking-wide text-blue-600">
+					<p className="text-sm font-semibold text-[#0E4F79]">
 						จังหวัดที่เคยไปแล้ว
 					</p>
 					<h2
 						id="visited-provinces-heading"
-						className="text-2xl font-bold text-gray-900"
+						className="text-2xl font-bold text-[#102033]"
 					>
 						เลือกจังหวัดเพื่อดูรายละเอียด
 					</h2>
 				</div>
-				<p className="text-sm text-gray-500">
+				<p className="text-sm text-[#64748B]">
 					{summaries.length} จังหวัดที่เคยไปแล้ว
 				</p>
 			</div>
@@ -47,10 +47,10 @@ export const VisitedProvinceList = memo(function VisitedProvinceList({
 							onClick={() => onSelectProvince(summary.provinceId)}
 							aria-label={`เลือกจังหวัด ${summary.provinceName} จากรายชื่อจังหวัดที่เคยไปแล้ว มีบันทึกค่าย ${summary.visitCount} ครั้ง`}
 							className={cn(
-								"flex min-h-24 flex-col gap-3 rounded-xl border px-4 py-4 text-left transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:flex-row sm:items-center sm:justify-between",
+								"flex min-h-24 flex-col gap-3 rounded-2xl border px-4 py-4 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2478A8] focus-visible:ring-offset-2 sm:flex-row sm:items-center sm:justify-between",
 								isSelected
-									? "border-blue-700 bg-blue-700 text-white shadow-md"
-									: "border-gray-200 bg-white text-gray-800 hover:border-blue-300 hover:bg-blue-50",
+									? "border-[#0E4F79] bg-[#0E4F79] text-white shadow-md"
+									: "border-[#E2E8F0] bg-white text-[#102033] hover:border-[#93C5FD] hover:bg-[#EFF6FF]",
 							)}
 							aria-pressed={isSelected}
 						>
@@ -61,7 +61,7 @@ export const VisitedProvinceList = memo(function VisitedProvinceList({
 								<span
 									className={cn(
 										"mt-1 block text-sm sm:line-clamp-2",
-										isSelected ? "text-blue-50" : "text-gray-500",
+										isSelected ? "text-white/85" : "text-[#64748B]",
 									)}
 								>
 									ล่าสุด: #{summary.latestVisit.campID}{" "}
@@ -72,8 +72,8 @@ export const VisitedProvinceList = memo(function VisitedProvinceList({
 								className={cn(
 									"inline-flex w-fit shrink-0 rounded-full px-3 py-1 text-xs font-semibold",
 									isSelected
-										? "bg-white text-blue-700"
-										: "bg-blue-100 text-blue-800",
+										? "bg-white text-[#0E4F79]"
+										: "bg-[#DBEAFE] text-[#1D4ED8]",
 								)}
 							>
 								{summary.visitCount} ครั้ง
