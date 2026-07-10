@@ -115,37 +115,98 @@ const provinceNamesById = provinces.reduce<Record<string, string>>(
 
 const northProvinceIds = new Set([
 	"chiangMai",
+	"chiangRai",
+	"kamphaengPhet",
 	"lampang",
 	"lamphun",
+	"maeHongSon",
 	"nan",
+	"nakhonSawan",
 	"phayao",
 	"phichit",
 	"phitsanulok",
 	"phrae",
+	"phetchabun",
 	"sukhothai",
 	"tak",
+	"uthaiThani",
 	"uttaradit",
-	"phetchabun",
 ])
 
 const northeastProvinceIds = new Set([
 	"amnatCharoen",
+	"buengKan",
+	"buriRam",
 	"chaiyaphum",
 	"kalasin",
+	"khonKaen",
 	"loei",
+	"mahaSarakham",
+	"mukdahan",
+	"nakhonPhanom",
+	"nakhonRatchasima",
 	"nongBuaLamPhu",
 	"nongKhai",
+	"roiEt",
 	"sakonNakhon",
 	"siSaKet",
 	"surin",
 	"ubonRatchathani",
 	"udonThani",
+	"yasothon",
 ])
 
-const eastProvinceIds = new Set(["chachoengsao", "prachinBuri"])
-const westProvinceIds = new Set(["kanchanaburi", "prachuapKhiriKhan"])
-const southProvinceIds = new Set(["chumphon", "suratThani"])
-const centralProvinceIds = new Set(["lopburi", "phetchaburi"])
+const eastProvinceIds = new Set([
+	"chachoengsao",
+	"chanthaburi",
+	"chonBuri",
+	"prachinBuri",
+	"rayong",
+	"saKaeo",
+	"trat",
+])
+
+const westProvinceIds = new Set([
+	"kanchanaburi",
+	"phetchaburi",
+	"prachuapKhiriKhan",
+	"ratchaburi",
+])
+
+const southProvinceIds = new Set([
+	"chumphon",
+	"krabi",
+	"nakhonSiThammarat",
+	"narathiwat",
+	"pattani",
+	"phangnga",
+	"phatthalung",
+	"phuket",
+	"ranong",
+	"satun",
+	"songkhla",
+	"suratThani",
+	"trang",
+	"yala",
+])
+
+const centralProvinceIds = new Set([
+	"angThong",
+	"bangkok",
+	"chaiNat",
+	"lopburi",
+	"nakhonNayok",
+	"nakhonPathom",
+	"nonthaburi",
+	"pathumThani",
+	"phraNakhonSiAyutthaya",
+	"samutPrakan",
+	"samutSakhon",
+	"samutSongkhram",
+	"saraburi",
+	"singBuri",
+	"suphanBuri",
+])
 
 export const configuredRegionProvinceIds = new Set([
 	...northProvinceIds,
