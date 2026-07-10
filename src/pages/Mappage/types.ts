@@ -19,6 +19,12 @@ export interface MapStats {
 	explorePercent: number
 }
 
+/** Selected province that has no camp records yet */
+export interface UnvisitedProvinceInfo {
+	id: string
+	name: string
+}
+
 export interface CampMapRegionInfo {
 	id: CampMapRegion
 	label: string

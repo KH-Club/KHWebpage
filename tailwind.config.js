@@ -86,10 +86,15 @@ export default {
 					from: { height: "var(--radix-accordion-content-height)" },
 					to: { height: "0" },
 				},
+				"map-ripple": {
+					"0%": { opacity: "0.7", transform: "scale(0.35)" },
+					"100%": { opacity: "0", transform: "scale(6)" },
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
+				"map-ripple": "map-ripple 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards",
 			},
 		},
 	},

@@ -20,7 +20,11 @@ export interface UseMapViewportResult {
 	zoomOut: () => void
 	resetView: () => void
 	fitThailand: () => void
-	zoomToElement: (element: SVGGraphicsElement, padding?: number) => void
+	zoomToElement: (
+		element: SVGGraphicsElement,
+		padding?: number,
+		durationMs?: number,
+	) => void
 }
 
 /**
@@ -138,7 +142,7 @@ export function useMapViewport(
 	}, [transitionTo])
 
 	const zoomToElement = useCallback(
-		(element: SVGGraphicsElement, padding = 64) => {
+		(element: SVGGraphicsElement, padding = 64, durationMs = 600) => {
 			const behavior = zoomBehaviorRef.current
 			if (!behavior) return
 
@@ -164,7 +168,12 @@ export function useMapViewport(
 				.scale(scale)
 				.translate(-cx, -cy)
 
-			transitionTo(transform, 550)
+			const prefersReduced =
+				typeof window !== "undefined" &&
+				typeof window.matchMedia === "function" &&
+				window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+			transitionTo(transform, prefersReduced ? 0 : durationMs)
 		},
 		[transitionTo],
 	)
