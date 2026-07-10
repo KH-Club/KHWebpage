@@ -22,6 +22,9 @@ interface ThailandProvinceMapProps {
 	selectedProvinceId?: string
 	onSelectProvince: (provinceId: string) => void
 	mapMode?: MapMode
+	/** Borderless full-bleed map for the immersive stage */
+	immersive?: boolean
+	className?: string
 }
 
 interface RippleState {
@@ -30,8 +33,8 @@ interface RippleState {
 	y: number
 }
 
-const unvisitedStroke = "#f8fafc"
-const selectedStroke = "#0f172a"
+const unvisitedStroke = "#f1f5f9"
+const selectedStroke = "#1e3a8a"
 const selectedVisitedFill = "#1D4ED8"
 const selectedUnvisitedFill = "#94A3B8"
 
@@ -76,6 +79,8 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 	selectedProvinceId,
 	onSelectProvince,
 	mapMode = "all",
+	immersive = false,
+	className,
 }: ThailandProvinceMapProps) {
 	const svgRef = useRef<SVGSVGElement>(null)
 	const containerRef = useRef<HTMLDivElement>(null)
@@ -115,7 +120,6 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 		[onSelectProvince, triggerRipple],
 	)
 
-	// Zoom when selection changes (map click or list) — cinematic focus
 	useEffect(() => {
 		if (!selectedProvinceId) {
 			lastZoomedId.current = undefined
@@ -168,19 +172,15 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 			role="region"
 			aria-labelledby="thailand-map-title"
 			aria-describedby="thailand-map-desc"
-			className="relative rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6"
+			className={cn(
+				"relative",
+				immersive ? "h-full w-full" : "rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6",
+				className,
+			)}
 		>
-			<div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
-				<div>
-					<p className="text-sm font-semibold text-sky-900">แผนที่โต้ตอบ</p>
-					<h2
-						id="thailand-map-title"
-						className="text-lg font-bold text-slate-900 sm:text-xl"
-					>
-						แผนที่จังหวัดที่ชมรมค่ายหอเคยไป
-					</h2>
-				</div>
-			</div>
+			<h2 id="thailand-map-title" className="sr-only">
+				แผนที่จังหวัดที่ชมรมค่ายหอเคยไป
+			</h2>
 			<p id="thailand-map-desc" className="sr-only">
 				แผนที่ประเทศไทยแบบโต้ตอบ ลากเพื่อเลื่อน เลื่อนเพื่อซูม
 				คลิกจังหวัดเพื่อซูมและดูรายละเอียด
@@ -190,8 +190,10 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 			<div
 				ref={containerRef}
 				className={cn(
-					"relative overflow-hidden rounded-2xl bg-slate-50 transition-[filter] duration-300",
-					selectedProvinceId && "ring-1 ring-sky-100",
+					"relative h-full overflow-hidden transition-[filter] duration-300",
+					immersive
+						? "bg-transparent"
+						: "rounded-2xl bg-slate-50",
 				)}
 			>
 				<MapControls
@@ -205,9 +207,34 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 				<svg
 					ref={svgRef}
 					viewBox="0 0 1400 2500"
-					className="mx-auto block h-[64vh] min-h-[440px] w-full cursor-grab touch-none active:cursor-grabbing sm:h-[72vh] sm:min-h-[560px] xl:h-[780px] xl:max-h-[780px]"
+					className={cn(
+						"mx-auto block w-full cursor-grab touch-none active:cursor-grabbing",
+						immersive
+							? "h-full min-h-[70vh]"
+							: "h-[64vh] min-h-[440px] sm:h-[72vh] sm:min-h-[560px] xl:h-[780px] xl:max-h-[780px]",
+					)}
 					onMouseLeave={clearTooltip}
 				>
+					{immersive ? (
+						<>
+							<defs>
+								<radialGradient id="mapStageWash" cx="50%" cy="42%" r="65%">
+									<stop offset="0%" stopColor="#E0F2FE" stopOpacity="0.55" />
+									<stop offset="55%" stopColor="#F0F9FF" stopOpacity="0.35" />
+									<stop offset="100%" stopColor="#F8FAFC" stopOpacity="0" />
+								</radialGradient>
+							</defs>
+							<rect
+								x="0"
+								y="0"
+								width="1400"
+								height="2500"
+								fill="url(#mapStageWash)"
+								className="pointer-events-none"
+							/>
+						</>
+					) : null}
+
 					<g ref={contentRef}>
 						{provinces.map((province) => {
 							const summary = visitedProvinceSummaryById.get(province.id)
@@ -282,7 +309,7 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 										selectionDimmed && !modeDimmed && "opacity-40",
 										emphasized && "drop-shadow-sm",
 										isSelected &&
-											"drop-shadow-md [filter:drop-shadow(0_0_10px_rgba(37,99,235,0.55))]",
+											"drop-shadow-md [filter:drop-shadow(0_0_14px_rgba(37,99,235,0.65))]",
 									)}
 								/>
 							)
@@ -295,7 +322,7 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 								cy={ripple.y}
 								r={12}
 								fill="none"
-								stroke="#38BDF8"
+								stroke="#60A5FA"
 								strokeWidth={10}
 								className="pointer-events-none origin-center animate-map-ripple"
 								style={{ transformOrigin: `${ripple.x}px ${ripple.y}px` }}
@@ -303,11 +330,17 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 						) : null}
 					</g>
 				</svg>
-			</div>
 
-			<p className="mt-3 text-center text-xs text-slate-500 sm:text-sm">
-				ลากเพื่อเลื่อน · เลื่อนเพื่อซูม · คลิกจังหวัดเพื่อซูมและดูรายละเอียด
-			</p>
+				{immersive ? (
+					<p className="pointer-events-none absolute bottom-3 left-1/2 z-10 w-[min(100%-2rem,28rem)] -translate-x-1/2 text-center text-[11px] text-slate-500 sm:bottom-4 sm:text-xs">
+						ลากเพื่อเลื่อน · เลื่อนเพื่อซูม · คลิกจังหวัดเพื่อซูมและดูเรื่องราว
+					</p>
+				) : (
+					<p className="mt-3 text-center text-xs text-slate-500 sm:text-sm">
+						ลากเพื่อเลื่อน · เลื่อนเพื่อซูม · คลิกจังหวัดเพื่อซูมและดูรายละเอียด
+					</p>
+				)}
+			</div>
 		</div>
 	)
 })

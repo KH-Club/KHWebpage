@@ -11,7 +11,7 @@ interface MapControlsProps {
 }
 
 const controlClass =
-	"grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-sky-300 hover:bg-sky-50 hover:text-sky-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
+	"grid h-10 w-10 place-items-center rounded-2xl border border-white/50 bg-white/70 text-slate-700 shadow-md backdrop-blur-md transition hover:bg-white hover:text-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
 
 export const MapControls = memo(function MapControls({
 	onZoomIn,
@@ -25,7 +25,7 @@ export const MapControls = memo(function MapControls({
 			role="toolbar"
 			aria-label="ตัวควบคุมแผนที่"
 			className={cn(
-				"absolute right-3 top-3 z-10 flex flex-col gap-1.5 sm:right-4 sm:top-4",
+				"absolute bottom-20 right-3 z-20 flex flex-col gap-1.5 sm:bottom-24 sm:right-5",
 				className,
 			)}
 		>
