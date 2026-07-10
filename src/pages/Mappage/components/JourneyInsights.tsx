@@ -1,6 +1,8 @@
 import { memo } from "react"
-import { FiBookOpen, FiCompass, FiFlag, FiMapPin } from "react-icons/fi"
+import { Calendar, Compass, MapPin, Navigation } from "lucide-react"
+import { motion, useReducedMotion } from "motion/react"
 import { cn } from "@/lib/utils"
+import { visitedProvinceSummaries } from "../data/campMapData"
 import { MapStats } from "../types"
 
 interface JourneyInsightsProps {
@@ -8,85 +10,92 @@ interface JourneyInsightsProps {
 	className?: string
 }
 
+const mostVisited = visitedProvinceSummaries.reduce((best, item) =>
+	item.visitCount > best.visitCount ? item : best,
+)
+
+const latest = visitedProvinceSummaries.reduce((current, item) =>
+	Number(item.latestVisit.campID) > Number(current.latestVisit.campID)
+		? item
+		: current,
+)
+
 export const JourneyInsights = memo(function JourneyInsights({
 	stats,
 	className,
 }: JourneyInsightsProps) {
+	const reduceMotion = useReducedMotion()
 	const items = [
 		{
-			icon: FiMapPin,
-			value: String(stats.visitedCount),
-			label: "จังหวัดที่มีความทรงจำ",
-			tone: "text-blue-600",
+			icon: MapPin,
+			value: mostVisited.provinceName,
+			label: `ไปบ่อยที่สุด ${mostVisited.visitCount} ครั้ง`,
+			tone: "text-[#2478A8]",
 		},
 		{
-			icon: FiBookOpen,
-			value: String(stats.campRecords),
-			label: "ค่ายที่บันทึกไว้",
-			tone: "text-sky-600",
+			icon: Calendar,
+			value: latest.provinceName,
+			label: `ค่ายล่าสุด #${latest.latestVisit.campID}`,
+			tone: "text-[#0E4F79]",
 		},
 		{
-			icon: FiFlag,
-			value: String(stats.totalProvinces),
-			label: "จังหวัดทั้งหมด",
-			tone: "text-slate-700",
+			icon: Compass,
+			value: `${stats.unvisitedCount} จังหวัด`,
+			label: "ยังรอบันทึกครั้งแรก",
+			tone: "text-[#334B5F]",
 		},
 		{
-			icon: FiCompass,
+			icon: Navigation,
 			value: `${stats.explorePercent}%`,
-			label: "สัดส่วนที่สำรวจแล้ว",
-			tone: "text-amber-700",
+			label: "ของประเทศไทยที่เคยไป",
+			tone: "text-[#B7792E]",
 		},
 	]
 
 	return (
 		<section
-			aria-label="สถิติแผนที่ความทรงจำ"
+			aria-label="ข้อมูลเด่นจากเส้นทางค่าย"
 			className={cn("relative", className)}
 		>
-			<div className="mx-auto max-w-6xl px-4 sm:px-6">
-				<div className="rounded-[1.75rem] border border-white/70 bg-white/70 p-5 shadow-[0_16px_40px_-24px_rgba(15,23,42,0.3)] backdrop-blur-md sm:p-6">
-					<div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
-						<div>
-							<p className="text-xs font-semibold uppercase tracking-[0.12em] text-blue-600">
-								Journey Insights
-							</p>
-							<h2 className="mt-1 text-xl font-bold text-slate-900 sm:text-2xl">
-								ภาพรวมเส้นทางค่ายหอ
-							</h2>
-						</div>
-						<p className="text-sm text-slate-500">
-							{stats.unvisitedCount} จังหวัดยังรอเรื่องราวครั้งแรก
-						</p>
-					</div>
-
-					<div className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
+			<div className="mx-auto max-w-6xl px-5 sm:px-6">
+				<motion.div
+					className="overflow-x-auto rounded-2xl border border-white/80 bg-white/75 shadow-[0_6px_8px_-6px_rgba(16,32,51,0.18)] backdrop-blur-md [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+					initial={reduceMotion ? false : { opacity: 0.72, y: 18 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true, amount: 0.3 }}
+					transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+				>
+					<div className="flex min-w-max divide-x divide-[#D7E6EF] lg:grid lg:min-w-0 lg:grid-cols-4">
 						{items.map((item) => {
 							const Icon = item.icon
 							return (
-								<div
+								<motion.div
 									key={item.label}
-									className="rounded-3xl bg-gradient-to-br from-slate-50/90 to-white p-4 ring-1 ring-slate-100"
+									className="group min-w-[13.5rem] px-5 py-4 transition-colors hover:bg-[#EAF5FF]/70 lg:min-w-0"
+									whileHover={reduceMotion ? undefined : { y: -2 }}
+									transition={{
+										duration: 0.22,
+										ease: [0.22, 1, 0.36, 1],
+									}}
 								>
-									<div className="flex items-center gap-2 text-slate-400">
-										<Icon className="h-4 w-4" aria-hidden />
+									<div className="flex items-center gap-3">
+										<span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#DCEFF7] text-[#2478A8] transition-transform group-hover:scale-105">
+											<Icon className="h-4 w-4" strokeWidth={1.8} aria-hidden />
+										</span>
+										<div>
+											<p className={cn("text-lg font-bold", item.tone)}>
+												{item.value}
+											</p>
+											<p className="text-xs font-medium text-[#526A7C]">
+												{item.label}
+											</p>
+										</div>
 									</div>
-									<p
-										className={cn(
-											"mt-2 text-2xl font-bold tabular-nums sm:text-3xl",
-											item.tone,
-										)}
-									>
-										{item.value}
-									</p>
-									<p className="mt-0.5 text-xs font-medium leading-5 text-slate-600 sm:text-sm">
-										{item.label}
-									</p>
-								</div>
+								</motion.div>
 							)
 						})}
 					</div>
-				</div>
+				</motion.div>
 			</div>
 		</section>
 	)

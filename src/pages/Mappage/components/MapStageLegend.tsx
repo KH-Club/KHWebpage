@@ -16,7 +16,7 @@ export const MapStageLegend = memo(function MapStageLegend({
 			<div
 				aria-label="คำอธิบายแผนที่"
 				className={cn(
-					"inline-flex items-center gap-3 border-b border-[#A7CEE5] bg-[#F6FAFC]/90 px-3 py-2 text-xs font-medium text-[#334B5F]",
+					"inline-flex items-center gap-3 rounded-xl border border-white/85 bg-white/[0.78] px-3 py-2 text-xs font-medium text-[#334B5F] shadow-[0_4px_8px_-5px_rgba(16,32,51,0.2)] backdrop-blur-md",
 					className,
 				)}
 			>
@@ -42,7 +42,10 @@ export const MapStageLegend = memo(function MapStageLegend({
 	return (
 		<div
 			aria-label="คำอธิบายแผนที่"
-			className={cn("border-t border-[#A7CEE5] pt-3 text-[#334B5F]", className)}
+			className={cn(
+				"bg-white/72 rounded-xl border border-white/85 px-4 py-3 text-[#334B5F] shadow-[0_4px_8px_-5px_rgba(16,32,51,0.2)] backdrop-blur-md",
+				className,
+			)}
 		>
 			<p className="sr-only">คำอธิบายสี</p>
 			<div className="flex items-center gap-5">

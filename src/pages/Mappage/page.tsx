@@ -5,6 +5,7 @@ import {
 	visitedProvinceSummaries,
 	visitedProvinceSummaryById,
 } from "./data/campMapData"
+import { JourneyInsights } from "./components/JourneyInsights"
 import { MapStage } from "./components/MapStage"
 import { MobileMapExperience } from "./components/MobileMapExperience"
 import { ProvinceArchiveList } from "./components/ProvinceArchiveList"
@@ -68,8 +69,9 @@ const MapPage = () => {
 			) : (
 				<>
 					<MapStage {...shared} />
+					<JourneyInsights stats={stats} className="relative z-20 -mt-8" />
 
-					<section className="mx-auto max-w-6xl px-6 py-20 xl:px-0">
+					<section className="mx-auto max-w-6xl px-6 pb-20 pt-16 xl:px-0">
 						<ProvinceArchiveList
 							selectedProvinceId={selectedProvinceId}
 							onSelectProvince={setSelectedProvinceId}

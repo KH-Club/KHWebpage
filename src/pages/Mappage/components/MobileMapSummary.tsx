@@ -1,4 +1,5 @@
 import { memo } from "react"
+import { motion } from "motion/react"
 import { cn } from "@/lib/utils"
 import { MapMode, MapStats } from "../types"
 
@@ -83,13 +84,17 @@ export const MobileMapSummary = memo(function MobileMapSummary({
 							onClick={() => onMapModeChange(mode)}
 							aria-pressed={active}
 							className={cn(
-								"relative h-11 shrink-0 px-4 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2478A8]",
-								active
-									? "text-[#0E4F79] after:absolute after:inset-x-2 after:bottom-[-1px] after:h-1 after:bg-[#2478A8]"
-									: "text-[#526A7C]",
+								"relative h-11 shrink-0 px-4 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2478A8] active:scale-[0.97]",
+								active ? "text-[#0E4F79]" : "text-[#526A7C]",
 							)}
 						>
 							{label}
+							{active ? (
+								<motion.span
+									layoutId="mobile-map-filter"
+									className="absolute inset-x-2 bottom-[-1px] h-1 bg-[#2478A8] shadow-[0_0_8px_rgba(36,120,168,0.3)]"
+								/>
+							) : null}
 						</button>
 					)
 				})}

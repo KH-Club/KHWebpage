@@ -6,6 +6,7 @@ import {
 	ProvinceSummary,
 	UnvisitedProvinceInfo,
 } from "../types"
+import { MapAtmosphere } from "./MapAtmosphere"
 import { MapStageHero } from "./MapStageHero"
 import { MapStageLegend } from "./MapStageLegend"
 import { MapStoryCard } from "./MapStoryCard"
@@ -43,6 +44,14 @@ export const MapStage = memo(function MapStage({
 				className,
 			)}
 		>
+			<div
+				aria-hidden
+				className="pointer-events-none absolute inset-0"
+				style={{
+					backgroundImage:
+						"radial-gradient(circle at 82% 12%, rgba(105,183,217,0.32), transparent 30%), radial-gradient(circle at 12% 88%, rgba(56,189,248,0.15), transparent 34%)",
+				}}
+			/>
 			<div className="absolute inset-0 z-0">
 				<ThailandProvinceMap
 					immersive
@@ -51,6 +60,7 @@ export const MapStage = memo(function MapStage({
 					mapMode={mapMode}
 				/>
 			</div>
+			<MapAtmosphere dimmed={Boolean(selectedProvinceId)} />
 
 			<MapStageHero
 				stats={stats}

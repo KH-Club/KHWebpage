@@ -39,7 +39,7 @@ export const ProvinceDetailSheet = memo(function ProvinceDetailSheet({
 					aria-describedby={undefined}
 					className={cn(
 						"fixed inset-x-0 bottom-0 z-50 flex h-[78svh] max-h-[42rem] flex-col outline-none",
-						"rounded-t-2xl border-t border-[#BFD9EB] bg-[#F6FAFC] shadow-[0_-6px_8px_-6px_rgba(16,32,51,0.2)]",
+						"rounded-t-[28px] border-t border-white/90 bg-white/[0.94] shadow-[0_-6px_8px_-6px_rgba(16,32,51,0.2)] backdrop-blur-md",
 					)}
 				>
 					<div className="mx-auto mt-2.5 h-1.5 w-12 shrink-0 rounded-full bg-slate-300" />

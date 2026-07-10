@@ -7,6 +7,7 @@ import {
 	useRef,
 	useState,
 } from "react"
+import { MousePointer2 } from "lucide-react"
 import { provinces } from "@/assets/data/provinces"
 import { cn } from "@/lib/utils"
 import { getVisitFill, visitedProvinceSummaryById } from "../data/campMapData"
@@ -222,7 +223,7 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 					onMouseLeave={clearTooltip}
 				>
 					<g ref={contentRef}>
-						{provinces.map((province) => {
+						{provinces.map((province, index) => {
 							const summary = visitedProvinceSummaryById.get(province.id)
 							const isVisited = Boolean(summary)
 							const visitCount = summary?.visitCount ?? 0
@@ -288,13 +289,13 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 									}
 									onMouseLeave={clearTooltip}
 									className={cn(
-										"cursor-pointer transition-[filter,opacity,stroke-width] duration-200 hover:brightness-95 focus:outline-none",
+										"map-province-reveal cursor-pointer transition-[filter,opacity,stroke-width] duration-200 hover:brightness-110 hover:drop-shadow-md focus:outline-none",
 										modeDimmed && "opacity-30",
 										selectionDimmed && !modeDimmed && "opacity-40",
 										emphasized && "drop-shadow-sm",
-										isSelected &&
-											"drop-shadow-md [filter:drop-shadow(0_0_14px_rgba(37,99,235,0.65))]",
+										isSelected && "map-province-selected",
 									)}
+									style={{ animationDelay: `${Math.min(index * 12, 720)}ms` }}
 								/>
 							)
 						})}
@@ -317,15 +318,25 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 
 				{mobileApp ? (
 					<p className="pointer-events-none absolute bottom-3 left-4 z-10 max-w-[55%] text-left text-[10px] leading-4 text-[#526A7C]">
-						ลาก · ซูม · แตะจังหวัด
+						แตะจังหวัด · ใช้ปุ่มเพื่อซูม
 					</p>
 				) : immersive ? (
-					<p className="pointer-events-none absolute bottom-3 left-1/2 z-10 w-[min(100%-2rem,28rem)] -translate-x-1/2 text-center text-[11px] text-slate-500 sm:bottom-4 sm:text-xs">
-						ลากเพื่อเลื่อน · เลื่อนเพื่อซูม · คลิกจังหวัดเพื่อซูมและดูเรื่องราว
+					<p className="pointer-events-none absolute bottom-3 left-1/2 z-10 inline-flex w-[min(100%-2rem,31rem)] -translate-x-1/2 items-center justify-center gap-1.5 text-center text-[11px] text-slate-500 sm:bottom-4 sm:text-xs">
+						<MousePointer2
+							className="h-3.5 w-3.5"
+							strokeWidth={1.7}
+							aria-hidden
+						/>
+						ลากเพื่อเลื่อน · ใช้ปุ่มเพื่อซูม · คลิกจังหวัดเพื่ออ่านเรื่องราว
 					</p>
 				) : (
-					<p className="mt-3 text-center text-xs text-slate-500 sm:text-sm">
-						ลากเพื่อเลื่อน · เลื่อนเพื่อซูม · คลิกจังหวัดเพื่อซูมและดูรายละเอียด
+					<p className="mt-3 inline-flex items-center justify-center gap-1.5 text-center text-xs text-slate-500 sm:text-sm">
+						<MousePointer2
+							className="h-3.5 w-3.5"
+							strokeWidth={1.7}
+							aria-hidden
+						/>
+						ลากเพื่อเลื่อน · ใช้ปุ่มเพื่อซูม · คลิกจังหวัดเพื่อดูรายละเอียด
 					</p>
 				)}
 			</div>

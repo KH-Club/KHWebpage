@@ -5,6 +5,7 @@ import {
 	ProvinceSummary,
 	UnvisitedProvinceInfo,
 } from "../types"
+import { JourneyInsights } from "./JourneyInsights"
 import { MapStageLegend } from "./MapStageLegend"
 import { MobileMapSummary } from "./MobileMapSummary"
 import { ProvinceArchiveList } from "./ProvinceArchiveList"
@@ -54,7 +55,7 @@ export const MobileMapExperience = memo(function MobileMapExperience({
 			>
 				<div className="relative w-full">
 					{/* Legend chip — top-left inside map, small footprint */}
-					<div className="pointer-events-none absolute bottom-3 left-4 z-20">
+					<div className="pointer-events-none absolute left-3 top-3 z-20">
 						<div className="pointer-events-auto">
 							<MapStageLegend variant="chip" />
 						</div>
@@ -69,7 +70,9 @@ export const MobileMapExperience = memo(function MobileMapExperience({
 				</div>
 			</section>
 
-			<section className="mx-auto max-w-6xl px-5 py-16">
+			<JourneyInsights stats={stats} className="py-10" />
+
+			<section className="mx-auto max-w-6xl px-5 pb-16">
 				<ProvinceArchiveList
 					selectedProvinceId={selectedProvinceId}
 					onSelectProvince={onSelectProvince}
