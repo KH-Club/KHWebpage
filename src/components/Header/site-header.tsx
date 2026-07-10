@@ -1,19 +1,28 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
-import { FiMenu, FiX } from "react-icons/fi"
 import { Icons } from "@/components/Header/icons"
 import { MainNav } from "@/components/Header/main-nav"
 import { buttonVariants } from "@/components/Header/ui/button"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
+import { useEffect, useState } from "react"
+import { FiMenu, FiX } from "react-icons/fi"
+import { Link, useLocation } from "react-router-dom"
+
+function isActivePath(pathname: string, href: string) {
+	if (href === "/") return pathname === href
+	return pathname === href || pathname.startsWith(`${href}/`)
+}
 
 export function SiteHeader() {
 	const [mobileOpen, setMobileOpen] = useState(false)
+	const location = useLocation()
+
+	useEffect(() => {
+		setMobileOpen(false)
+	}, [location.pathname])
 
 	return (
 		<header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-background/95 backdrop-blur-md">
 			<div className="container flex h-14 items-center justify-between gap-3 sm:h-16">
-				{/* Logo + title always visible; nav links desktop-only */}
 				<div className="flex min-w-0 items-center gap-3">
 					<Link
 						to="/"
@@ -30,19 +39,12 @@ export function SiteHeader() {
 					</div>
 				</div>
 
-				{/* Desktop social */}
-				<nav className="hidden items-center space-x-1 md:flex">
-					<Link
-						to={siteConfig.links.facebook}
-						target="_blank"
-						rel="noreferrer"
-					>
-						<div
-							className={buttonVariants({
-								size: "icon",
-								variant: "ghost",
-							})}
-						>
+				<nav
+					className="hidden items-center space-x-1 md:flex"
+					aria-label="Social links"
+				>
+					<Link to={siteConfig.links.facebook} target="_blank" rel="noreferrer">
+						<div className={buttonVariants({ size: "icon", variant: "ghost" })}>
 							<Icons.facebook className="h-5 w-5" />
 							<span className="sr-only">Facebook</span>
 						</div>
@@ -52,22 +54,17 @@ export function SiteHeader() {
 						target="_blank"
 						rel="noreferrer"
 					>
-						<div
-							className={buttonVariants({
-								size: "icon",
-								variant: "ghost",
-							})}
-						>
+						<div className={buttonVariants({ size: "icon", variant: "ghost" })}>
 							<Icons.instagram className="h-5 w-5" />
 							<span className="sr-only">Instagram</span>
 						</div>
 					</Link>
 				</nav>
 
-				{/* Mobile hamburger */}
 				<button
 					type="button"
 					className="grid h-11 w-11 place-items-center rounded-2xl text-slate-700 transition hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 md:hidden"
+					aria-controls="mobile-navigation"
 					aria-label={mobileOpen ? "ปิดเมนู" : "เปิดเมนู"}
 					aria-expanded={mobileOpen}
 					onClick={() => setMobileOpen((open) => !open)}
@@ -80,16 +77,22 @@ export function SiteHeader() {
 				</button>
 			</div>
 
-			{/* Mobile menu panel */}
 			{mobileOpen ? (
-				<div className="border-t border-slate-100 bg-white p-4 shadow-lg md:hidden">
+				<div
+					id="mobile-navigation"
+					className="border-t border-slate-100 bg-white p-4 shadow-lg md:hidden"
+				>
 					<nav className="flex flex-col gap-1" aria-label="เมนูหลัก">
 						{siteConfig.mainNav.map((item) =>
 							item.href ? (
 								<Link
 									key={item.href}
 									to={item.href}
-									className="flex min-h-11 items-center rounded-2xl px-3 text-base font-medium text-slate-800 hover:bg-slate-50"
+									className={cn(
+										"flex min-h-11 items-center rounded-2xl px-3 text-base font-medium text-slate-800 transition-colors hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+										isActivePath(location.pathname, item.href) &&
+											"bg-blue-50 text-blue-700",
+									)}
 									onClick={() => setMobileOpen(false)}
 								>
 									{item.title}
@@ -122,14 +125,11 @@ export function SiteHeader() {
 				</div>
 			) : null}
 
-			{/* Scrim when menu open */}
 			{mobileOpen ? (
 				<button
 					type="button"
 					aria-label="ปิดเมนู"
-					className={cn(
-						"fixed inset-0 top-14 z-[-1] bg-slate-900/20 md:hidden",
-					)}
+					className="fixed inset-0 top-14 z-[-1] bg-slate-900/20 md:hidden"
 					onClick={() => setMobileOpen(false)}
 				/>
 			) : null}
