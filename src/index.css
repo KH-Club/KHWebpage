@@ -216,6 +216,15 @@
 	}
 }
 
+@keyframes map-province-reveal {
+	from {
+		opacity: 0.68;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
 .camp-voice-enter {
 	animation: camp-voice-enter 640ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -228,10 +237,30 @@
 	animation: camp-voice-modal 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+@keyframes map-province-selected {
+	0%,
+	100% {
+		filter: drop-shadow(0 0 8px rgba(14, 95, 186, 0.5));
+	}
+	50% {
+		filter: drop-shadow(0 0 17px rgba(37, 99, 235, 0.78));
+	}
+}
+
+.map-province-reveal {
+	animation: map-province-reveal 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.map-province-selected {
+	animation: map-province-selected 1.8s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.camp-voice-enter,
 	.camp-voice-modal-backdrop,
-	.camp-voice-modal {
+	.camp-voice-modal,
+	.map-province-reveal,
+	.map-province-selected {
 		animation: none;
 	}
 }
