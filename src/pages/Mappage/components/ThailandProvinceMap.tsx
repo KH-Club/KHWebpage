@@ -24,6 +24,8 @@ interface ThailandProvinceMapProps {
 	mapMode?: MapMode
 	/** Borderless full-bleed map for the immersive stage */
 	immersive?: boolean
+	/** Mobile map-app layout: fixed height, 44px controls */
+	mobileApp?: boolean
 	className?: string
 }
 
@@ -80,6 +82,7 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 	onSelectProvince,
 	mapMode = "all",
 	immersive = false,
+	mobileApp = false,
 	className,
 }: ThailandProvinceMapProps) {
 	const svgRef = useRef<SVGSVGElement>(null)
@@ -201,6 +204,7 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 					onZoomOut={zoomOut}
 					onReset={resetView}
 					onFit={fitThailand}
+					touchFriendly={mobileApp}
 				/>
 				<ProvinceTooltip data={tooltip} />
 
@@ -209,9 +213,11 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 					viewBox="0 0 1400 2500"
 					className={cn(
 						"mx-auto block w-full cursor-grab touch-none active:cursor-grabbing",
-						immersive
-							? "h-full min-h-[70vh]"
-							: "h-[64vh] min-h-[440px] sm:h-[72vh] sm:min-h-[560px] xl:h-[780px] xl:max-h-[780px]",
+						mobileApp
+							? "h-[min(60svh,560px)] min-h-[420px] max-h-[560px]"
+							: immersive
+								? "h-full min-h-[70vh]"
+								: "h-[64vh] min-h-[440px] sm:h-[72vh] sm:min-h-[560px] xl:h-[780px] xl:max-h-[780px]",
 					)}
 					onMouseLeave={clearTooltip}
 				>
@@ -331,7 +337,11 @@ export const ThailandProvinceMap = memo(function ThailandProvinceMap({
 					</g>
 				</svg>
 
-				{immersive ? (
+				{mobileApp ? (
+					<p className="pointer-events-none absolute bottom-3 left-3 z-10 max-w-[55%] text-left text-[10px] leading-4 text-slate-500">
+						ลาก · ซูม · แตะจังหวัด
+					</p>
+				) : immersive ? (
 					<p className="pointer-events-none absolute bottom-3 left-1/2 z-10 w-[min(100%-2rem,28rem)] -translate-x-1/2 text-center text-[11px] text-slate-500 sm:bottom-4 sm:text-xs">
 						ลากเพื่อเลื่อน · เลื่อนเพื่อซูม · คลิกจังหวัดเพื่อซูมและดูเรื่องราว
 					</p>

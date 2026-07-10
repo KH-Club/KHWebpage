@@ -3,11 +3,42 @@ import { cn } from "@/lib/utils"
 
 interface MapStageLegendProps {
 	className?: string
+	/** Compact chip for mobile map (minimal footprint) */
+	variant?: "default" | "chip"
 }
 
 export const MapStageLegend = memo(function MapStageLegend({
 	className,
+	variant = "default",
 }: MapStageLegendProps) {
+	if (variant === "chip") {
+		return (
+			<div
+				aria-label="คำอธิบายแผนที่"
+				className={cn(
+					"inline-flex items-center gap-3 rounded-full border border-white/70 bg-white/90 px-3 py-2 text-xs font-medium text-slate-700 shadow-md backdrop-blur-md",
+					className,
+				)}
+			>
+				<span className="inline-flex items-center gap-1.5">
+					<span className="flex items-center gap-0.5" aria-hidden>
+						<span className="h-2 w-2 rounded-full bg-blue-500" />
+						<span className="h-2 w-2 rounded-full bg-blue-700" />
+					</span>
+					เคยไป
+				</span>
+				<span className="h-3 w-px bg-slate-200" aria-hidden />
+				<span className="inline-flex items-center gap-1.5">
+					<span
+						className="h-2 w-2 rounded-full bg-slate-300 ring-1 ring-slate-400/50"
+						aria-hidden
+					/>
+					ยังไม่ไป
+				</span>
+			</div>
+		)
+	}
+
 	return (
 		<div
 			aria-label="คำอธิบายแผนที่"

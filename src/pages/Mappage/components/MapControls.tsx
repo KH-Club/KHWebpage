@@ -8,10 +8,9 @@ interface MapControlsProps {
 	onReset: () => void
 	onFit: () => void
 	className?: string
+	/** Touch-friendly 44px targets for mobile map app layout */
+	touchFriendly?: boolean
 }
-
-const controlClass =
-	"grid h-10 w-10 place-items-center rounded-2xl border border-white/50 bg-white/70 text-slate-700 shadow-md backdrop-blur-md transition hover:bg-white hover:text-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
 
 export const MapControls = memo(function MapControls({
 	onZoomIn,
@@ -19,13 +18,22 @@ export const MapControls = memo(function MapControls({
 	onReset,
 	onFit,
 	className,
+	touchFriendly = false,
 }: MapControlsProps) {
+	const controlClass = cn(
+		"place-items-center rounded-2xl border border-white/60 bg-white/85 text-slate-700 shadow-md backdrop-blur-md transition hover:bg-white hover:text-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+		touchFriendly ? "grid h-11 w-11" : "grid h-10 w-10",
+	)
+
 	return (
 		<div
 			role="toolbar"
 			aria-label="ตัวควบคุมแผนที่"
 			className={cn(
-				"absolute bottom-20 right-3 z-20 flex flex-col gap-1.5 sm:bottom-24 sm:right-5",
+				"absolute z-20 flex flex-col gap-2",
+				touchFriendly
+					? "bottom-3 right-3"
+					: "bottom-20 right-3 sm:bottom-24 sm:right-5",
 				className,
 			)}
 		>
@@ -36,7 +44,7 @@ export const MapControls = memo(function MapControls({
 				aria-label="ขยายแผนที่"
 				title="ขยาย"
 			>
-				<FiPlus className="h-4 w-4" aria-hidden />
+				<FiPlus className="h-5 w-5" aria-hidden />
 			</button>
 			<button
 				type="button"
@@ -45,7 +53,7 @@ export const MapControls = memo(function MapControls({
 				aria-label="ย่อแผนที่"
 				title="ย่อ"
 			>
-				<FiMinus className="h-4 w-4" aria-hidden />
+				<FiMinus className="h-5 w-5" aria-hidden />
 			</button>
 			<button
 				type="button"
@@ -54,7 +62,7 @@ export const MapControls = memo(function MapControls({
 				aria-label="รีเซ็ตมุมมองแผนที่"
 				title="รีเซ็ต"
 			>
-				<FiHome className="h-4 w-4" aria-hidden />
+				<FiHome className="h-5 w-5" aria-hidden />
 			</button>
 			<button
 				type="button"
@@ -63,7 +71,7 @@ export const MapControls = memo(function MapControls({
 				aria-label="พอดีทั้งประเทศไทย"
 				title="พอดีทั้งประเทศ"
 			>
-				<FiMaximize2 className="h-4 w-4" aria-hidden />
+				<FiMaximize2 className="h-5 w-5" aria-hidden />
 			</button>
 		</div>
 	)
