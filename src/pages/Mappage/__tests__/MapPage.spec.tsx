@@ -21,7 +21,7 @@ function getRequiredProvinceSummary(provinceId: string) {
 }
 
 describe("MapPage", () => {
-	it("renders the interactive map and selects a province from the list", () => {
+	it("renders immersive stage and selects a province from the explorer", () => {
 		const sakonNakhon = getRequiredProvinceSummary("sakonNakhon")
 
 		render(<MapPage />)
@@ -33,16 +33,21 @@ describe("MapPage", () => {
 		).toBeInTheDocument()
 		expect(
 			screen.getByRole("region", {
+				name: /เวทีแผนที่ความทรงจำ/i,
+			}),
+		).toBeInTheDocument()
+		expect(
+			screen.getByRole("region", {
 				name: /แผนที่จังหวัดที่ชมรมค่ายหอเคยไป/i,
 			}),
 		).toBeInTheDocument()
 
-		const visitedProvinceList = screen.getByRole("region", {
-			name: /เลือกจังหวัดเพื่อดูรายละเอียด/i,
+		const archiveList = screen.getByRole("region", {
+			name: /สำรวจจังหวัดทั่วประเทศไทย|เลือกจังหวัดเพื่อดูรายละเอียด/i,
 		})
 
 		fireEvent.click(
-			within(visitedProvinceList).getByRole("button", {
+			within(archiveList).getByRole("button", {
 				name: new RegExp(escapeRegExp(sakonNakhon.provinceName), "i"),
 			}),
 		)
@@ -87,37 +92,40 @@ describe("MapPage", () => {
 		expect(screen.queryByText("Northeast")).not.toBeInTheDocument()
 	})
 
-	it("renders memory map stats and mode chips", () => {
+	it("renders journey insights and map mode chips", () => {
 		render(<MapPage />)
 
 		expect(
 			screen.getByLabelText(/สถิติแผนที่ความทรงจำ/i),
 		).toBeInTheDocument()
-		expect(
-			screen.getByRole("button", { name: /สำรวจจังหวัดที่เคยไป/i }),
-		).toBeInTheDocument()
-		expect(
-			screen.getByRole("button", { name: /แสดงจังหวัดที่ยังไม่เคยไป/i }),
-		).toBeInTheDocument()
 
-		const visitedChip = screen.getByRole("button", {
-			name: /สำรวจจังหวัดที่เคยไป/i,
+		const modeGroup = screen.getByRole("group", {
+			name: /ตัวกรองมุมมองแผนที่/i,
 		})
+		const visitedChip = within(modeGroup).getByRole("button", {
+			name: /^เคยไปแล้ว$/i,
+		})
+		const unvisitedChip = within(modeGroup).getByRole("button", {
+			name: /ยังไม่เคยไป/i,
+		})
+		expect(visitedChip).toBeInTheDocument()
+		expect(unvisitedChip).toBeInTheDocument()
+
 		fireEvent.click(visitedChip)
 		expect(visitedChip).toHaveAttribute("aria-pressed", "true")
 	})
 
-	it("clears selected province with Escape", () => {
+	it("clears selected province with Escape", async () => {
 		const sakonNakhon = getRequiredProvinceSummary("sakonNakhon")
 
 		render(<MapPage />)
 
-		const visitedProvinceList = screen.getByRole("region", {
-			name: /เลือกจังหวัดเพื่อดูรายละเอียด/i,
+		const archiveList = screen.getByRole("region", {
+			name: /สำรวจจังหวัดทั่วประเทศไทย|เลือกจังหวัดเพื่อดูรายละเอียด/i,
 		})
 
 		fireEvent.click(
-			within(visitedProvinceList).getByRole("button", {
+			within(archiveList).getByRole("button", {
 				name: new RegExp(escapeRegExp(sakonNakhon.provinceName), "i"),
 			}),
 		)
@@ -125,12 +133,12 @@ describe("MapPage", () => {
 
 		fireEvent.keyDown(window, { key: "Escape" })
 
-		expect(
-			screen.getByRole("heading", { name: /^เลือกจังหวัด$/i }),
-		).toBeInTheDocument()
-		expect(
-			screen.queryByText(/ไทม์ไลน์ค่ายในจังหวัดนี้/i),
-		).not.toBeInTheDocument()
+		// Floating story card may animate out via AnimatePresence
+		await waitFor(() => {
+			expect(
+				screen.queryByText(/ไทม์ไลน์ค่ายในจังหวัดนี้/i),
+			).not.toBeInTheDocument()
+		})
 	})
 
 	it("selects a visited province from the SVG map with keyboard support", () => {
@@ -200,7 +208,7 @@ describe("MapPage", () => {
 		render(<MapPage />)
 
 		const archiveList = screen.getByRole("region", {
-			name: /เลือกจังหวัดเพื่อดูรายละเอียด/i,
+			name: /สำรวจจังหวัดทั่วประเทศไทย|เลือกจังหวัดเพื่อดูรายละเอียด/i,
 		})
 
 		fireEvent.click(
@@ -209,7 +217,6 @@ describe("MapPage", () => {
 			}),
 		)
 
-		// Desktop panel shows timeline after list-driven selection
 		expect(screen.getByText(/ไทม์ไลน์ค่ายในจังหวัดนี้/i)).toBeInTheDocument()
 		expect(
 			screen.getByRole("button", { name: /ปิดรายละเอียดจังหวัด/i }),
@@ -222,11 +229,14 @@ describe("MapPage", () => {
 		render(<MapPage />)
 
 		const archiveList = screen.getByRole("region", {
-			name: /เลือกจังหวัดเพื่อดูรายละเอียด/i,
+			name: /สำรวจจังหวัดทั่วประเทศไทย|เลือกจังหวัดเพื่อดูรายละเอียด/i,
 		})
 
-		const statusSelect = within(archiveList).getByLabelText(/กรองสถานะ/i)
-		fireEvent.change(statusSelect, { target: { value: "unvisited" } })
+		// Status tabs (explorer) — pick unvisited
+		const unvisitedTab = within(archiveList).getByRole("tab", {
+			name: /ยังไม่เคยไป/i,
+		})
+		fireEvent.click(unvisitedTab)
 
 		const search = within(archiveList).getByPlaceholderText(/ค้นหาจังหวัด/i)
 		fireEvent.change(search, { target: { value: bangkokName } })
