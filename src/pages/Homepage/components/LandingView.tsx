@@ -15,16 +15,19 @@ const LandingView = memo(function LandingView() {
 	}, [])
 
 	return (
-		<section id="home" className="relative h-screen w-full overflow-hidden">
+		<section
+			id="home"
+			className="home-hero relative h-screen min-h-[42rem] w-full overflow-hidden"
+		>
 			{/* Static Background Image */}
 			<div
-				className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+				className="home-hero-image absolute inset-0 bg-cover bg-center bg-no-repeat"
 				style={{ backgroundImage: `url(${HeroBackground})` }}
 			/>
 
 			{/* Gradient Overlays for better text readability */}
 			<div
-				className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"
+				className="via-[#07182b]/58 absolute inset-0 bg-gradient-to-r from-[#07182b]/90 to-[#07182b]/10"
 				aria-hidden="true"
 			/>
 			<div
@@ -36,16 +39,16 @@ const LandingView = memo(function LandingView() {
 			<div className="relative z-10 flex h-full flex-col">
 				{/* Hero Content - Centered vertically */}
 				<div className="flex flex-1 flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24">
-					<div className="max-w-3xl">
+					<div className="home-hero-content max-w-3xl">
 						{/* Badge */}
-						<div className="mb-4 inline-block rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-white backdrop-blur-sm sm:text-sm">
+						<div className="mb-5 inline-block rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-medium tracking-[0.08em] text-white backdrop-blur-sm sm:text-sm">
 							Since {siteConfig.foundingYear}
 						</div>
 
 						{/* Main Title */}
-						<h1 className="mb-4 text-5xl font-bold leading-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
+						<h1 className="mb-5 text-5xl font-bold leading-[0.96] tracking-[-0.045em] text-white sm:text-6xl md:text-7xl lg:text-8xl">
 							KAIHOR
-							<span className="mt-2 block text-3xl font-medium text-white/90 sm:text-4xl md:text-5xl lg:text-6xl">
+							<span className="mt-4 block text-3xl font-medium tracking-[-0.025em] text-white/95 sm:text-4xl md:text-5xl lg:text-6xl">
 								ค่ายหอ
 							</span>
 						</h1>
@@ -56,7 +59,7 @@ const LandingView = memo(function LandingView() {
 						</p>
 
 						{/* Description */}
-						<p className="mb-8 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
+						<p className="mb-8 max-w-[58ch] text-base leading-8 text-white/80 sm:text-lg">
 							ครอบครัวที่พร้อมจะออกไปช่วยเหลือสังคม ส่งเสริมความเป็นจิตอาสา
 							พัฒนาความสามารถ และพัฒนาสังคมไปด้วยกัน
 						</p>
@@ -93,7 +96,7 @@ const LandingView = memo(function LandingView() {
 				</div>
 
 				{/* Stats Bar - Bottom */}
-				<div className="border-t border-white/10 bg-black/30 backdrop-blur-sm">
+				<div className="home-impact-bar bg-[#07182b]/72 border-t border-white/15 backdrop-blur-md">
 					<div className="container mx-auto p-6 sm:py-8">
 						<div className="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4 md:gap-12">
 							<AnimatedCounter

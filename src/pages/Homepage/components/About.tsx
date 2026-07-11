@@ -23,27 +23,30 @@ const About = memo(function About() {
 	return (
 		<section
 			id="about-section"
-			className="mx-auto bg-gray-50 pb-16 pt-10 md:pb-24 md:pt-12"
+			className="about-journey mx-auto bg-white py-20 sm:py-24 lg:py-32"
 		>
-			<div className="container mx-auto px-6">
+			<div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10">
 				{/* Section Header */}
-				<div className="mb-12 text-center">
+				<div className="mb-12 max-w-3xl text-left sm:mb-16">
 					<span className="mb-2 inline-block text-sm font-semibold uppercase tracking-wider text-blue-600">
 						เกี่ยวกับเรา
 					</span>
 					<h2 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl md:text-5xl">
 						ค่ายหอคืออะไร?
 					</h2>
-					<div className="mx-auto h-1 w-20 rounded bg-blue-500" />
+					<p className="max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+						พื้นที่ทดลองลงมือทำ เรียนรู้จากชุมชน และค้นพบว่าการเปลี่ยนแปลงเล็ก ๆ
+						เริ่มจากการเดินทางร่วมกันได้เสมอ
+					</p>
 				</div>
 
-				<div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
+				<div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 					{/* Left Container: Images Grid */}
-					<div className="grid grid-cols-2 gap-4 lg:w-3/5">
+					<div className="about-collage grid grid-cols-2 gap-3 sm:gap-4 lg:w-3/5">
 						{activityImages.map((img, index) => (
 							<div
 								key={index}
-								className="group relative h-48 overflow-hidden rounded-xl sm:h-60 md:h-72"
+								className="group relative h-48 overflow-hidden rounded-2xl sm:h-60 md:h-72"
 							>
 								<LazyImage
 									src={img.src}
@@ -59,7 +62,7 @@ const About = memo(function About() {
 
 					{/* Right Container: Text and Content */}
 					<div className="flex flex-col justify-center lg:w-2/5">
-						<div className="rounded-2xl bg-white p-6 shadow-lg sm:p-8">
+						<div className="about-copy p-0 sm:p-2">
 							<p className="mb-4 text-base leading-relaxed text-gray-700 sm:text-lg">
 								<span className="font-semibold text-blue-600">
 									ค่ายรวมจุฬาฯอาสาพัฒนาชนบท (ค่ายหอ)

@@ -38,9 +38,21 @@ const coreValues: CoreValue[] = [
 
 const Core = memo(function Core() {
 	return (
-		<section className="bg-gray-100 py-12" id="core-section">
-			<div className="container mx-auto px-6">
-				<div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+		<section
+			className="core-journey relative overflow-hidden bg-[#102033] py-20 text-white sm:py-24 lg:py-28"
+			id="core-section"
+		>
+			<div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10">
+				<div className="mb-12 max-w-3xl sm:mb-16">
+					<p className="text-sm font-semibold text-blue-300">
+						สิ่งที่เราเชื่อและลงมือทำ
+					</p>
+					<p className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-[-0.03em] text-white sm:text-4xl lg:text-5xl">
+						ค่ายไม่ใช่แค่การเดินทางไปช่วยเหลือ
+						แต่คือพื้นที่ที่ทุกคนได้เติบโตไปพร้อมกัน
+					</p>
+				</div>
+				<div className="core-values-grid grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-white/15 md:grid-cols-3">
 					{coreValues.map(({ title, description, items }) => (
 						<InfoCard key={title} title={title} description={description}>
 							{items && (
