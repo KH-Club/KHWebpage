@@ -1,9 +1,8 @@
 import { Icons } from "@/components/Header/icons"
 import { MainNav } from "@/components/Header/main-nav"
-import { buttonVariants } from "@/components/Header/ui/button"
 import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
 import { useFeatureFlags } from "@/features/featureFlags"
+import { cn } from "@/lib/utils"
 import { useEffect, useMemo, useState } from "react"
 import { FiMenu, FiX } from "react-icons/fi"
 import { Link, useLocation } from "react-router-dom"
@@ -12,6 +11,9 @@ function isActivePath(pathname: string, href: string) {
 	if (href === "/") return pathname === href
 	return pathname === href || pathname.startsWith(`${href}/`)
 }
+
+const socialLinkClassName =
+	"grid size-10 place-items-center rounded-full text-slate-600 transition-colors hover:bg-blue-50 hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
 
 export function SiteHeader() {
 	const [mobileOpen, setMobileOpen] = useState(false)
@@ -31,72 +33,67 @@ export function SiteHeader() {
 	}, [location.pathname])
 
 	return (
-		<header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-background/95 backdrop-blur-md">
-			{/* Three-zone bar: logo | nav | actions — equal side columns keep the center true */}
-			<div className="container grid h-14 grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 sm:h-16 sm:gap-4">
-				{/* Left: brand */}
+		<header className="sticky top-0 z-40 w-full border-b border-slate-200/70 bg-white/90 shadow-[0_1px_8px_rgba(15,23,42,0.04)] backdrop-blur-xl">
+			<div className="mx-auto grid h-16 w-full max-w-7xl grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 px-4 sm:h-[4.5rem] sm:gap-4 sm:px-6 lg:px-8">
 				<div className="flex min-w-0 items-center justify-self-start">
 					<Link
 						to="/"
-						className="flex min-w-0 items-center gap-2"
+						className="group flex min-w-0 items-center gap-2.5 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
 						onClick={() => setMobileOpen(false)}
 					>
-						<Icons.logo className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" />
-						<span className="truncate text-base font-bold text-slate-900 sm:text-lg">
-							{siteConfig.name}
+						<Icons.logo className="size-9 shrink-0 transition-transform duration-200 group-hover:scale-[1.04] motion-reduce:transform-none sm:size-10" />
+						<span className="flex min-w-0 flex-col leading-none">
+							<span className="truncate text-sm font-bold tracking-[0.08em] text-slate-950 sm:text-[15px]">
+								KAIHOR
+							</span>
+							<span className="mt-1 hidden truncate text-[11px] font-medium text-slate-500 sm:block">
+								ชมรมค่ายหอ
+							</span>
 						</span>
 					</Link>
 				</div>
 
-				{/* Center: primary nav (desktop) */}
 				<div className="hidden justify-self-center md:block">
 					<MainNav items={visibleNavItems} showLogo={false} />
 				</div>
 
-				{/* Right: social (desktop) / menu (mobile) */}
-				<div className="flex items-center justify-end justify-self-end">
+				<div className="flex items-center justify-end gap-1 justify-self-end">
 					<nav
-						className="hidden items-center gap-0.5 md:flex"
+						className="hidden items-center gap-1 md:flex"
 						aria-label="Social links"
 					>
-						<Link
-							to={siteConfig.links.facebook}
+						<a
+							href={siteConfig.links.facebook}
 							target="_blank"
 							rel="noreferrer"
+							className={socialLinkClassName}
 						>
-							<div
-								className={buttonVariants({ size: "icon", variant: "ghost" })}
-							>
-								<Icons.facebook className="h-5 w-5" />
-								<span className="sr-only">Facebook</span>
-							</div>
-						</Link>
-						<Link
-							to={siteConfig.links.instagram}
+							<Icons.facebook className="size-[18px]" />
+							<span className="sr-only">Facebook</span>
+						</a>
+						<a
+							href={siteConfig.links.instagram}
 							target="_blank"
 							rel="noreferrer"
+							className={socialLinkClassName}
 						>
-							<div
-								className={buttonVariants({ size: "icon", variant: "ghost" })}
-							>
-								<Icons.instagram className="h-5 w-5" />
-								<span className="sr-only">Instagram</span>
-							</div>
-						</Link>
+							<Icons.instagram className="size-[18px]" />
+							<span className="sr-only">Instagram</span>
+						</a>
 					</nav>
 
 					<button
 						type="button"
-						className="grid h-11 w-11 place-items-center rounded-2xl text-slate-700 transition hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 md:hidden"
+						className="grid size-11 place-items-center rounded-full bg-slate-100 text-slate-700 transition-colors hover:bg-blue-50 hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 md:hidden"
 						aria-controls="mobile-navigation"
 						aria-label={mobileOpen ? "ปิดเมนู" : "เปิดเมนู"}
 						aria-expanded={mobileOpen}
 						onClick={() => setMobileOpen((open) => !open)}
 					>
 						{mobileOpen ? (
-							<FiX className="h-5 w-5" aria-hidden />
+							<FiX className="size-5" aria-hidden />
 						) : (
-							<FiMenu className="h-5 w-5" aria-hidden />
+							<FiMenu className="size-5" aria-hidden />
 						)}
 					</button>
 				</div>
@@ -105,7 +102,7 @@ export function SiteHeader() {
 			{mobileOpen ? (
 				<div
 					id="mobile-navigation"
-					className="border-t border-slate-100 bg-white p-4 shadow-lg md:hidden"
+					className="border-t border-slate-100 bg-white px-4 pb-5 pt-3 shadow-[0_8px_16px_rgba(15,23,42,0.06)] md:hidden"
 				>
 					<nav className="flex flex-col gap-1" aria-label="เมนูหลัก">
 						{visibleNavItems.map((item) =>
@@ -113,10 +110,15 @@ export function SiteHeader() {
 								<Link
 									key={item.href}
 									to={item.href}
+									aria-current={
+										isActivePath(location.pathname, item.href)
+											? "page"
+											: undefined
+									}
 									className={cn(
-										"flex min-h-11 items-center rounded-2xl px-3 text-base font-medium text-slate-800 transition-colors hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+										"flex min-h-11 items-center rounded-xl px-4 text-base font-medium text-slate-700 transition-colors hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
 										isActivePath(location.pathname, item.href) &&
-											"bg-blue-50 text-blue-700",
+											"bg-blue-50 font-semibold text-blue-700",
 									)}
 									onClick={() => setMobileOpen(false)}
 								>
@@ -126,26 +128,26 @@ export function SiteHeader() {
 						)}
 					</nav>
 					<div className="mt-3 flex items-center gap-2 border-t border-slate-100 pt-3">
-						<Link
-							to={siteConfig.links.facebook}
+						<a
+							href={siteConfig.links.facebook}
 							target="_blank"
 							rel="noreferrer"
-							className="grid h-11 w-11 place-items-center rounded-2xl hover:bg-slate-50"
+							className={socialLinkClassName}
 							onClick={() => setMobileOpen(false)}
 						>
-							<Icons.facebook className="h-5 w-5" />
+							<Icons.facebook className="size-[18px]" />
 							<span className="sr-only">Facebook</span>
-						</Link>
-						<Link
-							to={siteConfig.links.instagram}
+						</a>
+						<a
+							href={siteConfig.links.instagram}
 							target="_blank"
 							rel="noreferrer"
-							className="grid h-11 w-11 place-items-center rounded-2xl hover:bg-slate-50"
+							className={socialLinkClassName}
 							onClick={() => setMobileOpen(false)}
 						>
-							<Icons.instagram className="h-5 w-5" />
+							<Icons.instagram className="size-[18px]" />
 							<span className="sr-only">Instagram</span>
-						</Link>
+						</a>
 					</div>
 				</div>
 			) : null}
@@ -154,7 +156,7 @@ export function SiteHeader() {
 				<button
 					type="button"
 					aria-label="ปิดเมนู"
-					className="fixed inset-0 top-14 z-[-1] bg-slate-900/20 md:hidden"
+					className="fixed inset-0 top-16 z-[-1] bg-slate-950/20 backdrop-blur-[1px] md:hidden"
 					onClick={() => setMobileOpen(false)}
 				/>
 			) : null}
