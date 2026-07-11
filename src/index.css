@@ -288,22 +288,6 @@
 	scroll-margin-top: 4.5rem;
 }
 
-.core-values-grid > div {
-	border: 0;
-	border-radius: 0;
-	background: #102033;
-	box-shadow: none;
-	color: #cbd5e1;
-}
-
-.core-values-grid > div:nth-child(2) {
-	background: #15304d;
-}
-
-.core-values-grid h2 {
-	color: white;
-}
-
 .about-collage > div:first-child {
 	grid-row: span 2;
 	height: 100%;
@@ -329,6 +313,10 @@
 	}
 	.home-hero-image {
 		transform: none;
+	}
+	.join-way,
+	.join-way * {
+		transition: none;
 	}
 }
 

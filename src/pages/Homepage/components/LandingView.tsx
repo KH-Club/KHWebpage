@@ -27,7 +27,7 @@ const LandingView = memo(function LandingView() {
 
 			{/* Gradient Overlays for better text readability */}
 			<div
-				className="via-[#07182b]/58 absolute inset-0 bg-gradient-to-r from-[#07182b]/90 to-[#07182b]/10"
+				className="absolute inset-0 bg-gradient-to-r from-blue-950/80 via-blue-900/45 to-blue-700/5"
 				aria-hidden="true"
 			/>
 			<div
