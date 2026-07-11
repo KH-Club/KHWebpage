@@ -34,7 +34,7 @@ export function SiteHeader() {
 
 	return (
 		<header className="sticky top-0 z-40 w-full border-b border-slate-200/70 bg-white/90 shadow-[0_1px_8px_rgba(15,23,42,0.04)] backdrop-blur-xl">
-			<div className="mx-auto grid h-16 w-full max-w-7xl grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 px-4 sm:h-[4.5rem] sm:gap-4 sm:px-6 lg:px-8">
+			<div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-2 px-4 sm:h-[4.5rem] sm:gap-4 sm:px-6 md:grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:px-8">
 				<div className="flex min-w-0 items-center justify-self-start">
 					<Link
 						to="/"
