@@ -26,6 +26,10 @@ export const siteConfig = {
 			title: "Map",
 			href: "/map",
 		},
+		{
+			title: "Contact",
+			href: "/contact",
+		},
 	],
 	links: {
 		facebook: "https://www.facebook.com/profile.php?id=61558699434541",

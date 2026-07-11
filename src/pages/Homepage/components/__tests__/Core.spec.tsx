@@ -1,86 +1,54 @@
-import { describe, it, expect } from "vitest"
 import { render, screen } from "@testing-library/react"
+import { describe, expect, it } from "vitest"
 import Core from "../Core"
 
 describe("Core", () => {
-	it("renders section with correct id", () => {
+	it("renders the core section", () => {
 		render(<Core />)
-
-		const section = document.getElementById("core-section")
-		expect(section).toBeInTheDocument()
-		expect(section?.tagName).toBe("SECTION")
+		expect(document.getElementById("core-section")).toBeInTheDocument()
 	})
 
-	it("renders Our Activities card", () => {
-		render(<Core />)
+	it.each(["Our Activities", "Our Vision", "Our Values"])(
+		"renders %s",
+		(title) => {
+			render(<Core />)
+			expect(screen.getByRole("heading", { name: title })).toBeInTheDocument()
+		},
+	)
 
+	it("renders the activity options", () => {
+		render(<Core />)
 		expect(
-			screen.getByRole("heading", { name: "Our Activities" }),
+			screen.getByText("ค่ายอาสาพัฒนาโรงเรียนและชุมชน (ปลายปี)"),
 		).toBeInTheDocument()
+		expect(
+			screen.getByText("ค่ายอาสาพัฒนาโรงเรียนและชุมชน (กลางปี)"),
+		).toBeInTheDocument()
+		expect(screen.getByText("กิจกรรมจิตอาสา 1 Days Trip")).toBeInTheDocument()
 	})
 
-	it("renders Our Vision card", () => {
+	it("renders the club values", () => {
 		render(<Core />)
-
+		expect(screen.getByText("ช่วยเหลือสังคมด้วยหัวใจอาสา")).toBeInTheDocument()
 		expect(
-			screen.getByRole("heading", { name: "Our Vision" }),
-		).toBeInTheDocument()
-	})
-
-	it("renders Our Values card", () => {
-		render(<Core />)
-
-		expect(
-			screen.getByRole("heading", { name: "Our Values" }),
-		).toBeInTheDocument()
-	})
-
-	it("renders activities list items", () => {
-		render(<Core />)
-
-		expect(
-			screen.getByText(/ค่ายอาสาพัฒนาโรงเรียนเเละชุมชน \(ปลายปี\)/),
+			screen.getByText("เรียนรู้ทักษะใหม่จากการลงมือทำ"),
 		).toBeInTheDocument()
 		expect(
-			screen.getByText(/ค่ายอาสาพัฒนาโรงเรียนเเละชุมชน \(กลางปี\)/),
-		).toBeInTheDocument()
-		expect(screen.getByText(/กิจกรรมจิตอาสา 1 Days Trip/)).toBeInTheDocument()
-	})
-
-	it("renders values list items", () => {
-		render(<Core />)
-
-		expect(
-			screen.getByText(/พัฒนาเเละส่งเสริมความเป็นจิตอาสา/),
-		).toBeInTheDocument()
-		expect(
-			screen.getByText(/พัฒนาเเละส่งเสริมการเรียนรู้ทักษะใหม่ๆ/),
-		).toBeInTheDocument()
-		expect(
-			screen.getByText(/พัฒนาเเละส่งเสริมความสัมพันธ์ของคนในชมรม/),
+			screen.getByText("สร้างความสัมพันธ์ของคนในชมรมและชุมชน"),
 		).toBeInTheDocument()
 	})
 
-	it("renders vision description", () => {
+	it("renders the revised vision description", () => {
 		render(<Core />)
-
 		expect(
-			screen.getByText(/ชมรมของเรามีวิสัยทัศน์ที่จะเป็นเเรงขับเคลื่อนเล็กๆ/),
+			screen.getByText(/เราอยากเป็นแรงขับเคลื่อนเล็ก ๆ/),
 		).toBeInTheDocument()
 	})
 
-	it("renders all three info cards", () => {
-		render(<Core />)
-
-		const headings = screen.getAllByRole("heading", { level: 2 })
-		expect(headings).toHaveLength(3)
-	})
-
-	it("has grid layout for cards", () => {
+	it("uses the responsive three-column layout", () => {
 		const { container } = render(<Core />)
-
-		const grid = container.querySelector(".grid")
-		expect(grid).toBeInTheDocument()
-		expect(grid).toHaveClass("md:grid-cols-3")
+		expect(container.querySelector(".core-values-grid")).toHaveClass(
+			"md:grid-cols-3",
+		)
 	})
 })

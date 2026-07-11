@@ -193,7 +193,7 @@ export const ProvinceArchiveList = memo(function ProvinceArchiveList({
 		>
 			<div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
 				<div>
-					<p className="text-sm font-semibold text-[#2478A8]">ดัชนีความทรงจำ</p>
+					<p className="text-sm font-semibold text-[#2478A8]">ค้นหาร่องรอยค่าย</p>
 					<div className="mt-2 flex items-center gap-3">
 						<span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#DCEFF7] text-[#2478A8]">
 							<Compass className="h-5 w-5" strokeWidth={1.7} aria-hidden />

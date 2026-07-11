@@ -1,7 +1,7 @@
 import InstagramEmbed from "./components/InstagramEmbled"
 
 const ContactPage = () => {
-	const embedIGSubUrl = "C_Numb1yoch"
+	const embedIGSubUrl = "DM1dhXDhxhp"
 
 	return (
 		<section className="bg-gray-100 py-12">
