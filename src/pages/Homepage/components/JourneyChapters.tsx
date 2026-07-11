@@ -32,6 +32,27 @@ const routePaths = [
 	"M-30 68 C130 18 250 100 420 44 S690 6 850 64 S1060 112 1230 34",
 ]
 
+const routeStyles = [
+	{
+		Icon: MapPin,
+		iconPosition: "left-[13%] top-[46%]",
+		glowPosition: "left-[5%] top-[-70%]",
+		pathOffset: "translate(0 8)",
+	},
+	{
+		Icon: Compass,
+		iconPosition: "right-[13%] top-[34%]",
+		glowPosition: "right-[4%] top-[-55%]",
+		pathOffset: "translate(0 -7)",
+	},
+	{
+		Icon: HeartHandshake,
+		iconPosition: "left-1/2 top-[58%] -ml-[1.125rem] sm:-ml-5",
+		glowPosition: "left-[38%] top-[-75%]",
+		pathOffset: "translate(0 9)",
+	},
+]
+
 interface JourneyRouteDividerProps {
 	variant?: 0 | 1 | 2
 	className?: string
@@ -42,6 +63,7 @@ export function JourneyRouteDivider({
 	className,
 }: JourneyRouteDividerProps) {
 	const reduceMotion = useReducedMotion()
+	const { Icon, iconPosition, glowPosition, pathOffset } = routeStyles[variant]
 	const waypoints =
 		variant === 1
 			? [
@@ -60,11 +82,26 @@ export function JourneyRouteDivider({
 			className={cn("relative z-20 h-20 overflow-hidden sm:h-24", className)}
 			aria-hidden
 		>
+			<div
+				className={cn(
+					"absolute size-56 rounded-full bg-sky-300/20 blur-3xl",
+					glowPosition,
+				)}
+			/>
 			<motion.svg
 				viewBox="0 0 1200 100"
 				preserveAspectRatio="none"
 				className="absolute inset-0 h-full w-full"
 			>
+				<path
+					d={routePaths[variant]}
+					transform={pathOffset}
+					fill="none"
+					stroke="#69B7D9"
+					strokeWidth="9"
+					strokeLinecap="round"
+					opacity="0.09"
+				/>
 				<motion.path
 					d={routePaths[variant]}
 					fill="none"
@@ -95,9 +132,16 @@ export function JourneyRouteDivider({
 					/>
 				))}
 			</motion.svg>
-			<span className="absolute left-[13%] top-1/2 grid size-9 -translate-y-1/2 place-items-center rounded-full bg-white text-[#2478A8] shadow-[0_3px_6px_rgba(36,120,168,0.12)] sm:size-10">
-				<MapPin className="size-4" strokeWidth={1.8} />
-			</span>
+			<motion.span
+				className={cn(
+					"absolute -mt-[1.125rem] grid size-9 place-items-center rounded-full bg-white text-[#2478A8] shadow-[0_5px_8px_rgba(36,120,168,0.18)] ring-4 ring-sky-100/70 sm:-mt-5 sm:size-10",
+					iconPosition,
+				)}
+				animate={reduceMotion ? undefined : { y: [-3, 3, -3] }}
+				transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+			>
+				<Icon className="size-4" strokeWidth={1.8} />
+			</motion.span>
 		</div>
 	)
 }
