@@ -73,7 +73,7 @@ export const MobileMapExperience = memo(function MobileMapExperience({
 				</div>
 			</section>
 
-			<JourneyInsights stats={stats} className="py-10" />
+			<JourneyInsights stats={stats} className="py-6 sm:py-10" />
 
 			<section className="mx-auto max-w-6xl px-5 pb-16">
 				<ProvinceArchiveList
