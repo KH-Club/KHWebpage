@@ -24,10 +24,7 @@ const Home = () => {
 			<FeatureGate flag="camp_voices">
 				<CampVoices />
 			</FeatureGate>
-			<JourneyRouteDivider
-				variant={2}
-				className="bg-gradient-to-b from-[#f8fcfe] to-white"
-			/>
+			<JourneyRouteDivider variant={2} className="bg-[#eaf5ff]" />
 			<JoinJourneyChapter />
 		</div>
 	)

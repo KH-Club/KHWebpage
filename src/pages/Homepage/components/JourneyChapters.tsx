@@ -213,9 +213,9 @@ export function MemoryMapChapter() {
 
 export function JoinJourneyChapter() {
 	return (
-		<section className="relative isolate overflow-hidden bg-white px-5 py-20 text-slate-950 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+		<section className="relative isolate overflow-hidden bg-[#eaf5ff] px-5 py-20 text-slate-950 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
 			<div
-				className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#f3f9ff] to-white"
+				className="absolute -right-24 top-16 size-72 rounded-full bg-blue-300/15 blur-3xl"
 				aria-hidden
 			/>
 			<div className="relative mx-auto grid w-full max-w-7xl items-stretch gap-10 lg:grid-cols-[1.04fr_0.96fr] lg:gap-14">
