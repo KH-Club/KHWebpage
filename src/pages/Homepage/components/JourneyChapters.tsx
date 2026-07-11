@@ -6,7 +6,9 @@ import {
 	MapPin,
 	MessageCircle,
 } from "lucide-react"
+import { motion, useReducedMotion } from "motion/react"
 import { Link } from "react-router-dom"
+import { cn } from "@/lib/utils"
 import JoinImage from "@/assets/images/activitys/fun.jpg"
 import JourneyImage from "@/assets/images/layout/homepagebackground2.jpg"
 
@@ -23,6 +25,82 @@ const waysToJoin = [
 		detail: "สื่อสารและเก็บความทรงจำ",
 	},
 ]
+
+const routePaths = [
+	"M-30 78 C120 4 235 118 390 53 S690 12 850 67 S1080 106 1230 24",
+	"M-30 26 C145 105 265 -2 435 62 S710 118 875 47 S1060 4 1230 76",
+	"M-30 68 C130 18 250 100 420 44 S690 6 850 64 S1060 112 1230 34",
+]
+
+interface JourneyRouteDividerProps {
+	variant?: 0 | 1 | 2
+	className?: string
+}
+
+export function JourneyRouteDivider({
+	variant = 0,
+	className,
+}: JourneyRouteDividerProps) {
+	const reduceMotion = useReducedMotion()
+	const waypoints =
+		variant === 1
+			? [
+					[160, 83],
+					[575, 83],
+					[1020, 20],
+				]
+			: [
+					[155, 42],
+					[610, 38],
+					[1065, 76],
+				]
+
+	return (
+		<div
+			className={cn("relative z-20 h-20 overflow-hidden sm:h-24", className)}
+			aria-hidden
+		>
+			<motion.svg
+				viewBox="0 0 1200 100"
+				preserveAspectRatio="none"
+				className="absolute inset-0 h-full w-full"
+			>
+				<motion.path
+					d={routePaths[variant]}
+					fill="none"
+					stroke="#2478A8"
+					strokeWidth="2.35"
+					strokeDasharray="7 12"
+					strokeLinecap="round"
+					initial={reduceMotion ? false : { pathLength: 0, opacity: 0.15 }}
+					whileInView={{ pathLength: 1, opacity: 0.5 }}
+					viewport={{ once: true, amount: 0.6 }}
+					transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+				/>
+				{waypoints.map(([cx, cy], index) => (
+					<motion.circle
+						key={`${cx}-${cy}`}
+						cx={cx}
+						cy={cy}
+						r="5"
+						fill="#2478A8"
+						initial={reduceMotion ? false : { opacity: 0, scale: 0.5 }}
+						whileInView={{ opacity: 0.9, scale: 1 }}
+						viewport={{ once: true, amount: 0.6 }}
+						transition={{
+							duration: 0.4,
+							delay: 0.25 + index * 0.14,
+							ease: [0.22, 1, 0.36, 1],
+						}}
+					/>
+				))}
+			</motion.svg>
+			<span className="absolute left-[13%] top-1/2 grid size-9 -translate-y-1/2 place-items-center rounded-full bg-white text-[#2478A8] shadow-[0_3px_6px_rgba(36,120,168,0.12)] sm:size-10">
+				<MapPin className="size-4" strokeWidth={1.8} />
+			</span>
+		</div>
+	)
+}
 
 export function MemoryMapChapter() {
 	return (
